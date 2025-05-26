@@ -1,0 +1,89 @@
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+bun.lockb
+bun.lock
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Environment variables
+.env
+.env.*
+!.env.example
+!.env.local.example
+
+# Logs
+logs
+*.log
+lerna-debug.log*
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDEs and editors
+.idea/
+.vscode/settings.json
+.vscode/launch.json
+.fleet/
+*.swp
+*.swo
+*~
+
+# Build outputs and generated files
+dist/
+build/
+out/
+coverage/
+*.tgz
+*.tar.gz
+.turbo/
+
+# Cache files
+.eslintcache
+.stylelintcache
+
+# Framework-specific patterns
+
+# Next.js
+.next/
+next-env.d.ts
+
+# Nuxt
+.nuxt/
+.output/
+.nitro/
+.cache/
+
+# SvelteKit
+.svelte-kit/
+
+# Vercel
+.vercel
+
+# Netlify
+.netlify
+
+# Temporary folders
+tmp/
+temp/
+
+# Runtime configuration
+.npmrc
+.yarnrc
