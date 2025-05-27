@@ -22,46 +22,25 @@ const testimonials = [
     name: 'Sarah Johnson',
     role: 'Product Manager',
     content: 'This demo showcases excellent modern web development practices.',
-    avatar: 'https://picsum.photos/64/64?random=1'
+    avatar: 'https://picsum.photos/64/64'
   },
   {
     name: 'Mike Chen',
     role: 'Frontend Developer',
     content: 'The component architecture is clean and well-organized.',
-    avatar: 'https://picsum.photos/64/64?random=2'
+    avatar: 'https://picsum.photos/64/64'
   },
   {
     name: 'Lisa Williams',
     role: 'UX Designer',
     content: 'Beautiful design system with consistent styling.',
-    avatar: 'https://picsum.photos/64/64?random=3'
+    avatar: 'https://picsum.photos/64/64'
   }
 ]
 </script>
 
 <template>
   <div class="min-h-screen bg-gradient-to-br from-primary0 via-white to-primary05">
-    <!-- Header -->
-    <header class="bg-white/80 backdrop-blur-sm border-b border-primary10 sticky top-0 z-50">
-      <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center h-16">
-          <div class="flex items-center">
-            <h1 class="text-2xl font-bold text-primary100">DemoApp</h1>
-          </div>
-          <div class="hidden md:block">
-            <div class="ml-10 flex items-baseline space-x-4">
-              <a href="#features" class="text-primary80 hover:text-primary100 px-3 py-2 text-sm font-medium transition-colors">Features</a>
-              <a href="#about" class="text-primary80 hover:text-primary100 px-3 py-2 text-sm font-medium transition-colors">About</a>
-              <a href="#testimonials" class="text-primary80 hover:text-primary100 px-3 py-2 text-sm font-medium transition-colors">Testimonials</a>
-              <button class="bg-primary100 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary80 transition-colors">
-                Get Started
-              </button>
-            </div>
-          </div>
-        </div>
-      </nav>
-    </header>
-
     <!-- Hero Section -->
     <section class="relative py-20 px-4 sm:px-6 lg:px-8">
       <div class="max-w-7xl mx-auto text-center">
@@ -85,11 +64,11 @@ const testimonials = [
         </div>
       </div>
         <!-- Hero Image -->
-      <div class="mt-16 max-w-5xl mx-auto">
-        <div class="relative">
+      <div class="mt-16 max-w-5xl mx-auto">        <div class="relative">
           <Image 
-            src="https://picsum.photos/1200/600?random=10" 
+            src="https://picsum.photos/1200/600" 
             alt="Demo Application Screenshot"
+            seed="hero-demo"
             class="w-full h-auto rounded-2xl shadow-2xl"
             loading="eager"
           />
@@ -169,11 +148,11 @@ const testimonials = [
               <span class="px-3 py-1 bg-primary05 text-primary100 rounded-full text-sm font-medium">TypeScript</span>
               <span class="px-3 py-1 bg-primary05 text-primary100 rounded-full text-sm font-medium">Tailwind CSS</span>
               <span class="px-3 py-1 bg-primary05 text-primary100 rounded-full text-sm font-medium">Vue 3</span>
-            </div>          </div>
-          <div>
+            </div>          </div>          <div>
             <Image 
-              src="https://picsum.photos/600/400?random=11" 
+              src="https://picsum.photos/600/400" 
               alt="About Demo"
+              seed="about-demo"
               class="w-full h-auto rounded-xl shadow-lg"
             />
           </div>
@@ -198,11 +177,11 @@ const testimonials = [
             v-for="testimonial in testimonials" 
             :key="testimonial.name"
             class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow"
-          >            <p class="text-primary60 mb-6 italic">"{{ testimonial.content }}"</p>
-            <div class="flex items-center">
+          >            <p class="text-primary60 mb-6 italic">"{{ testimonial.content }}"</p>            <div class="flex items-center">
               <Image 
                 :src="testimonial.avatar" 
                 :alt="testimonial.name"
+                :seed="`avatar-${testimonial.name.toLowerCase().replace(' ', '-')}`"
                 class="w-12 h-12 rounded-full mr-4"
                 fit="cover"
               />
