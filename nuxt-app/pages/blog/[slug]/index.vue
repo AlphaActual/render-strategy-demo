@@ -97,11 +97,11 @@ const getInitials = (name: string): string => {
           Back to Blog
         </NuxtLink>
       </div><!-- Article -->
-      <article v-if="post && postUser" class="bg-white rounded-xl shadow-xl overflow-hidden">
-        <!-- Hero Image -->
+      <article v-if="post && postUser" class="bg-white rounded-xl shadow-xl overflow-hidden">        <!-- Hero Image -->
         <div class="relative h-64 sm:h-80 lg:h-96 overflow-hidden">
           <Image
-            :src="`https://picsum.photos/1200/600?random=${post.id}`"
+            src="https://picsum.photos/1200/600"
+            :seed="`hero-${post.id}`"
             :alt="`Hero image for ${post.title}`"
             class="w-full h-full object-cover"
             fit="cover"
@@ -122,10 +122,10 @@ const getInitials = (name: string): string => {
         </div>        <!-- Article Header -->
         <div class="px-6 py-8 sm:px-8">
           <!-- Author Info -->
-          <div class="flex items-center mb-8">
-            <div class="flex-shrink-0">
+          <div class="flex items-center mb-8">            <div class="flex-shrink-0">
               <Image
-                :src="`https://picsum.photos/60/60?random=user-${postUser.id}`"
+                src="https://picsum.photos/60/60"
+                :seed="`user-${postUser.id}`"
                 :alt="`${postUser.name} avatar`"
                 class="h-14 w-14 rounded-full object-cover ring-3 ring-blue-100"
                 fit="cover"
@@ -187,10 +187,10 @@ const getInitials = (name: string): string => {
           <div class="mt-12 border-t pt-8">
             <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-100">
               <h3 class="text-lg font-semibold text-gray-900 mb-4">About the Author</h3>
-              <div class="flex items-start space-x-4">
-                <div class="flex-shrink-0">
+              <div class="flex items-start space-x-4">                <div class="flex-shrink-0">
                   <Image
-                    :src="`https://picsum.photos/80/80?random=user-${postUser.id}`"
+                    src="https://picsum.photos/80/80"
+                    :seed="`user-${postUser.id}`"
                     :alt="`${postUser.name} profile picture`"
                     class="h-16 w-16 rounded-full object-cover ring-3 ring-white shadow-lg"
                     fit="cover"
@@ -237,10 +237,10 @@ const getInitials = (name: string): string => {
               :key="comment.id"
               class="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300"
             >
-              <div class="flex items-start space-x-4">
-                <div class="flex-shrink-0">
+              <div class="flex items-start space-x-4">                <div class="flex-shrink-0">
                   <Image
-                    :src="`https://picsum.photos/50/50?random=comment-${comment.id}`"
+                    src="https://picsum.photos/50/50"
+                    :seed="`comment-${comment.id}`"
                     :alt="`${comment.name} avatar`"
                     class="h-12 w-12 rounded-full object-cover ring-2 ring-gray-100"
                     fit="cover"

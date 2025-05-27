@@ -39,42 +39,45 @@ const { data: users } = await useLazyFetch<User[]>(
         <div
           class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"
         ></div>
-      </div>      <!-- Posts Grid -->
-      <div v-else class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-        <article
+      </div>
+      <!-- Posts Grid -->
+      <div v-else class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">        <article
           v-for="post in posts"
           :key="post.id"
-          class="group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 hover:border-blue-200 transform hover:-translate-y-2"
+          class="group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 hover:border-blue-200 transform hover:-translate-y-2 flex flex-col"
         >
           <!-- Thumbnail Image -->
           <div class="relative overflow-hidden">
             <Image
-              :src="`https://picsum.photos/400/240?random=${post.id}`"
+              src="https://picsum.photos/400/240"
+              :seed="`post-${post.id}`"
               :alt="`Thumbnail for ${post.title}`"
               class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
               fit="cover"
             />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            ></div>
             <!-- Category Badge -->
             <div class="absolute top-4 left-4">
-              <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 backdrop-blur-sm">
+              <span
+                class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 backdrop-blur-sm"
+              >
                 Article
               </span>
             </div>
-          </div>
-
-          <!-- Post Content -->
-          <div class="p-6">
+          </div>          <!-- Post Content -->
+          <div class="p-6 flex flex-col flex-1">
             <!-- Author Info -->
             <div class="flex items-center mb-4">
               <div class="flex-shrink-0">
                 <Image
                   src="https://picsum.photos/40/40"
+                  :seed="`user-${post.userId}`"
                   :alt="
                     users?.find((u) => u.id === post.userId)?.name ||
                     'User avatar'
                   "
-                  :seed="`user-${post.userId}`"
                   class="h-10 w-10 rounded-full object-cover ring-2 ring-blue-100"
                   fit="cover"
                 />
@@ -87,23 +90,32 @@ const { data: users } = await useLazyFetch<User[]>(
                   }}
                 </p>
                 <div class="flex items-center text-xs text-gray-500 space-x-2">
-                  <span>@{{
-                    users?.find((u) => u.id === post.userId)?.username ||
-                    "unknown"
-                  }}</span>
+                  <span
+                    >@{{
+                      users?.find((u) => u.id === post.userId)?.username ||
+                      "unknown"
+                    }}</span
+                  >
                   <span>•</span>
-                  <span>{{ new Date(2024, 0, post.id % 28 + 1).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) }}</span>
+                  <span>{{
+                    new Date(2024, 0, (post.id % 28) + 1).toLocaleDateString(
+                      "en-US",
+                      { month: "short", day: "numeric" }
+                    )
+                  }}</span>
                 </div>
               </div>
             </div>
 
             <!-- Post Title -->
-            <h2 class="text-xl font-bold text-gray-900 mb-3 line-clamp-2 group-hover:text-blue-600 transition-colors duration-300">
+            <h2
+              class="text-xl font-bold text-gray-900 mb-3 line-clamp-2 group-hover:text-blue-600 transition-colors duration-300"
+            >
               {{ post.title }}
             </h2>
 
             <!-- Post Excerpt -->
-            <p class="text-gray-600 mb-6 line-clamp-3 leading-relaxed">
+            <p class="text-gray-600 mb-6 line-clamp-3 leading-relaxed flex-1">
               {{ post.body }}
             </p>
 
@@ -130,7 +142,7 @@ const { data: users } = await useLazyFetch<User[]>(
               </NuxtLink>
               <!-- Reading Time Estimate -->
               <span class="text-xs text-gray-400 font-medium">
-                {{ Math.ceil(post.body.split(' ').length / 200) }} min read
+                {{ Math.ceil(post.body.split(" ").length / 200) }} min read
               </span>
             </div>
           </div>
