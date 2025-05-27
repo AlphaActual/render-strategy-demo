@@ -22,19 +22,22 @@ const testimonials = [
     name: 'Sarah Johnson',
     role: 'Product Manager',
     content: 'This demo showcases excellent modern web development practices.',
-    avatar: 'https://picsum.photos/64/64'
+    avatar: 'https://picsum.photos/64/64',
+    seed: 'sarah-johnson'
   },
   {
     name: 'Mike Chen',
     role: 'Frontend Developer',
     content: 'The component architecture is clean and well-organized.',
-    avatar: 'https://picsum.photos/64/64'
+    avatar: 'https://picsum.photos/64/64',
+    seed: 'mike-chen'
   },
   {
     name: 'Lisa Williams',
     role: 'UX Designer',
     content: 'Beautiful design system with consistent styling.',
-    avatar: 'https://picsum.photos/64/64'
+    avatar: 'https://picsum.photos/64/64',
+    seed: 'lisa-williams'
   }
 ]
 </script>
@@ -181,7 +184,7 @@ const testimonials = [
               <Image 
                 :src="testimonial.avatar" 
                 :alt="testimonial.name"
-                :seed="`avatar-${testimonial.name.toLowerCase().replace(' ', '-')}`"
+                :seed="testimonial.seed"
                 class="w-12 h-12 rounded-full mr-4"
                 fit="cover"
               />

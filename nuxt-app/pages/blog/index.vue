@@ -14,16 +14,8 @@ interface User {
 }
 
 // Fetch posts and users data
-const {data: posts} = await useFetch<Post[]>('https://jsonplaceholder.typicode.com/posts')
-const {data: users} = await useFetch<User[]>('https://jsonplaceholder.typicode.com/users')
-
-
-// Create a map for quick user lookup
-const userMap = new Map<number, User>()
-users.value?.forEach(user => userMap.set(user.id, user))
-
-// Function to get user by ID
-const getUserById = (userId: number): User | undefined => userMap.get(userId)
+const {data: posts} = await useLazyFetch<Post[]>('https://jsonplaceholder.typicode.com/posts')
+const {data: users} = await useLazyFetch<User[]>('https://jsonplaceholder.typicode.com/users')
 </script>
 
 <template>
@@ -52,21 +44,20 @@ const getUserById = (userId: number): User | undefined => userMap.get(userId)
           class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden"
         >
           <!-- Post Header -->
-          <div class="p-6">
-            <div class="flex items-center mb-4">
-              <div class="flex-shrink-0">
-                <div class="h-10 w-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
-                  <span class="text-white font-semibold text-sm">
-                    {{ getUserById(post.userId)?.name?.charAt(0).toUpperCase() || 'U' }}
-                  </span>
-                </div>
-              </div>
-              <div class="ml-3">
+          <div class="p-6">            <div class="flex items-center mb-4">
+              <div class="flex-shrink-0">                <Image 
+                  src="https://picsum.photos/40/40"
+                  :alt="users?.find(u => u.id === post.userId)?.name || 'User avatar'"
+                  :seed="`user-${post.userId}`"
+                  class="h-10 w-10 rounded-full object-cover"
+                  fit="cover"
+                />
+              </div>              <div class="ml-3">
                 <p class="text-sm font-medium text-gray-900">
-                  {{ getUserById(post.userId)?.name || 'Unknown Author' }}
+                  {{ users?.find(u => u.id === post.userId)?.name || 'Unknown Author' }}
                 </p>
                 <p class="text-sm text-gray-500">
-                  @{{ getUserById(post.userId)?.username || 'unknown' }}
+                  @{{ users?.find(u => u.id === post.userId)?.username || 'unknown' }}
                 </p>
               </div>
             </div>            <!-- Post Title -->
