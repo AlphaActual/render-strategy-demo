@@ -286,36 +286,73 @@ const getInitials = (name: string): string => {
           </div>
         </div>
       </article>      <!-- Related Posts / Navigation -->
-      <div class="mt-12 flex flex-col sm:flex-row justify-between gap-4">
-        <NuxtLink 
-          v-if="parseInt(postId) > 1"
-          :to="`/blog/${parseInt(postId) - 1}`"
-          class="group inline-flex items-center px-6 py-4 bg-white border border-gray-200 text-gray-700 rounded-xl hover:bg-gray-50 hover:border-blue-300 transition-all duration-300 shadow-sm hover:shadow-md"
-        >
-          <svg class="mr-3 h-5 w-5 transition-transform duration-300 group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-          </svg>
-          <div class="text-left">
-            <div class="text-sm text-gray-500">Previous</div>
-            <div class="font-semibold">Post {{ parseInt(postId) - 1 }}</div>
-          </div>
-        </NuxtLink>
-        <div v-else class="flex-1"></div>
+      <div class="mt-12">
+        <div class="bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 rounded-2xl p-8 border border-blue-100">
+          <h3 class="text-lg font-semibold text-gray-900 mb-6 text-center">Continue Reading</h3>
+          <div class="flex flex-col sm:flex-row justify-between gap-4">
+            <NuxtLink 
+              v-if="parseInt(postId) > 1"
+              :to="`/blog/${parseInt(postId) - 1}`"
+              class="group flex-1 relative overflow-hidden bg-white rounded-xl p-6 border border-gray-200 hover:border-blue-300 transition-all duration-300 shadow-md hover:shadow-xl transform hover:-translate-y-1"
+            >
+              <div class="absolute inset-0 bg-gradient-to-r from-blue-600/5 to-purple-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div class="relative z-10 flex items-center">
+                <div class="flex-shrink-0 w-12 h-12 bg-blue-100 group-hover:bg-blue-200 rounded-full flex items-center justify-center transition-colors duration-300">
+                  <svg class="h-6 w-6 text-blue-600 transition-transform duration-300 group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                  </svg>
+                </div>
+                <div class="ml-4 flex-1">
+                  <div class="text-sm font-medium text-blue-600 mb-1">Previous Article</div>
+                  <div class="font-bold text-gray-900 group-hover:text-blue-700 transition-colors duration-300">Post {{ parseInt(postId) - 1 }}</div>
+                  <div class="text-sm text-gray-500 mt-1">← Go back in the series</div>
+                </div>
+              </div>
+            </NuxtLink>
+            
+            <div v-else class="flex-1 flex items-center justify-center p-6">
+              <div class="text-center text-gray-400">
+                <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <svg class="h-6 w-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                  </svg>
+                </div>
+                <div class="text-sm font-medium">You're at the beginning!</div>
+              </div>
+            </div>
 
-        <NuxtLink 
-          v-if="parseInt(postId) < 100"
-          :to="`/blog/${parseInt(postId) + 1}`"
-          class="group inline-flex items-center px-6 py-4 bg-white border border-gray-200 text-gray-700 rounded-xl hover:bg-gray-50 hover:border-blue-300 transition-all duration-300 shadow-sm hover:shadow-md"
-        >
-          <div class="text-right">
-            <div class="text-sm text-gray-500">Next</div>
-            <div class="font-semibold">Post {{ parseInt(postId) + 1 }}</div>
+            <NuxtLink 
+              v-if="parseInt(postId) < 100"
+              :to="`/blog/${parseInt(postId) + 1}`"
+              class="group flex-1 relative overflow-hidden bg-white rounded-xl p-6 border border-gray-200 hover:border-blue-300 transition-all duration-300 shadow-md hover:shadow-xl transform hover:-translate-y-1"
+            >
+              <div class="absolute inset-0 bg-gradient-to-r from-purple-600/5 to-blue-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div class="relative z-10 flex items-center justify-end text-right">
+                <div class="mr-4 flex-1">
+                  <div class="text-sm font-medium text-blue-600 mb-1">Next Article</div>
+                  <div class="font-bold text-gray-900 group-hover:text-blue-700 transition-colors duration-300">Post {{ parseInt(postId) + 1 }}</div>
+                  <div class="text-sm text-gray-500 mt-1">Continue the journey →</div>
+                </div>
+                <div class="flex-shrink-0 w-12 h-12 bg-blue-100 group-hover:bg-blue-200 rounded-full flex items-center justify-center transition-colors duration-300">
+                  <svg class="h-6 w-6 text-blue-600 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </div>
+            </NuxtLink>
+            
+            <div v-else class="flex-1 flex items-center justify-center p-6">
+              <div class="text-center text-gray-400">
+                <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <svg class="h-6 w-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+                <div class="text-sm font-medium">You've reached the end!</div>
+              </div>
+            </div>
           </div>
-          <svg class="ml-3 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-          </svg>
-        </NuxtLink>
-        <div v-else class="flex-1"></div>
+        </div>
       </div>
     </div>
   </div>
