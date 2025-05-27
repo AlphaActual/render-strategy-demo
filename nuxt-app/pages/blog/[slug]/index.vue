@@ -85,88 +85,148 @@ const getInitials = (name: string): string => {
 
 <template>
   <div class="py-8">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <!-- Back Navigation -->
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">      <!-- Back Navigation -->
       <div class="mb-8">
         <NuxtLink 
           to="/blog"
-          class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors duration-200"
+          class="group inline-flex items-center px-4 py-2 text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 rounded-lg transition-all duration-300 font-medium"
         >
-          <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="mr-2 h-5 w-5 transition-transform duration-300 group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
           </svg>
           Back to Blog
         </NuxtLink>
-      </div>      <!-- Article -->
-      <article v-if="post && postUser" class="bg-white rounded-lg shadow-lg overflow-hidden">
-        <!-- Article Header -->
-        <div class="px-6 py-8 sm:px-8">
-          <div class="mb-6">
-            <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+      </div><!-- Article -->
+      <article v-if="post && postUser" class="bg-white rounded-xl shadow-xl overflow-hidden">
+        <!-- Hero Image -->
+        <div class="relative h-64 sm:h-80 lg:h-96 overflow-hidden">
+          <Image
+            :src="`https://picsum.photos/1200/600?random=${post.id}`"
+            :alt="`Hero image for ${post.title}`"
+            class="w-full h-full object-cover"
+            fit="cover"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent"></div>
+          
+          <!-- Hero Content Overlay -->
+          <div class="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
+            <div class="mb-4">
+              <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800 backdrop-blur-sm">
+                Article
+              </span>
+            </div>
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight">
               {{ post.title }}
             </h1>
-            
-            <!-- Author Info -->
-            <div class="flex items-center">
-              <div class="flex-shrink-0">
-                <div class="h-12 w-12 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
-                  <span class="text-white font-semibold">
-                    {{ getInitials(postUser.name) }}
-                  </span>
+          </div>
+        </div>        <!-- Article Header -->
+        <div class="px-6 py-8 sm:px-8">
+          <!-- Author Info -->
+          <div class="flex items-center mb-8">
+            <div class="flex-shrink-0">
+              <Image
+                :src="`https://picsum.photos/60/60?random=user-${postUser.id}`"
+                :alt="`${postUser.name} avatar`"
+                class="h-14 w-14 rounded-full object-cover ring-3 ring-blue-100"
+                fit="cover"
+              />
+            </div>
+            <div class="ml-4 flex-1">
+              <div class="flex items-center justify-between">
+                <div>
+                  <p class="text-lg font-semibold text-gray-900">{{ postUser.name }}</p>
+                  <div class="flex items-center text-sm text-gray-500 space-x-4">
+                    <span>@{{ postUser.username }}</span>
+                    <span>•</span>
+                    <span>{{ formattedDate }}</span>
+                    <span>•</span>
+                    <span>{{ Math.ceil(post.body.split(' ').length / 200) }} min read</span>
+                  </div>
+                </div>
+                <!-- Social Share Buttons -->
+                <div class="hidden sm:flex items-center space-x-2">
+                  <button class="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-full transition-colors duration-200">
+                    <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                    </svg>
+                  </button>
+                  <button class="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-full transition-colors duration-200">
+                    <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                  </button>
+                  <button class="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-full transition-colors duration-200">
+                    <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                  </button>
                 </div>
               </div>
-              <div class="ml-4">
-                <div class="flex items-center space-x-4">
-                  <div>
-                    <p class="text-lg font-medium text-gray-900">{{ postUser.name }}</p>
-                    <div class="flex items-center text-sm text-gray-500 space-x-4">
-                      <span>@{{ postUser.username }}</span>
-                      <span>•</span>
-                      <span>{{ formattedDate }}</span>
+            </div>
+          </div>          <!-- Article Content -->
+          <div class="prose prose-lg prose-blue max-w-none">
+            <div class="text-gray-700 leading-relaxed whitespace-pre-line text-lg">
+              {{ post.body }}
+            </div>
+          </div>
+
+          <!-- Tags Section -->
+          <div class="mt-8 pt-6 border-t border-gray-200">
+            <div class="flex flex-wrap gap-2">
+              <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                Technology
+              </span>
+              <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                Tutorial
+              </span>
+              <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
+                Development
+              </span>
+            </div>
+          </div>          <!-- Author Details Card -->
+          <div class="mt-12 border-t pt-8">
+            <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-100">
+              <h3 class="text-lg font-semibold text-gray-900 mb-4">About the Author</h3>
+              <div class="flex items-start space-x-4">
+                <div class="flex-shrink-0">
+                  <Image
+                    :src="`https://picsum.photos/80/80?random=user-${postUser.id}`"
+                    :alt="`${postUser.name} profile picture`"
+                    class="h-16 w-16 rounded-full object-cover ring-3 ring-white shadow-lg"
+                    fit="cover"
+                  />
+                </div>
+                <div class="flex-1">
+                  <h4 class="text-lg font-semibold text-gray-900">{{ postUser.name }}</h4>
+                  <p class="text-blue-600 font-medium mb-2">@{{ postUser.username }}</p>
+                  <div class="space-y-2 text-sm text-gray-600">
+                    <div class="flex items-center">
+                      <svg class="h-4 w-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                      </svg>
+                      {{ postUser.email }}
+                    </div>
+                    <div class="flex items-center">
+                      <svg class="h-4 w-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9v-9m0-9v9m0 9c-5 0-9-4-9-9s4-9 9-9"/>
+                      </svg>
+                      <a :href="`https://${postUser.website}`" target="_blank" class="text-blue-600 hover:text-blue-800 hover:underline">
+                        {{ postUser.website }}
+                      </a>
+                    </div>
+                    <div class="flex items-center">
+                      <svg class="h-4 w-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                      </svg>
+                      {{ postUser.company.name }}
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
-          <!-- Article Content -->
-          <div class="prose prose-lg max-w-none">
-            <div class="text-gray-700 leading-relaxed whitespace-pre-line">
-              {{ post.body }}
-            </div>
-          </div>
-
-          <!-- Author Details Card -->
-          <div class="mt-12 border-t pt-8">
-            <div class="bg-gray-50 rounded-lg p-6">
-              <h3 class="text-lg font-semibold text-gray-900 mb-4">About the Author</h3>
-              <div class="flex items-start space-x-4">
-                <div class="flex-shrink-0">
-                  <div class="h-16 w-16 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
-                    <span class="text-white font-semibold text-lg">
-                      {{ getInitials(postUser.name) }}
-                    </span>
-                  </div>
-                </div>
-                <div class="flex-1">
-                  <h4 class="text-lg font-medium text-gray-900">{{ postUser.name }}</h4>
-                  <p class="text-gray-600 mb-2">@{{ postUser.username }}</p>
-                  <div class="space-y-1 text-sm text-gray-600">
-                    <p><strong>Email:</strong> {{ postUser.email }}</p>
-                    <p><strong>Website:</strong> 
-                      <a :href="`https://${postUser.website}`" target="_blank" class="text-blue-600 hover:text-blue-800">
-                        {{ postUser.website }}
-                      </a>
-                    </p>
-                    <p><strong>Company:</strong> {{ postUser.company.name }}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>        <!-- Comments Section -->
-        <div class="border-t bg-gray-50 px-6 py-8 sm:px-8">
+        <div class="border-t bg-gradient-to-b from-gray-50 to-white px-6 py-8 sm:px-8">
           <h3 class="text-2xl font-bold text-gray-900 mb-6">
             Comments ({{ comments?.length || 0 }})
           </h3>
@@ -175,23 +235,42 @@ const getInitials = (name: string): string => {
             <div 
               v-for="comment in comments" 
               :key="comment.id"
-              class="bg-white rounded-lg p-6 shadow-sm border"
+              class="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300"
             >
-              <div class="flex items-start space-x-3">
+              <div class="flex items-start space-x-4">
                 <div class="flex-shrink-0">
-                  <div class="h-10 w-10 rounded-full bg-gradient-to-r from-green-400 to-blue-500 flex items-center justify-center">
-                    <span class="text-white font-medium text-sm">
-                      {{ comment.name.charAt(0).toUpperCase() }}
-                    </span>
-                  </div>
+                  <Image
+                    :src="`https://picsum.photos/50/50?random=comment-${comment.id}`"
+                    :alt="`${comment.name} avatar`"
+                    class="h-12 w-12 rounded-full object-cover ring-2 ring-gray-100"
+                    fit="cover"
+                  />
                 </div>
                 <div class="flex-1">
-                  <div class="flex items-center space-x-2 mb-2">
-                    <h4 class="font-medium text-gray-900">{{ comment.name }}</h4>
-                    <span class="text-gray-400">•</span>
+                  <div class="flex items-center space-x-2 mb-3">
+                    <h4 class="font-semibold text-gray-900">{{ comment.name }}</h4>
+                    <span class="text-gray-300">•</span>
                     <span class="text-sm text-gray-500">{{ comment.email }}</span>
+                    <span class="text-gray-300">•</span>
+                    <span class="text-sm text-gray-400">{{ Math.floor(Math.random() * 24) + 1 }}h ago</span>
                   </div>
                   <p class="text-gray-700 leading-relaxed">{{ comment.body }}</p>
+                  
+                  <!-- Comment Actions -->
+                  <div class="flex items-center space-x-4 mt-4">
+                    <button class="flex items-center text-sm text-gray-500 hover:text-blue-600 transition-colors duration-200">
+                      <svg class="h-4 w-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                      </svg>
+                      Like
+                    </button>
+                    <button class="flex items-center text-sm text-gray-500 hover:text-blue-600 transition-colors duration-200">
+                      <svg class="h-4 w-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"/>
+                      </svg>
+                      Reply
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -206,33 +285,37 @@ const getInitials = (name: string): string => {
             <p class="text-gray-600">No comments yet. Be the first to comment!</p>
           </div>
         </div>
-      </article>
-
-      <!-- Related Posts / Navigation -->
-      <div class="mt-8 flex justify-between">
+      </article>      <!-- Related Posts / Navigation -->
+      <div class="mt-12 flex flex-col sm:flex-row justify-between gap-4">
         <NuxtLink 
           v-if="parseInt(postId) > 1"
           :to="`/blog/${parseInt(postId) - 1}`"
-          class="inline-flex items-center px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition-colors duration-200"
+          class="group inline-flex items-center px-6 py-4 bg-white border border-gray-200 text-gray-700 rounded-xl hover:bg-gray-50 hover:border-blue-300 transition-all duration-300 shadow-sm hover:shadow-md"
         >
-          <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="mr-3 h-5 w-5 transition-transform duration-300 group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
           </svg>
-          Previous Post
+          <div class="text-left">
+            <div class="text-sm text-gray-500">Previous</div>
+            <div class="font-semibold">Post {{ parseInt(postId) - 1 }}</div>
+          </div>
         </NuxtLink>
-        <div v-else></div>
+        <div v-else class="flex-1"></div>
 
         <NuxtLink 
           v-if="parseInt(postId) < 100"
           :to="`/blog/${parseInt(postId) + 1}`"
-          class="inline-flex items-center px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition-colors duration-200"
+          class="group inline-flex items-center px-6 py-4 bg-white border border-gray-200 text-gray-700 rounded-xl hover:bg-gray-50 hover:border-blue-300 transition-all duration-300 shadow-sm hover:shadow-md"
         >
-          Next Post
-          <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="text-right">
+            <div class="text-sm text-gray-500">Next</div>
+            <div class="font-semibold">Post {{ parseInt(postId) + 1 }}</div>
+          </div>
+          <svg class="ml-3 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
           </svg>
         </NuxtLink>
-        <div v-else></div>
+        <div v-else class="flex-1"></div>
       </div>
     </div>
   </div>
