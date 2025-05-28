@@ -14,7 +14,7 @@
 	<main>
 		{@render children()}
 	</main>
-	
+
 	<!-- Footer Component -->
 	<Footer />
 </div>

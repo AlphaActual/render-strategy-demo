@@ -14,23 +14,21 @@
 
 	// Navigation items
 	const navigationItems = [
-		{ name: "Home", href: "/", current: false },
-		{ name: "Blog", href: "/blog", current: false },
-		{ name: "About", href: "#about", current: false },
-		{ name: "Contact", href: "#contact", current: false },
+		{ name: 'Home', href: '/', current: false },
+		{ name: 'Blog', href: '/blog', current: false },
+		{ name: 'About', href: '#about', current: false },
+		{ name: 'Contact', href: '#contact', current: false }
 	];
 </script>
 
-<header
-	class="bg-white/95 backdrop-blur-md border-b border-primary10 sticky top-0 z-50 shadow-sm"
->
-	<nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-		<div class="flex justify-between items-center h-16">
+<header class="border-primary10 sticky top-0 z-50 border-b bg-white/95 shadow-sm backdrop-blur-md">
+	<nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+		<div class="flex h-16 items-center justify-between">
 			<!-- Logo -->
 			<div class="flex items-center">
 				<a
 					href="/"
-					class="text-2xl font-bold text-primary100 hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 hover:bg-clip-text hover:text-transparent transition-all duration-300"
+					class="text-primary100 text-2xl font-bold transition-all duration-300 hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 hover:bg-clip-text hover:text-transparent"
 					onclick={closeMobileMenu}
 				>
 					SvelteKit SSR mode
@@ -43,13 +41,13 @@
 					{#each navigationItems as item}
 						<a
 							href={item.href}
-							class="text-primary80 hover:text-primary100 px-3 py-2 text-sm font-medium transition-all duration-300 hover:bg-primary05 rounded-lg"
+							class="text-primary80 hover:text-primary100 hover:bg-primary05 rounded-lg px-3 py-2 text-sm font-medium transition-all duration-300"
 						>
 							{item.name}
 						</a>
 					{/each}
 					<button
-						class="group inline-flex items-center px-6 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg text-sm font-semibold hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+						class="group inline-flex transform items-center rounded-lg bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-2 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:from-blue-700 hover:to-blue-800 hover:shadow-xl"
 					>
 						Get Started
 						<svg
@@ -72,7 +70,7 @@
 			<div class="md:hidden">
 				<button
 					onclick={toggleMobileMenu}
-					class="inline-flex items-center justify-center p-2 rounded-lg text-primary80 hover:text-primary100 hover:bg-primary05 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 transition-all duration-300"
+					class="text-primary80 hover:text-primary100 hover:bg-primary05 inline-flex items-center justify-center rounded-lg p-2 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
 					aria-expanded="false"
 				>
 					<span class="sr-only">Open main menu</span>
@@ -116,24 +114,22 @@
 		</div>
 		<!-- Mobile menu -->
 		{#if isMobileMenuOpen}
-			<div
-				class="md:hidden transition-all duration-300 ease-in-out opacity-100"
-			>
+			<div class="opacity-100 transition-all duration-300 ease-in-out md:hidden">
 				<div
-					class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white/95 backdrop-blur-md border-t border-primary10"
+					class="border-primary10 space-y-1 border-t bg-white/95 px-2 pb-3 pt-2 backdrop-blur-md sm:px-3"
 				>
 					{#each navigationItems as item}
 						<a
 							href={item.href}
 							onclick={closeMobileMenu}
-							class="text-primary80 hover:text-primary100 hover:bg-primary05 block px-3 py-2 rounded-lg text-base font-medium transition-all duration-300"
+							class="text-primary80 hover:text-primary100 hover:bg-primary05 block rounded-lg px-3 py-2 text-base font-medium transition-all duration-300"
 						>
 							{item.name}
 						</a>
 					{/each}
 					<button
 						onclick={closeMobileMenu}
-						class="group w-full text-left bg-gradient-to-r from-blue-600 to-blue-700 text-white block px-3 py-2 rounded-lg text-base font-semibold hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+						class="group block w-full transform rounded-lg bg-gradient-to-r from-blue-600 to-blue-700 px-3 py-2 text-left text-base font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:from-blue-700 hover:to-blue-800 hover:shadow-xl"
 					>
 						<span class="inline-flex items-center">
 							Get Started
