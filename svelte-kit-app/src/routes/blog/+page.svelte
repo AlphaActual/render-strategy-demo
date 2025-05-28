@@ -11,7 +11,6 @@
 
   const posts: Post[] = data.posts;
   const users: User[] = data.users;
-  const error: string | undefined = data.error;
 </script>
 
 <svelte:head>
@@ -27,31 +26,10 @@
       <p class="text-xl text-gray-600 max-w-2xl mx-auto">
         Discover amazing articles and stories from our community using
         JSONPlaceholder API
-      </p>
-    </div>    <!-- Error state -->
-    {#if error}
-      <div class="text-center py-12">
-        <div class="text-red-400 mb-4">
-          <svg
-            class="mx-auto h-12 w-12"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.464 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z"
-            />
-          </svg>
-        </div>
-        <h3 class="text-lg font-medium text-gray-900 mb-2">Error loading posts</h3>
-        <p class="text-gray-600">
-          {error}
-        </p>
-      </div>
-    {:else if posts && posts.length > 0}
+      </p>    </div>
+
+    <!-- Posts Grid -->
+    {#if posts && posts.length > 0}
       <!-- Posts Grid -->
       <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
         {#each posts as post (post.id)}
@@ -151,31 +129,30 @@
               </div>
             </div>
           </article>
-        {/each}
-      </div>      <!-- Empty State -->
-      {#if posts.length === 0}
-        <div class="text-center py-12">
-          <div class="text-gray-400 mb-4">
-            <svg
-              class="mx-auto h-12 w-12"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-              />
-            </svg>
-          </div>
-          <h3 class="text-lg font-medium text-gray-900 mb-2">No posts found</h3>
-          <p class="text-gray-600">
-            There are no blog posts available at the moment.
-          </p>
+        {/each}      </div>
+    {:else}
+      <!-- No posts state -->
+      <div class="text-center py-12">
+        <div class="text-gray-400 mb-4">
+          <svg
+            class="mx-auto h-12 w-12"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+            />
+          </svg>
         </div>
-      {/if}
+        <h3 class="text-lg font-medium text-gray-900 mb-2">No posts found</h3>
+        <p class="text-gray-600">
+          There are no blog posts available at the moment.
+        </p>
+      </div>
     {/if}
   </div>
 </div>

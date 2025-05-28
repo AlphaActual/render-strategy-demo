@@ -1,3 +1,4 @@
+import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
 export interface Post {
@@ -17,7 +18,6 @@ export interface User {
 export interface BlogPageData {
 	posts: Post[];
 	users: User[];
-	error?: string;
 }
 
 export const load: PageLoad = async ({ fetch }): Promise<BlogPageData> => {
@@ -28,7 +28,7 @@ export const load: PageLoad = async ({ fetch }): Promise<BlogPageData> => {
 		]);
 
 		if (!postsResponse.ok || !usersResponse.ok) {
-			throw new Error('Failed to fetch data');
+			throw error(500, 'Failed to fetch data from the API');
 		}
 
 		const posts: Post[] = await postsResponse.json();
@@ -38,12 +38,8 @@ export const load: PageLoad = async ({ fetch }): Promise<BlogPageData> => {
 			posts,
 			users
 		};
-	} catch (error) {
-		console.error('Failed to fetch data:', error);
-		return {
-			posts: [],
-			users: [],
-			error: 'Failed to load blog posts'
-		};
+	} catch (err) {
+		console.error('Failed to fetch data:', err);
+		throw error(500, 'Failed to load blog posts');
 	}
 };

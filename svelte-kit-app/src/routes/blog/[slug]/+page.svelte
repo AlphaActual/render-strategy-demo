@@ -1,28 +1,15 @@
 <script lang="ts">
 	import Image from '$lib/components/Image.svelte';
-	import type { BlogPostPageData } from './+page.js';
+	import type { BlogPostPageData, Comment } from './+page.js';
 	import type { Post, User } from '../+page.js';
-
 	interface Props {
 		data: BlogPostPageData;
 	}
 
 	let { data }: Props = $props();
-
 	const post: Post | null = data.post;
 	const author: User | null = data.author;
-	const error: string | undefined = data.error;
-	interface Comment {
-		id: number;
-		postId: number;
-		name: string;
-		email: string;
-		body: string;
-	}
-
-	let comments = $state<Comment[]>([]);
-	let commentsLoading = $state(true);
-
+	const comments: Comment[] = data.comments || [];
 	// Format date (since JSONPlaceholder doesn't provide dates, we'll use a mock date)
 	const formatDate = (date: Date): string => {
 		return new Intl.DateTimeFormat('en-US', {
@@ -31,31 +18,6 @@
 			day: 'numeric'
 		}).format(date);
 	};
-
-	// Load comments client-side (optional for demonstration)
-	const loadComments = async () => {
-		if (!post) return;
-
-		try {
-			const response = await fetch(
-				`https://jsonplaceholder.typicode.com/posts/${post.id}/comments`
-			);
-			if (response.ok) {
-				comments = await response.json();
-			}
-		} catch (err) {
-			console.error('Failed to load comments:', err);
-		} finally {
-			commentsLoading = false;
-		}
-	};
-
-	// Load comments when component mounts
-	$effect(() => {
-		if (post) {
-			loadComments();
-		}
-	});
 
 	let mockDate = $derived(post ? new Date(2024, 0, (post.id % 28) + 1) : new Date());
 	let formattedDate = $derived(formatDate(mockDate));
@@ -93,25 +55,8 @@
 				Back to Blog
 			</a>
 		</div>
-		<!-- Error State -->
-		{#if error}
-			<div class="py-12 text-center">
-				<div class="mb-4 text-red-400">
-					<svg class="mx-auto h-12 w-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.464 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z"
-						/>
-					</svg>
-				</div>
-				<h3 class="mb-2 text-lg font-medium text-gray-900">Error loading post</h3>
-				<p class="text-gray-600">
-					{error}
-				</p>
-			</div>
-		{:else if post && author}
+		
+		{#if post && author}
 			<!-- Article -->
 			<article class="overflow-hidden rounded-xl bg-white shadow-xl">
 				<!-- Hero Image -->
@@ -270,19 +215,13 @@
 							</div>
 						</div>
 					</div>
-				</div>
-
-				<!-- Comments Section -->
+				</div>				<!-- Comments Section -->
 				<div class="border-t bg-gradient-to-b from-gray-50 to-white px-6 py-8 sm:px-8">
 					<h3 class="mb-6 text-2xl font-bold text-gray-900">
 						Comments ({comments?.length || 0})
 					</h3>
 
-					{#if commentsLoading}
-						<div class="flex items-center justify-center py-8">
-							<div class="h-8 w-8 animate-spin rounded-full border-b-2 border-blue-600"></div>
-						</div>
-					{:else if comments && comments.length > 0}
+					{#if comments && comments.length > 0}
 						<div class="space-y-6">
 							{#each comments as comment (comment.id)}
 								<div
