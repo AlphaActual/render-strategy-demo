@@ -1,22 +1,53 @@
-# sv
+# SvelteKit Blog Application
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+A modern blog application built with SvelteKit, migrated from the Nuxt 3 version. This application demonstrates server-side rendering, dynamic routing, and modern web development practices.
 
-## Creating a project
+## Features
 
-If you're seeing this, you've probably already done this step. Congrats!
+- 🏠 **Homepage**: Hero section, features, testimonials, and company information
+- 📝 **Blog Listing**: Dynamic blog posts fetched from JSONPlaceholder API
+- 📖 **Individual Blog Posts**: Detailed post pages with comments and navigation
+- 📱 **Responsive Design**: Mobile-first approach with Tailwind CSS
+- 🎨 **Modern UI**: Smooth animations and hover effects
+- 🔧 **TypeScript**: Full type safety with Svelte 5 runes
+- ⚡ **Performance**: Static prerendering and optimized loading
 
-```bash
-# create a new project in the current directory
-npx sv create
+## Technology Stack
 
-# create a new project in my-app
-npx sv create my-app
+- **Framework**: SvelteKit with Svelte 5
+- **Styling**: Tailwind CSS v3
+- **Language**: TypeScript
+- **API**: JSONPlaceholder for demo content
+- **Images**: Picsum for consistent demo images
+
+## Project Structure
+
+```
+src/
+├── routes/
+│   ├── +layout.svelte          # Main layout
+│   ├── +page.svelte            # Homepage
+│   └── blog/
+│       ├── +page.svelte        # Blog listing
+│       └── [slug]/
+│           └── +page.svelte    # Individual blog posts
+├── lib/
+│   └── components/
+│       ├── Header.svelte       # Navigation header
+│       ├── Footer.svelte       # Site footer
+│       └── Image.svelte        # Custom image component
+└── app.css                     # Global styles and Tailwind imports
 ```
 
-## Developing
+## Getting Started
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start the development server:
 
 ```bash
 npm run dev
@@ -25,14 +56,39 @@ npm run dev
 npm run dev -- --open
 ```
 
-## Building
-
-To create a production version of your app:
+## Available Commands
 
 ```bash
-npm run build
+npm run dev        # Start development server
+npm run build      # Build for production
+npm run preview    # Preview production build
+npm run check      # Run type checking and linting
 ```
 
-You can preview the production build with `npm run preview`.
+## API Integration
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+This application uses the [JSONPlaceholder](https://jsonplaceholder.typicode.com/) API for demo content:
+
+- **Posts**: `/posts` - Blog post content
+- **Users**: `/users` - Author information
+- **Comments**: `/posts/{id}/comments` - Post comments
+
+## Migration from Nuxt
+
+This SvelteKit application was migrated from a Nuxt 3 version, maintaining the same:
+- HTML structure and layout
+- Tailwind CSS classes and styling
+- API integration and data flow
+- User interface and user experience
+
+Key changes made during migration:
+- Vue Composition API → Svelte 5 runes
+- Nuxt routing → SvelteKit routing
+- Vue components → Svelte components
+- Vue state management → Svelte reactive statements
+
+For detailed migration information, see [MIGRATION_SUMMARY.md](./MIGRATION_SUMMARY.md).
+
+## License
+
+This project is for demonstration purposes.
