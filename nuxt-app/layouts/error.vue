@@ -27,10 +27,9 @@ const goBack = () => {
 				<div class="absolute -bottom-20 -left-20 w-96 h-96 bg-gradient-to-tr from-purple-200/30 to-blue-200/30 rounded-full blur-3xl"></div>
 			</div>
 
-			<div v-if="error" class="relative z-10 text-center max-w-2xl mx-auto">
-				<!-- Error Code with Gradient -->
+			<div v-if="error" class="relative z-10 text-center max-w-2xl mx-auto">				<!-- Error Code with Gradient -->
 				<div class="mb-8">
-					<h1 class="fs-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-4">
+					<h1 class="mb-4 text-6xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent sm:text-7xl lg:text-8xl">
 						{{ 'statusCode' in error ? error.statusCode : '500' }}
 					</h1>
 					<div class="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full"></div>
@@ -38,11 +37,13 @@ const goBack = () => {
 
 				<!-- Error Message -->
 				<div class="mb-12">
-					<h2 class="fs-2xl font-semibold text-primary100 mb-4">
+					<h2 class="mb-4 text-2xl font-semibold text-primary100 sm:text-3xl lg:text-4xl">
 						{{ 'statusCode' in error && error.statusCode === 404 ? 'Page Not Found' : 'Something went wrong' }}
 					</h2>
-					<p class="fs-md text-primary80 leading-relaxed">
-						{{ 'message' in error ? error.message : 'An unexpected error occurred. Please try again or return to the homepage.' }}
+					<p class="text-lg leading-relaxed text-primary80 sm:text-xl">
+						{{ 'statusCode' in error && error.statusCode === 404 
+							? 'The page you\'re looking for doesn\'t exist. Please check the URL or return to the homepage.'
+							: ('message' in error ? error.message : 'An unexpected error occurred. Please try again or return to the homepage.') }}
 					</p>
 				</div>
 
@@ -66,11 +67,9 @@ const goBack = () => {
 						</svg>
 						Go Back
 					</button>
-				</div>
-
-				<!-- Additional Help Text -->
+				</div>				<!-- Additional Help Text -->
 				<div class="mt-12 pt-8 border-t border-primary10">
-					<p class="fs-sm text-primary60">
+					<p class="text-sm text-primary60">
 						If this problem persists, please contact our support team.
 					</p>
 				</div>

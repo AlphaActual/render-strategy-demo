@@ -55,78 +55,6 @@
 	--icon-xl: 48px;
 	--icon-2xl: 64px;
 
-	/* text sizes */
-	--text-5xl: 71px;
-	--text-5xl--line-height: 86px;
-	--text-4xl: 55px;
-	--text-4xl--line-height: 67.5px;
-	--text-3xl: 40px;
-	--text-3xl--line-height: 51px;
-	--text-2xl: 32px;
-	--text-2xl--line-height: 39px;
-	--text-xl: 24px;
-	--text-xl--line-height: 36px;
-	--text-lg: 22px;
-	--text-lg--line-height: 30px;
-	--text-md: 20px;
-	--text-md--line-height: 32px;
-	--text-base: 16px;
-	--text-base--line-height: 24px;
-	--text-sm: 14px;
-	--text-sm--line-height: 20px;
-	--text-xs: 12px;
-	--text-xs--line-height: 14.5px;
-	--text-xxs: 8px;
-	--text-xxs--line-height: 12px;
-
-	/* fontscale mobile */
-	--mob-text-5xl: 55px;
-	--mob-text-5xl--line-height: 61px;
-	--mob-text-4xl: 40px;
-	--mob-text-4xl--line-height: 52px;
-	--mob-text-3xl: 32px;
-	--mob-text-3xl--line-height: 38.5px;
-	--mob-text-2xl: 24px;
-	--mob-text-2xl--line-height: 31px;
-	--mob-text-xl: 22px;
-	--mob-text-xl--line-height: 36px;
-	--mob-text-lg: 20px;
-	--mob-text-lg--line-height: 25px;
-	--mob-text-md: 20px;
-	--mob-text-md--line-height: 32px;
-	--mob-text-base: var(--text-base);
-	--mob-text-base--line-height: var(--text-base--line-height);
-	--mob-text-sm: var(--text-sm);
-	--mob-text-sm--line-height: var(--text-sm--line-height);
-	--mob-text-xs: var(--text-xs);
-	--mob-text-xs--line-height: var(--text-xs--line-height);
-	--mob-text-xxs: var(--text-xxs);
-	--mob-text-xxs--line-height: var(--text-xxs--line-height);
-
-	/* fontscale large screens */
-	--lg-text-5xl: 85px;
-	--lg-text-5xl--line-height: 100px;
-	--lg-text-4xl: 66px;
-	--lg-text-4xl--line-height: 80px;
-	--lg-text-3xl: 48px;
-	--lg-text-3xl--line-height: 60px;
-	--lg-text-2xl: 38px;
-	--lg-text-2xl--line-height: 46px;
-	--lg-text-xl: 28px;
-	--lg-text-xl--line-height: 42px;
-	--lg-text-lg: 25px;
-	--lg-text-lg--line-height: 34px;
-	--lg-text-md: 22px;
-	--lg-text-md--line-height: 35px;
-	--lg-text-base: 18px;
-	--lg-text-base--line-height: 27px;
-	--lg-text-sm: 15px;
-	--lg-text-sm--line-height: 22px;
-	--lg-text-xs: 13px;
-	--lg-text-xs--line-height: 16px;
-	--lg-text-xxs: 9px;
-	--lg-text-xxs--line-height: 13px;
-
 	/* animation */
 	--animate-fade-down: fade-down 1500ms ease-in-out infinite;
 
@@ -141,23 +69,12 @@
 	--header-height: 99px;
 }
 
-@utility icon-* {
-	font-size: --value(--icon- *);
+html {
+	font-family: 'Archivo', system-ui, sans-serif;
 }
 
-@utility fs-* {
-	font-size: --value(--mob-text- *);
-	line-height: --value(--mob-text- * --line-height);
-
-	@media (width >= 640px) {
-		font-size: --value(--text- *);
-		line-height: --value(--text- * --line-height);
-	}
-
-	@media (width > 1920px) {
-		font-size: --value(--lg-text- *);
-		line-height: --value(--lg-text- * --line-height);
-	}
+@utility icon-* {
+	font-size: --value(--icon- *);
 }
 
 @utility animation-delay-* {

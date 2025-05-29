@@ -16,7 +16,7 @@ const closeMobileMenu = () => {
 const navigationItems = [
   { name: "Home", href: "/", current: false },
   { name: "Blog", href: "/blog", current: false },
-  { name: "About", href: "#about", current: false },
+  { name: "About", href: "/about", current: false },
   { name: "Contact", href: "#contact", current: false },
 ];
 </script>
