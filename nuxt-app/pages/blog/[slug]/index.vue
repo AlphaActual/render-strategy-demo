@@ -164,7 +164,7 @@ const getInitials = (name: string): string => {
               </div>
             </div>
           </div>          <!-- Article Content -->
-          <div class="prose prose-lg prose-blue max-w-none">
+          <div class="max-w-none">
             <div class="text-gray-700 leading-relaxed whitespace-pre-line text-lg">
               {{ post.body }}
             </div>

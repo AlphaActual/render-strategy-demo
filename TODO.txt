@@ -1,1 +1,3 @@
-* ABOUT US page
+TODO * ABOUT US page
+TODO * improve nav menu
+TODO * contact button needs to change page to index page if contact section is not on that page

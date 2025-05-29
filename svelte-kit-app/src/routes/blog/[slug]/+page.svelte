@@ -116,6 +116,7 @@
 								<div class="hidden items-center space-x-2 sm:flex">
 									<button
 										class="rounded-full p-2 text-gray-400 transition-colors duration-200 hover:bg-blue-50 hover:text-blue-600"
+										aria-label="Share on Twitter"
 									>
 										<svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
 											<path
@@ -125,6 +126,7 @@
 									</button>
 									<button
 										class="rounded-full p-2 text-gray-400 transition-colors duration-200 hover:bg-blue-50 hover:text-blue-600"
+										aria-label="Share on Facebook"
 									>
 										<svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
 											<path
@@ -134,6 +136,7 @@
 									</button>
 									<button
 										class="rounded-full p-2 text-gray-400 transition-colors duration-200 hover:bg-blue-50 hover:text-blue-600"
+										aria-label="Share on LinkedIn"
 									>
 										<svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
 											<path
@@ -147,7 +150,7 @@
 					</div>
 
 					<!-- Article Content -->
-					<div class="prose prose-lg prose-blue max-w-none">
+					<div class="max-w-none">
 						<div class="whitespace-pre-line text-lg leading-relaxed text-gray-700">
 							{post.body}
 						</div>
