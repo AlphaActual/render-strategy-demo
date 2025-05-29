@@ -96,7 +96,8 @@
 					showcases best practices and beautiful design patterns.
 				</p>
 				<div class="mb-12 flex flex-col justify-center gap-4 sm:flex-row">
-					<button
+					<a
+						href="#features"
 						class="group inline-flex transform items-center rounded-lg bg-gradient-to-r from-blue-600 to-blue-700 px-8 py-4 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:from-blue-700 hover:to-blue-800 hover:shadow-xl"
 					>
 						Explore Features
@@ -113,7 +114,7 @@
 								d="M9 5l7 7-7 7"
 							/>
 						</svg>
-					</button>
+					</a>
 					<button
 						class="rounded-lg border-2 border-blue-600 px-8 py-4 font-semibold text-blue-600 transition-all duration-300 hover:bg-blue-600 hover:text-white"
 					>

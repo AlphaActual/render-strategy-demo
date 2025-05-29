@@ -1,5 +1,10 @@
 @import 'tailwindcss';
 
+/* Global styles */
+html {
+	scroll-behavior: smooth;
+}
+
 @theme {
 	/* colors */
 	--color-black: #000;
@@ -43,85 +48,13 @@
 	/* fonts */
 	--font-sans: 'Archivo';
 	--font-serif: 'Times New Roman';
-
-	/* breakpoints */
-	--breakpoint-2xl: 94.5rem;
-	--breakpoint-3xl: 125rem;
-
-	/* icon sizes */
-	--icon-sm: 16px;
-	--icon-md: 24px;
-	--icon-lg: 32px;
-	--icon-xl: 48px;
-	--icon-2xl: 64px;
-
-	/* animation */
-	--animate-fade-down: fade-down 1500ms ease-in-out infinite;
-
-	/* shadows */
-	--shadow-3xl: 2px 4px 43.4px 0px #0000001f;
-
-	/* content width */
-	--content-width: 1216px;
-
-	/* header height */
-	--header-height--mobile: 85px;
-	--header-height: 99px;
 }
 
 html {
 	font-family: 'Archivo', system-ui, sans-serif;
 }
 
-@utility icon-* {
-	font-size: --value(--icon- *);
-}
-
-@utility animation-delay-* {
-	animation-delay: --value([ *]);
-}
-
-@utility animation-duration-* {
-	animation-duration: --value([ *]);
-}
-
 @layer components {
-	.px-page {
-		@apply px-4 md:px-[60px] lg:px-[90px] 2xl:px-[10%] 3xl:px-[15%];
-	}
-
-	.pt-page {
-		@apply pt-[calc(var(--header-height--mobile)+32px)] md:pt-[calc(var(--header-height)+32px)];
-	}
-
-	.card-width {
-		@apply mx-auto w-full sm:w-3/4 md:w-2/3 lg:w-full;
-	}
-
-	.header-height {
-		@apply h-[var(--header-height--mobile)] md:h-[var(--header-height)];
-	}
-
-	.blob-element {
-		@apply pointer-events-none absolute max-w-none opacity-90;
-	}
-
-	.masonry-card {
-		@apply rounded-[18px] bg-white p-8 shadow-3xl;
-	}
-
-	.layout-wrap {
-		@apply flex min-h-dvh flex-col;
-	}
-
-	.layout-wrap__page {
-		@apply flex-grow;
-	}
-
-	.text-page-wrap {
-		@apply mx-auto max-w-[900px] px-4 py-[175px] md:py-[100px];
-	}
-
 	.error-wrap {
 		@apply flex min-h-dvh flex-col;
 	}
@@ -132,23 +65,5 @@ html {
 
 	.input {
 		@apply w-full rounded border border-gray100;
-	}
-
-	.nuxt-icon svg {
-		@apply mb-0 h-[1em] w-[1em] align-middle;
-	}
-
-	.nuxt-icon.nuxt-icon--fill,
-	.nuxt-icon.nuxt-icon--fill * {
-		fill: currentcolor !important;
-	}
-
-	.nuxt-icon.nuxt-icon--stroke,
-	.nuxt-icon.nuxt-icon--stroke * {
-		stroke: currentcolor !important;
-	}
-
-	.bg-linear-overlay {
-		background: linear-gradient(180deg, rgb(0 0 0 / 0%) 0%, rgb(0 0 0 / 50%) 65.19%), linear-gradient(0deg, rgb(0 0 0 / 20%), rgb(0 0 0 / 20%));
 	}
 }

@@ -88,14 +88,13 @@ const stats = [
           <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
             Experience modern web development with Nuxt 3, TypeScript, and Tailwind CSS. 
             This demo showcases best practices and beautiful design patterns.
-          </p>
-          <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <button class="group inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
+          </p>          <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+            <a href="#features" class="group inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
               Explore Features
               <svg class="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
               </svg>
-            </button>
+            </a>
             <button class="border-2 border-blue-600 text-blue-600 px-8 py-4 rounded-lg font-semibold hover:bg-blue-600 hover:text-white transition-all duration-300">
               View Demo
             </button>
