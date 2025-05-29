@@ -229,7 +229,7 @@ useSeoMeta({
               :class="index % 2 === 0 ? 'lg:justify-start' : 'lg:justify-end'"
             >
               <!-- Timeline dot - responsive positioning -->
-              <div class="absolute left-8 transform -translate-x-1/2 lg:left-1/2 w-4 h-4 bg-white border-4 border-blue-600 rounded-full z-10"></div>
+              <div class="absolute left-[34px] transform -translate-x-1/2 lg:left-1/2 w-4 h-4 bg-white border-4 border-blue-600 rounded-full z-10"></div>
               
               <!-- Content -->
               <div 

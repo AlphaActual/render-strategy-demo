@@ -233,7 +233,7 @@
 						>
 							<!-- Timeline dot - responsive positioning -->
 							<div
-								class="absolute left-8 z-10 h-4 w-4 -translate-x-1/2 transform rounded-full border-4 border-blue-600 bg-white lg:left-1/2"
+								class="absolute left-[34px] z-10 h-4 w-4 -translate-x-1/2 transform rounded-full border-4 border-blue-600 bg-white lg:left-1/2"
 							></div>
 
 							<!-- Content -->
