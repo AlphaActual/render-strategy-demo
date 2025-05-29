@@ -221,36 +221,33 @@
 			</div>			<div class="relative">
 				<!-- Timeline line - responsive positioning -->
 				<div
-					class="absolute left-8 h-full w-1 rounded-full bg-gradient-to-b from-blue-600 to-purple-600 md:left-1/2 md:-translate-x-1/2 md:transform"
+					class="absolute left-8 h-full w-1 rounded-full bg-gradient-to-b from-blue-600 to-purple-600 lg:left-1/2 lg:-translate-x-1/2 lg:transform"
 				></div>
 
-				<div class="space-y-8 md:space-y-12">
+				<div class="space-y-8 lg:space-y-12">
 					{#each milestones as milestone, index}
 						<div
-							class="relative flex items-center justify-start md:justify-start lg:justify-start {index %
-								2 ===
-							0
+							class="relative flex items-center {index % 2 === 0
 								? 'lg:justify-start'
 								: 'lg:justify-end'}"
 						>
 							<!-- Timeline dot - responsive positioning -->
 							<div
-								class="absolute left-8 z-10 h-4 w-4 rounded-full border-4 border-blue-600 bg-white md:left-1/2 md:-translate-x-1/2 md:transform"
+								class="absolute left-8 z-10 h-4 w-4 -translate-x-1/2 transform rounded-full border-4 border-blue-600 bg-white lg:left-1/2"
 							></div>
 
 							<!-- Content -->
 							<div
-								class="group ml-20 md:ml-0 md:w-5/12 {index % 2 === 0
-									? 'lg:pr-8 lg:text-right md:pl-8 md:text-left'
-									: 'lg:pl-8 lg:text-left md:pl-8 md:text-left'}"
+								class="group ml-20 lg:ml-0 lg:w-5/12 {index % 2 === 0
+									? 'lg:pr-8 lg:text-right'
+									: 'lg:pl-8 lg:text-left'}"
 							>
 								<div
 									class="transform rounded-xl border border-gray-100 bg-white p-6 shadow-lg transition-all duration-500 hover:-translate-y-2 hover:border-blue-200 hover:shadow-2xl"
-								>
-									<div
+								>									<div
 										class="mb-3 flex items-center {index % 2 === 0
-											? 'justify-start lg:justify-end'
-											: 'justify-start'}"
+											? 'lg:justify-end'
+											: 'lg:justify-start'}"
 									>
 										<span class="mr-3 text-2xl">{milestone.icon}</span>
 										<span class="text-2xl font-bold text-blue-600">{milestone.year}</span>
@@ -259,20 +256,7 @@
 										class="mb-2 text-xl font-bold text-gray-900 transition-colors duration-300 group-hover:text-blue-600"
 									>
 										{milestone.title}
-									</h3>
-									<p class="leading-relaxed text-gray-600">{milestone.description}</p>
-								</div>
-							</div>
-						</div>
-					{/each}
-				</div>
-			</div>
-									<h3
-										class="mb-2 text-xl font-bold text-gray-900 transition-colors duration-300 group-hover:text-blue-600"
-									>
-										{milestone.title}
-									</h3>
-									<p class="leading-relaxed text-gray-600">{milestone.description}</p>
+									</h3>					<p class="leading-relaxed text-gray-600">{milestone.description}</p>
 								</div>
 							</div>
 						</div>

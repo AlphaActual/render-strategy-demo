@@ -217,33 +217,29 @@ useSeoMeta({
           <p class="text-xl text-gray-600 max-w-2xl mx-auto">
             From humble beginnings to modern excellence
           </p>
-        </div>
-          <div class="relative">
+        </div>        <div class="relative">
           <!-- Timeline line - responsive positioning -->
-          <div class="absolute left-8 md:left-1/2 md:transform md:-translate-x-1/2 w-1 h-full bg-gradient-to-b from-blue-600 to-purple-600 rounded-full"></div>
+          <div class="absolute left-8 lg:left-1/2 lg:transform lg:-translate-x-1/2 w-1 h-full bg-gradient-to-b from-blue-600 to-purple-600 rounded-full"></div>
           
-          <div class="space-y-8 md:space-y-12">
+          <div class="space-y-8 lg:space-y-12">
             <div 
               v-for="(milestone, index) in milestones" 
               :key="milestone.year"
               class="relative flex items-center"
-              :class="['justify-start md:justify-start lg:justify-start', index % 2 === 0 ? 'lg:justify-start' : 'lg:justify-end']"
+              :class="index % 2 === 0 ? 'lg:justify-start' : 'lg:justify-end'"
             >
               <!-- Timeline dot - responsive positioning -->
-              <div class="absolute left-8 md:left-1/2 md:transform md:-translate-x-1/2 w-4 h-4 bg-white border-4 border-blue-600 rounded-full z-10"></div>
+              <div class="absolute left-8 transform -translate-x-1/2 lg:left-1/2 w-4 h-4 bg-white border-4 border-blue-600 rounded-full z-10"></div>
               
               <!-- Content -->
               <div 
-                class="group ml-20 md:ml-0"
-                :class="[
-                  'md:w-5/12',
-                  index % 2 === 0 
-                    ? 'lg:text-right lg:pr-8 md:text-left md:pl-8' 
-                    : 'lg:text-left lg:pl-8 md:text-left md:pl-8'
-                ]"
+                class="group ml-20 lg:ml-0 lg:w-5/12"
+                :class="index % 2 === 0 
+                  ? 'lg:text-right lg:pr-8' 
+                  : 'lg:text-left lg:pl-8'"
               >
                 <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-blue-200 transform hover:-translate-y-2">
-                  <div class="flex items-center mb-3" :class="index % 2 === 0 ? 'justify-start lg:justify-end' : 'justify-start'">
+                  <div class="flex items-center mb-3" :class="index % 2 === 0 ? 'lg:justify-end' : 'lg:justify-start'">
                     <span class="text-2xl mr-3">{{ milestone.icon }}</span>
                     <span class="text-2xl font-bold text-blue-600">{{ milestone.year }}</span>
                   </div>
