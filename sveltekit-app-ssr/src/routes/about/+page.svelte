@@ -104,6 +104,9 @@
 		name="description"
 		content="Learn about our team, mission, and the technology behind our modern web development demo."
 	/>
+	<meta property="og:title" content="About Us - SvelteKit Demo" />
+	<meta property="og:description" content="Learn about our team, mission, and the technology behind our modern web development demo." />
+	<meta property="og:url" content="/about" />
 </svelte:head>
 
 <div class="py-8">

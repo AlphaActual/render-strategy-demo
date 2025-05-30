@@ -76,8 +76,11 @@
 </script>
 
 <svelte:head>
-	<title>Home</title>
-	<meta name="description" content="SvelteKit demo app" />
+	<title>Home - SvelteKit Demo</title>
+	<meta name="description" content="Experience modern web development with SvelteKit, TypeScript, and Tailwind CSS. This demo showcases best practices and beautiful design patterns." />
+	<meta property="og:title" content="SvelteKit Demo - Modern Web Development" />
+	<meta property="og:description" content="Experience modern web development with SvelteKit, TypeScript, and Tailwind CSS. This demo showcases best practices and beautiful design patterns." />
+	<meta property="og:url" content="/" />
 </svelte:head>
 
 <div class="py-8">
