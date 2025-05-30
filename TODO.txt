@@ -1,1 +1,0 @@
-COMPLETED ✓ Contact button now navigates to index page and scrolls to contact section when clicked from non-home pages across all three frameworks (Next.js, Nuxt.js, SvelteKit)
