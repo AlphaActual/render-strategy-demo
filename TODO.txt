@@ -1,0 +1,1 @@
+* popravak komentara na blog details page-u na mobilnoj verziji overflow
