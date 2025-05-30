@@ -125,9 +125,8 @@ useSeoMeta({
         <div class="relative max-w-4xl mx-auto mb-12">
           <div class="relative overflow-hidden rounded-2xl shadow-2xl">
             <Image 
-              src="https://picsum.photos/1000/500" 
+              src="https://picsum.photos/id/214/1000/500" 
               alt="Our team working together"
-              seed="team-hero"
               class="w-full h-auto"
               loading="eager"
             />
@@ -171,9 +170,8 @@ useSeoMeta({
           <div class="relative">
             <div class="overflow-hidden rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-500">
               <Image 
-                src="https://picsum.photos/600/400" 
+                src="https://picsum.photos/id/524/600/400" 
                 alt="Our mission in action"
-                seed="mission-image"
                 class="w-full h-auto"
               />
             </div>

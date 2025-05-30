@@ -127,9 +127,8 @@
 			<div class="relative mx-auto mb-12 max-w-4xl">
 				<div class="relative overflow-hidden rounded-2xl shadow-2xl">
 					<Image
-						src="https://picsum.photos/1000/500"
+						src="https://picsum.photos/id/214/1000/500"
 						alt="Our team working together"
-						seed="team-hero"
 						class="h-auto w-full"
 						loading="eager"
 					/>
@@ -174,9 +173,8 @@
 						class="transform overflow-hidden rounded-xl shadow-lg transition-transform duration-500 hover:scale-105"
 					>
 						<Image
-							src="https://picsum.photos/600/400"
+							src="https://picsum.photos/id/524/600/400"
 							alt="Our mission in action"
-							seed="mission-image"
 							class="h-auto w-full"
 						/>
 					</div>

@@ -105,9 +105,8 @@ const stats = [
         <div class="relative max-w-5xl mx-auto">
           <div class="relative overflow-hidden rounded-2xl shadow-2xl">
             <Image 
-              src="https://picsum.photos/1200/600" 
+              src="https://picsum.photos/id/3/1200/600" 
               alt="Demo Application Screenshot"
-              seed="hero-demo"
               class="w-full h-auto"
               loading="eager"
             />
@@ -182,9 +181,8 @@ const stats = [
           <div class="relative">
             <div class="overflow-hidden rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-500">
               <Image 
-                src="https://picsum.photos/600/400" 
+                src="https://picsum.photos/id/6/600/400" 
                 alt="About Demo"
-                seed="about-demo"
                 class="w-full h-auto"
               />
             </div>

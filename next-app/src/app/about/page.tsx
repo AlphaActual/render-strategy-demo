@@ -147,9 +147,8 @@ export default function About() {
           <div className="relative max-w-4xl mx-auto mb-12">
             <div className="relative overflow-hidden rounded-2xl shadow-2xl">
               <Image 
-                src="https://picsum.photos/1000/500" 
+                src="https://picsum.photos/id/214/1000/500" 
                 alt="Our team working together"
-                seed="team-hero"
                 width={1000}
                 height={500}
                 className="w-full h-auto"
@@ -195,9 +194,8 @@ export default function About() {
             <div className="relative">
               <div className="overflow-hidden rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-500">
                 <Image 
-                  src="https://picsum.photos/600/400" 
+                  src="https://picsum.photos/id/524/600/400" 
                   alt="Our mission in action"
-                  seed="mission-image"
                   width={600}
                   height={400}
                   className="w-full h-auto"

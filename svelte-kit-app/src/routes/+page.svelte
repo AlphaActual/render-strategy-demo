@@ -127,9 +127,8 @@
 			<div class="relative mx-auto max-w-5xl">
 				<div class="relative overflow-hidden rounded-2xl shadow-2xl">
 					<Image
-						src="https://picsum.photos/1200/600"
+						src="https://picsum.photos/id/3/1200/600" 
 						alt="Demo Application Screenshot"
-						seed="hero-demo"
 						class="h-auto w-full"
 						loading="eager"
 					/>
@@ -219,9 +218,8 @@
 						class="transform overflow-hidden rounded-xl shadow-lg transition-transform duration-500 hover:scale-105"
 					>
 						<Image
-							src="https://picsum.photos/600/400"
+							src="https://picsum.photos/id/6/600/400"
 							alt="About Demo"
-							seed="about-demo"
 							class="h-auto w-full"
 						/>
 					</div>
