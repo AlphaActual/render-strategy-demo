@@ -74,7 +74,11 @@ const navigationItems = [
           <button
             @click="toggleMobileMenu"
             class="inline-flex items-center justify-center p-2 rounded-lg text-primary80 hover:text-primary100 hover:bg-primary05 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 transition-all duration-300"
-            aria-expanded="false"
+            :aria-expanded="isMobileMenuOpen"
+            aria-controls="mobile-menu"
+            :aria-label="
+              isMobileMenuOpen ? 'Close main menu' : 'Open main menu'
+            "
           >
             <span class="sr-only">Open main menu</span>
             <!-- Hamburger icon -->
@@ -116,22 +120,53 @@ const navigationItems = [
       </div>
       <!-- Full Screen Mobile Menu -->
       <div
+        id="mobile-menu"
         class="fixed inset-0 z-50 md:hidden h-dvh transition-all duration-500 ease-out"
         :class="
-          isMobileMenuOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'
+          isMobileMenuOpen
+            ? 'opacity-100 scale-100'
+            : 'opacity-0 scale-95 pointer-events-none'
         "
+        role="dialog"
+        tabindex="0"
+        aria-modal="true"
+        aria-labelledby="mobile-menu-title"
         @click="closeMobileMenu"
+        @keydown="
+          (e) => {
+            if (e.key === 'Escape') {
+              closeMobileMenu();
+            }
+            // Allow closing with Enter or Space for accessibility
+            if (
+              (e.key === 'Enter' || e.key === ' ') &&
+              e.target === e.currentTarget
+            ) {
+              closeMobileMenu();
+            }
+          }
+        "
       >
         <!-- Menu Content with backdrop and blur -->
         <div
           class="fixed inset-0 h-dvh flex flex-col bg-white/95 backdrop-blur-lg"
+          role="presentation"
           @click.stop
+          @keydown="
+            (e) => {
+              // Allow closing with Escape from inner div as well
+              if (e.key === 'Escape') {
+                closeMobileMenu();
+              }
+            }
+          "
         >
           <!-- Header with close button -->
           <div
             class="flex items-center justify-between p-6 border-b border-gray-200/50"
           >
             <h2
+              id="mobile-menu-title"
               class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
             >
               Menu
@@ -139,6 +174,7 @@ const navigationItems = [
             <button
               @click="closeMobileMenu"
               class="p-2 rounded-full hover:bg-black/10 transition-all duration-300 hover:rotate-90"
+              aria-label="Close menu"
             >
               <svg
                 class="h-6 w-6 text-gray-600"
@@ -158,16 +194,25 @@ const navigationItems = [
           </div>
           <!-- Navigation Items -->
           <div class="flex-1 flex flex-col justify-center px-8 py-12">
-            <nav class="space-y-8">
+            <nav class="space-y-8" aria-label="Mobile navigation">
               <NuxtLink
                 v-for="(item, index) in navigationItems"
                 :key="item.name"
                 :to="item.href"
                 @click="closeMobileMenu"
                 class="group block text-3xl font-semibold text-gray-700 hover:text-blue-600 transition-all duration-500"
-                :class="[{ 'delay-150': index === 1}, { 'delay-300': index === 2}, { 'delay-500': index === 3}, isMobileMenuOpen ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0']"
+                :class="[
+                  { 'delay-150': index === 1 },
+                  { 'delay-300': index === 2 },
+                  { 'delay-500': index === 3 },
+                  isMobileMenuOpen
+                    ? 'translate-x-0 opacity-100'
+                    : 'translate-x-10 opacity-0',
+                ]"
               >
-                <span class="flex items-center group-hover:translate-x-2 transition-all duration-300">
+                <span
+                  class="flex items-center group-hover:translate-x-2 transition-all duration-300"
+                >
                   {{ item.name }}
                   <svg
                     class="ml-4 h-6 w-6 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-2"
@@ -193,7 +238,7 @@ const navigationItems = [
             <div class="mt-16">
               <button
                 @click="closeMobileMenu"
-                class="group w-full max-w-sm mx-auto flex items-center justify-center px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-2xl text-lg font-semibold hover:from-blue-700 hover:to-blue-800 transition-all duration-500 shadow-xl hover:shadow-2xl transform hover:scale-105 hover:-translate-y-1  slide-in-from-bottom animation-delay-[400ms]"
+                class="group w-full max-w-sm mx-auto flex items-center justify-center px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-2xl text-lg font-semibold hover:from-blue-700 hover:to-blue-800 transition-all duration-500 shadow-xl hover:shadow-2xl transform hover:scale-105 hover:-translate-y-1 slide-in-from-bottom animation-delay-[400ms]"
               >
                 <span>Get Started</span>
                 <svg
