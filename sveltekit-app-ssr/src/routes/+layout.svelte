@@ -2,7 +2,6 @@
 	import Header from '$lib/components/Header.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 	import { page } from '$app/stores';
-	import ogImage from '$lib/images/og-image.jpg';
 	import { base } from '$app/paths';
 	import '../app.css';
 
@@ -11,15 +10,12 @@
 	// App configuration
 	const APP_NAME = 'SvelteKit App SSR';
 	const APP_DESCRIPTION = 'A SvelteKit application demonstrating SSR';
+	const BASE_APP_URL = 'https://render-strategy-demo-sveltekit-app.vercel.app';
 	
 	const isErrorPage = $derived($page.url.pathname.startsWith('/error') || $page.status >= 400);
 	
-	// Ensure absolute URL for og:image (required for social media)
-	const absoluteOgImage = $derived(
-		typeof ogImage === 'string' && ogImage.startsWith('http') 
-			? ogImage 
-			: `${$page.url.origin}${base}${ogImage}`
-	);
+	// Use static og-image URL for consistent social media sharing
+	const absoluteOgImage = $derived(`${BASE_APP_URL}${base}/og-image.jpg`);
 </script>
 
 <svelte:head>
