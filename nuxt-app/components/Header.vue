@@ -2,6 +2,36 @@
 // Mobile menu state
 const isMobileMenuOpen = ref(false);
 
+// Get current route
+const route = useRoute();
+
+// Handle scrolling to contact section when page loads with hash
+onMounted(() => {
+  if (window.location.hash === "#contact" && route.path === "/") {
+    setTimeout(() => {
+      const contactSection = document.getElementById("contact");
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 100);
+  }
+});
+
+// Watch for route changes to handle contact hash
+watch(
+  () => route.fullPath,
+  (newPath) => {
+    if (newPath === "/#contact") {
+      setTimeout(() => {
+        const contactSection = document.getElementById("contact");
+        if (contactSection) {
+          contactSection.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+    }
+  }
+);
+
 // Toggle mobile menu
 const toggleMobileMenu = () => {
   isMobileMenuOpen.value = !isMobileMenuOpen.value;
@@ -12,12 +42,30 @@ const closeMobileMenu = () => {
   isMobileMenuOpen.value = false;
 };
 
+// Handle contact navigation
+const handleContactClick = (e: Event) => {
+  e.preventDefault();
+
+  if (route.path === "/") {
+    // If on home page, just scroll to contact section
+    const contactSection = document.getElementById("contact");
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: "smooth" });
+    }
+  } else {
+    // If on another page, navigate to home page and then scroll to contact
+    navigateTo("/#contact");
+  }
+
+  closeMobileMenu();
+};
+
 // Navigation items
 const navigationItems = [
   { name: "Home", href: "/", current: false },
   { name: "Blog", href: "/blog", current: false },
   { name: "About", href: "/about", current: false },
-  { name: "Contact", href: "#contact", current: false },
+  { name: "Contact", href: "#contact", current: false, isContact: true },
 ];
 </script>
 
@@ -41,14 +89,22 @@ const navigationItems = [
         <!-- Desktop Navigation -->
         <div class="hidden md:block">
           <div class="ml-10 flex items-baseline space-x-4">
-            <NuxtLink
-              v-for="item in navigationItems"
-              :key="item.name"
-              :to="item.href"
-              class="text-primary80 hover:text-primary100 px-3 py-2 text-sm font-medium transition-all duration-300 hover:bg-primary05 rounded-lg"
-            >
-              {{ item.name }}
-            </NuxtLink>
+            <template v-for="item in navigationItems" :key="item.name">
+              <NuxtLink
+                v-if="!item.isContact"
+                :to="item.href"
+                class="text-primary80 hover:text-primary100 px-3 py-2 text-sm font-medium transition-all duration-300 hover:bg-primary05 rounded-lg"
+              >
+                {{ item.name }}
+              </NuxtLink>
+              <button
+                v-else
+                @click="handleContactClick"
+                class="text-primary80 hover:text-primary100 px-3 py-2 text-sm font-medium transition-all duration-300 hover:bg-primary05 rounded-lg"
+              >
+                {{ item.name }}
+              </button>
+            </template>
             <button
               class="group inline-flex items-center px-6 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg text-sm font-semibold hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
             >
@@ -195,43 +251,82 @@ const navigationItems = [
           <!-- Navigation Items -->
           <div class="flex-1 flex flex-col justify-center px-8 py-12">
             <nav class="space-y-8" aria-label="Mobile navigation">
-              <NuxtLink
+              <template
                 v-for="(item, index) in navigationItems"
                 :key="item.name"
-                :to="item.href"
-                @click="closeMobileMenu"
-                class="group block text-3xl font-semibold text-gray-700 hover:text-blue-600 transition-all duration-500"
-                :class="[
-                  { 'delay-150': index === 1 },
-                  { 'delay-300': index === 2 },
-                  { 'delay-500': index === 3 },
-                  isMobileMenuOpen
-                    ? 'translate-x-0 opacity-100'
-                    : 'translate-x-10 opacity-0',
-                ]"
               >
-                <span
-                  class="flex items-center group-hover:translate-x-2 transition-all duration-300"
+                <NuxtLink
+                  v-if="!item.isContact"
+                  :to="item.href"
+                  @click="closeMobileMenu"
+                  class="group block text-3xl font-semibold text-gray-700 hover:text-blue-600 transition-all duration-500"
+                  :class="[
+                    { 'delay-150': index === 1 },
+                    { 'delay-300': index === 2 },
+                    { 'delay-500': index === 3 },
+                    isMobileMenuOpen
+                      ? 'translate-x-0 opacity-100'
+                      : 'translate-x-10 opacity-0',
+                  ]"
                 >
-                  {{ item.name }}
-                  <svg
-                    class="ml-4 h-6 w-6 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-2"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
+                  <span
+                    class="flex items-center group-hover:translate-x-2 transition-all duration-300"
                   >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-                </span>
-                <div
-                  class="h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 w-0 group-hover:w-full transition-all duration-500 mt-2"
-                ></div>
-              </NuxtLink>
+                    {{ item.name }}
+                    <svg
+                      class="ml-4 h-6 w-6 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </span>
+                  <div
+                    class="h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 w-0 group-hover:w-full transition-all duration-500 mt-2"
+                  ></div>
+                </NuxtLink>
+                <button
+                  v-else
+                  @click="handleContactClick"
+                  class="group block text-3xl font-semibold text-gray-700 hover:text-blue-600 transition-all duration-500"
+                  :class="[
+                    { 'delay-150': index === 1 },
+                    { 'delay-300': index === 2 },
+                    { 'delay-500': index === 3 },
+                    isMobileMenuOpen
+                      ? 'translate-x-0 opacity-100'
+                      : 'translate-x-10 opacity-0',
+                  ]"
+                >
+                  <span
+                    class="flex items-center group-hover:translate-x-2 transition-all duration-300"
+                  >
+                    {{ item.name }}
+                    <svg
+                      class="ml-4 h-6 w-6 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </span>
+                  <div
+                    class="h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 w-0 group-hover:w-full transition-all duration-500 mt-2"
+                  ></div>
+                </button>
+              </template>
             </nav>
 
             <!-- Call to Action Button -->

@@ -1,11 +1,27 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter, usePathname } from 'next/navigation';
 
 const Header = () => {
+  const router = useRouter();
+  const pathname = usePathname();
+  
   // Mobile menu state
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // Handle scrolling to contact section when page loads with hash
+  useEffect(() => {
+    if (window.location.hash === '#contact' && pathname === '/') {
+      setTimeout(() => {
+        const contactSection = document.getElementById('contact');
+        if (contactSection) {
+          contactSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  }, [pathname]);
 
   // Toggle mobile menu
   const toggleMobileMenu = () => {
@@ -17,12 +33,30 @@ const Header = () => {
     setIsMobileMenuOpen(false);
   };
 
+  // Handle contact navigation
+  const handleContactClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    
+    if (pathname === '/') {
+      // If on home page, just scroll to contact section
+      const contactSection = document.getElementById('contact');
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // If on another page, navigate to home page and then scroll to contact
+      router.push('/#contact');
+    }
+    
+    closeMobileMenu();
+  };
+
   // Navigation items
   const navigationItems = [
     { name: "Home", href: "/", current: false },
     { name: "Blog", href: "/blog", current: false },
     { name: "About", href: "/about", current: false },
-    { name: "Contact", href: "#contact", current: false },
+    { name: "Contact", href: "#contact", current: false, onClick: handleContactClick },
   ];
 
   return (
@@ -40,17 +74,26 @@ const Header = () => {
             </Link>
           </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:block">
+          {/* Desktop Navigation */}          <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
               {navigationItems.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className="text-primary80 hover:text-primary100 px-3 py-2 text-sm font-medium transition-all duration-300 hover:bg-primary05 rounded-lg"
-                >
-                  {item.name}
-                </Link>
+                item.name === "Contact" ? (
+                  <button
+                    key={item.name}
+                    onClick={item.onClick}
+                    className="text-primary80 hover:text-primary100 px-3 py-2 text-sm font-medium transition-all duration-300 hover:bg-primary05 rounded-lg"
+                  >
+                    {item.name}
+                  </button>
+                ) : (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className="text-primary80 hover:text-primary100 px-3 py-2 text-sm font-medium transition-all duration-300 hover:bg-primary05 rounded-lg"
+                  >
+                    {item.name}
+                  </Link>
+                )
               ))}
               <button className="group inline-flex items-center px-6 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg text-sm font-semibold hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
                 Get Started
@@ -189,41 +232,74 @@ const Header = () => {
             </div>
             
             {/* Navigation Items */}
-            <div className="flex-1 flex flex-col justify-center px-8 py-12">
-              <nav className="space-y-8" aria-label="Mobile navigation">
+            <div className="flex-1 flex flex-col justify-center px-8 py-12">              <nav className="space-y-8" aria-label="Mobile navigation">
                 {navigationItems.map((item, index) => (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    onClick={closeMobileMenu}
-                    className={`group block text-3xl font-semibold text-gray-700 hover:text-blue-600 transition-all duration-500 ${
-                      index === 1 ? 'delay-150' : ''
-                    } ${index === 2 ? 'delay-300' : ''} ${
+                  item.name === "Contact" ? (
+                    <button
+                      key={item.name}
+                      onClick={item.onClick}
+                      className={`group block text-3xl font-semibold text-gray-700 hover:text-blue-600 transition-all duration-500 ${
+                        index === 1 ? 'delay-150' : ''
+                      } ${index === 2 ? 'delay-300' : ''} ${
+                        index === 3 ? 'delay-500' : ''
+                      } ${
+                        isMobileMenuOpen
+                          ? 'translate-x-0 opacity-100'
+                          : 'translate-x-10 opacity-0'
+                      }`}
+                    >
+                      <span className="flex items-center group-hover:translate-x-2 transition-all duration-300">
+                        {item.name}
+                        <svg
+                          className="ml-4 h-6 w-6 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-2"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M9 5l7 7-7 7"
+                          />
+                        </svg>
+                      </span>
+                      <div className="h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 w-0 group-hover:w-full transition-all duration-500 mt-2"></div>
+                    </button>
+                  ) : (
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      onClick={closeMobileMenu}
+                      className={`group block text-3xl font-semibold text-gray-700 hover:text-blue-600 transition-all duration-500 ${
+                        index === 1 ? 'delay-150' : ''
+                      } ${index === 2 ? 'delay-300' : ''} ${
                       index === 3 ? 'delay-500' : ''
-                    } ${
-                      isMobileMenuOpen
-                        ? 'translate-x-0 opacity-100'
-                        : 'translate-x-10 opacity-0'
-                    }`}
-                  >
-                    <span className="flex items-center group-hover:translate-x-2 transition-all duration-300">
-                      {item.name}
-                      <svg
-                        className="ml-4 h-6 w-6 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-2"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M9 5l7 7-7 7"
-                        />
-                      </svg>
-                    </span>
-                    <div className="h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 w-0 group-hover:w-full transition-all duration-500 mt-2"></div>
-                  </Link>
+                      } ${
+                        isMobileMenuOpen
+                          ? 'translate-x-0 opacity-100'
+                          : 'translate-x-10 opacity-0'
+                      }`}
+                    >
+                      <span className="flex items-center group-hover:translate-x-2 transition-all duration-300">
+                        {item.name}
+                        <svg
+                          className="ml-4 h-6 w-6 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-2"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M9 5l7 7-7 7"
+                          />
+                        </svg>
+                      </span>
+                      <div className="h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 w-0 group-hover:w-full transition-all duration-500 mt-2"></div>
+                    </Link>
+                  )
                 ))}
               </nav>
 

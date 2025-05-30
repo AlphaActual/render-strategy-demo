@@ -1,6 +1,36 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
+	import { page } from '$app/stores';
+	import { goto } from '$app/navigation';
+
 	// Mobile menu state
 	let isMobileMenuOpen = $state(false);
+
+	// Handle scrolling to contact section when page loads with hash
+	onMount(() => {
+		if (typeof window !== 'undefined') {
+			if (window.location.hash === '#contact' && $page.url.pathname === '/') {
+				setTimeout(() => {
+					const contactSection = document.getElementById('contact');
+					if (contactSection) {
+						contactSection.scrollIntoView({ behavior: 'smooth' });
+					}
+				}, 100);
+			}
+		}
+	});
+
+	// Watch for route changes to handle contact hash
+	$effect(() => {
+		if ($page.url.pathname === '/' && $page.url.hash === '#contact') {
+			setTimeout(() => {
+				const contactSection = document.getElementById('contact');
+				if (contactSection) {
+					contactSection.scrollIntoView({ behavior: 'smooth' });
+				}
+			}, 100);
+		}
+	});
 
 	// Toggle mobile menu
 	const toggleMobileMenu = () => {
@@ -11,12 +41,31 @@
 	const closeMobileMenu = () => {
 		isMobileMenuOpen = false;
 	};
+
+	// Handle contact navigation
+	const handleContactClick = (e: Event) => {
+		e.preventDefault();
+
+		if ($page.url.pathname === '/') {
+			// If on home page, just scroll to contact section
+			const contactSection = document.getElementById('contact');
+			if (contactSection) {
+				contactSection.scrollIntoView({ behavior: 'smooth' });
+			}
+		} else {
+			// If on another page, navigate to home page and then scroll to contact
+			goto('/#contact');
+		}
+
+		closeMobileMenu();
+	};
+
 	// Navigation items
 	const navigationItems = [
 		{ name: 'Home', href: '/', current: false },
 		{ name: 'Blog', href: '/blog', current: false },
 		{ name: 'About', href: '/about', current: false },
-		{ name: 'Contact', href: '#contact', current: false }
+		{ name: 'Contact', href: '#contact', current: false, isContact: true }
 	];
 </script>
 
@@ -32,18 +81,25 @@
 				>
 					SvelteKit SSR mode
 				</a>
-			</div>
-
-			<!-- Desktop Navigation -->
+			</div>			<!-- Desktop Navigation -->
 			<div class="hidden md:block">
 				<div class="ml-10 flex items-baseline space-x-4">
 					{#each navigationItems as item}
-						<a
-							href={item.href}
-							class="text-primary80 hover:text-primary100 hover:bg-primary05 rounded-lg px-3 py-2 text-sm font-medium transition-all duration-300"
-						>
-							{item.name}
-						</a>
+						{#if item.isContact}
+							<button
+								onclick={handleContactClick}
+								class="text-primary80 hover:text-primary100 hover:bg-primary05 rounded-lg px-3 py-2 text-sm font-medium transition-all duration-300"
+							>
+								{item.name}
+							</button>
+						{:else}
+							<a
+								href={item.href}
+								class="text-primary80 hover:text-primary100 hover:bg-primary05 rounded-lg px-3 py-2 text-sm font-medium transition-all duration-300"
+							>
+								{item.name}
+							</a>
+						{/if}
 					{/each}
 					<button
 						class="group inline-flex transform items-center rounded-lg bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-2 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:from-blue-700 hover:to-blue-800 hover:shadow-xl"
@@ -178,46 +234,80 @@
 							/>
 						</svg>
 					</button>
-				</div>
-
-				<!-- Navigation Items -->
+				</div>				<!-- Navigation Items -->
 				<div class="flex flex-1 flex-col justify-center px-8 py-12">
 					<nav class="space-y-8" aria-label="Mobile navigation">
 						{#each navigationItems as item, index}
-							<a
-								href={item.href}
-								onclick={closeMobileMenu}
-								class="group block text-3xl font-semibold text-gray-700 transition-all duration-500 hover:text-blue-600"
-								class:translate-x-0={isMobileMenuOpen}
-								class:opacity-100={isMobileMenuOpen}
-								class:translate-x-10={!isMobileMenuOpen}
-								class:opacity-0={!isMobileMenuOpen}
-								class:delay-150={index === 1}
-								class:delay-300={index === 2}
-								class:delay-500={index === 3}
-							>
-								<span
-									class="flex items-center transition-all duration-300 group-hover:translate-x-2"
+							{#if item.isContact}
+								<button
+									onclick={handleContactClick}
+									class="group block text-3xl font-semibold text-gray-700 transition-all duration-500 hover:text-blue-600 text-left"
+									class:translate-x-0={isMobileMenuOpen}
+									class:opacity-100={isMobileMenuOpen}
+									class:translate-x-10={!isMobileMenuOpen}
+									class:opacity-0={!isMobileMenuOpen}
+									class:delay-150={index === 1}
+									class:delay-300={index === 2}
+									class:delay-500={index === 3}
 								>
-									{item.name}
-									<svg
-										class="ml-4 h-6 w-6 opacity-0 transition-all duration-300 group-hover:translate-x-2 group-hover:opacity-100"
-										fill="none"
-										stroke="currentColor"
-										viewBox="0 0 24 24"
+									<span
+										class="flex items-center transition-all duration-300 group-hover:translate-x-2"
 									>
-										<path
-											stroke-linecap="round"
-											stroke-linejoin="round"
-											stroke-width="2"
-											d="M9 5l7 7-7 7"
-										/>
-									</svg>
-								</span>
-								<div
-									class="mt-2 h-0.5 w-0 bg-gradient-to-r from-blue-600 to-purple-600 transition-all duration-500 group-hover:w-full"
-								></div>
-							</a>
+										{item.name}
+										<svg
+											class="ml-4 h-6 w-6 opacity-0 transition-all duration-300 group-hover:translate-x-2 group-hover:opacity-100"
+											fill="none"
+											stroke="currentColor"
+											viewBox="0 0 24 24"
+										>
+											<path
+												stroke-linecap="round"
+												stroke-linejoin="round"
+												stroke-width="2"
+												d="M9 5l7 7-7 7"
+											/>
+										</svg>
+									</span>
+									<div
+										class="mt-2 h-0.5 w-0 bg-gradient-to-r from-blue-600 to-purple-600 transition-all duration-500 group-hover:w-full"
+									></div>
+								</button>
+							{:else}
+								<a
+									href={item.href}
+									onclick={closeMobileMenu}
+									class="group block text-3xl font-semibold text-gray-700 transition-all duration-500 hover:text-blue-600"
+									class:translate-x-0={isMobileMenuOpen}
+									class:opacity-100={isMobileMenuOpen}
+									class:translate-x-10={!isMobileMenuOpen}
+									class:opacity-0={!isMobileMenuOpen}
+									class:delay-150={index === 1}
+									class:delay-300={index === 2}
+									class:delay-500={index === 3}
+								>
+									<span
+										class="flex items-center transition-all duration-300 group-hover:translate-x-2"
+									>
+										{item.name}
+										<svg
+											class="ml-4 h-6 w-6 opacity-0 transition-all duration-300 group-hover:translate-x-2 group-hover:opacity-100"
+											fill="none"
+											stroke="currentColor"
+											viewBox="0 0 24 24"
+										>
+											<path
+												stroke-linecap="round"
+												stroke-linejoin="round"
+												stroke-width="2"
+												d="M9 5l7 7-7 7"
+											/>
+										</svg>
+									</span>
+									<div
+										class="mt-2 h-0.5 w-0 bg-gradient-to-r from-blue-600 to-purple-600 transition-all duration-500 group-hover:w-full"
+									></div>
+								</a>
+							{/if}
 						{/each}
 					</nav>
 

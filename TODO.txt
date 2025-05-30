@@ -1,3 +1,1 @@
-TODO * ABOUT US page
-TODO * improve nav menu
-TODO * contact button needs to change page to index page if contact section is not on that page
+COMPLETED ✓ Contact button now navigates to index page and scrolls to contact section when clicked from non-home pages across all three frameworks (Next.js, Nuxt.js, SvelteKit)
