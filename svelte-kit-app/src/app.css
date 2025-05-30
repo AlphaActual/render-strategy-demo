@@ -64,6 +64,6 @@ html {
 	}
 
 	.input {
-		@apply w-full rounded border border-gray100;
+		@apply w-full rounded border border-gray-100;
 	}
 }
