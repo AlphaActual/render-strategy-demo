@@ -1,23 +1,23 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { useState, useEffect } from 'react';
-import { useRouter, usePathname } from 'next/navigation';
+import Link from "next/link";
+import { useState, useEffect } from "react";
+import { useRouter, usePathname } from "next/navigation";
 
 const Header = () => {
   const router = useRouter();
   const pathname = usePathname();
-  
+
   // Mobile menu state
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // Handle scrolling to contact section when page loads with hash
   useEffect(() => {
-    if (window.location.hash === '#contact' && pathname === '/') {
+    if (window.location.hash === "#contact" && pathname === "/") {
       setTimeout(() => {
-        const contactSection = document.getElementById('contact');
+        const contactSection = document.getElementById("contact");
         if (contactSection) {
-          contactSection.scrollIntoView({ behavior: 'smooth' });
+          contactSection.scrollIntoView({ behavior: "smooth" });
         }
       }, 100);
     }
@@ -36,18 +36,18 @@ const Header = () => {
   // Handle contact navigation
   const handleContactClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    
-    if (pathname === '/') {
+
+    if (pathname === "/") {
       // If on home page, just scroll to contact section
-      const contactSection = document.getElementById('contact');
+      const contactSection = document.getElementById("contact");
       if (contactSection) {
-        contactSection.scrollIntoView({ behavior: 'smooth' });
+        contactSection.scrollIntoView({ behavior: "smooth" });
       }
     } else {
       // If on another page, navigate to home page and then scroll to contact
-      router.push('/#contact');
+      router.push("/#contact");
     }
-    
+
     closeMobileMenu();
   };
 
@@ -56,7 +56,12 @@ const Header = () => {
     { name: "Home", href: "/", current: false },
     { name: "Blog", href: "/blog", current: false },
     { name: "About", href: "/about", current: false },
-    { name: "Contact", href: "#contact", current: false, onClick: handleContactClick },
+    {
+      name: "Contact",
+      href: "#contact",
+      current: false,
+      onClick: handleContactClick,
+    },
   ];
 
   return (
@@ -73,10 +78,10 @@ const Header = () => {
               Next.js SSR mode
             </Link>
           </div>
-
-          {/* Desktop Navigation */}          <div className="hidden md:block">
+          {/* Desktop Navigation */}{" "}
+          <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
-              {navigationItems.map((item) => (
+              {navigationItems.map((item) =>
                 item.name === "Contact" ? (
                   <button
                     key={item.name}
@@ -94,7 +99,7 @@ const Header = () => {
                     {item.name}
                   </Link>
                 )
-              ))}
+              )}
               <button className="group inline-flex items-center px-6 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg text-sm font-semibold hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
                 Get Started
                 <svg
@@ -113,7 +118,6 @@ const Header = () => {
               </button>
             </div>
           </div>
-          
           {/* Mobile menu button */}
           <div className="md:hidden">
             <button
@@ -121,7 +125,9 @@ const Header = () => {
               className="inline-flex items-center justify-center p-2 rounded-lg text-primary80 hover:text-primary100 hover:bg-primary05 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 transition-all duration-300"
               aria-expanded={isMobileMenuOpen}
               aria-controls="mobile-menu"
-              aria-label={isMobileMenuOpen ? 'Close main menu' : 'Open main menu'}
+              aria-label={
+                isMobileMenuOpen ? "Close main menu" : "Open main menu"
+              }
             >
               <span className="sr-only">Open main menu</span>
               {/* Hamburger icon */}
@@ -162,14 +168,14 @@ const Header = () => {
             </button>
           </div>
         </div>
-        
+
         {/* Full Screen Mobile Menu */}
         <div
           id="mobile-menu"
           className={`fixed inset-0 z-50 md:hidden h-dvh transition-all duration-500 ease-out ${
             isMobileMenuOpen
-              ? 'opacity-100 scale-100'
-              : 'opacity-0 scale-95 pointer-events-none'
+              ? "opacity-100 scale-100"
+              : "opacity-0 scale-95 pointer-events-none"
           }`}
           role="dialog"
           tabIndex={0}
@@ -177,12 +183,12 @@ const Header = () => {
           aria-labelledby="mobile-menu-title"
           onClick={closeMobileMenu}
           onKeyDown={(e) => {
-            if (e.key === 'Escape') {
+            if (e.key === "Escape") {
               closeMobileMenu();
             }
             // Allow closing with Enter or Space for accessibility
             if (
-              (e.key === 'Enter' || e.key === ' ') &&
+              (e.key === "Enter" || e.key === " ") &&
               e.target === e.currentTarget
             ) {
               closeMobileMenu();
@@ -196,7 +202,7 @@ const Header = () => {
             onClick={(e) => e.stopPropagation()}
             onKeyDown={(e) => {
               // Allow closing with Escape from inner div as well
-              if (e.key === 'Escape') {
+              if (e.key === "Escape") {
                 closeMobileMenu();
               }
             }}
@@ -230,22 +236,24 @@ const Header = () => {
                 </svg>
               </button>
             </div>
-            
+
             {/* Navigation Items */}
-            <div className="flex-1 flex flex-col justify-center px-8 py-12">              <nav className="space-y-8" aria-label="Mobile navigation">
-                {navigationItems.map((item, index) => (
+            <div className="flex-1 flex flex-col justify-center px-8 py-12">
+              {" "}
+              <nav className="space-y-8" aria-label="Mobile navigation">
+                {navigationItems.map((item, index) =>
                   item.name === "Contact" ? (
                     <button
                       key={item.name}
                       onClick={item.onClick}
                       className={`group block text-3xl font-semibold text-gray-700 hover:text-blue-600 transition-all duration-500 ${
-                        index === 1 ? 'delay-150' : ''
-                      } ${index === 2 ? 'delay-300' : ''} ${
-                        index === 3 ? 'delay-500' : ''
+                        index === 1 ? "delay-150" : ""
+                      } ${index === 2 ? "delay-300" : ""} ${
+                        index === 3 ? "delay-500" : ""
                       } ${
                         isMobileMenuOpen
-                          ? 'translate-x-0 opacity-100'
-                          : 'translate-x-10 opacity-0'
+                          ? "translate-x-0 opacity-100"
+                          : "translate-x-10 opacity-0"
                       }`}
                     >
                       <span className="flex items-center group-hover:translate-x-2 transition-all duration-300">
@@ -272,13 +280,13 @@ const Header = () => {
                       href={item.href}
                       onClick={closeMobileMenu}
                       className={`group block text-3xl font-semibold text-gray-700 hover:text-blue-600 transition-all duration-500 ${
-                        index === 1 ? 'delay-150' : ''
-                      } ${index === 2 ? 'delay-300' : ''} ${
-                      index === 3 ? 'delay-500' : ''
+                        index === 1 ? "delay-150" : ""
+                      } ${index === 2 ? "delay-300" : ""} ${
+                        index === 3 ? "delay-500" : ""
                       } ${
                         isMobileMenuOpen
-                          ? 'translate-x-0 opacity-100'
-                          : 'translate-x-10 opacity-0'
+                          ? "translate-x-0 opacity-100"
+                          : "translate-x-10 opacity-0"
                       }`}
                     >
                       <span className="flex items-center group-hover:translate-x-2 transition-all duration-300">
@@ -300,9 +308,8 @@ const Header = () => {
                       <div className="h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 w-0 group-hover:w-full transition-all duration-500 mt-2"></div>
                     </Link>
                   )
-                ))}
+                )}
               </nav>
-
               {/* Call to Action Button */}
               <div className="mt-16">
                 <button
@@ -325,7 +332,6 @@ const Header = () => {
                   </svg>
                 </button>
               </div>
-
               {/* Footer */}
               <div className="p-6 border-t border-gray-200/50">
                 <p className="text-center text-sm text-gray-500">

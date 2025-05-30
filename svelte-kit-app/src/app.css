@@ -1,11 +1,6 @@
 @import 'tailwindcss';
 
-/* Global styles */
-html {
-	scroll-behavior: smooth;
-}
-
-:root {
+@theme {
 	/* colors */
 	--color-black: #000;
 	--color-gray100: #050e01;
@@ -46,11 +41,13 @@ html {
 	--color-grayscale60: #6b7280;
 
 	/* fonts */
-	--font-sans: 'Archivo';
-	--font-serif: 'Times New Roman';
+	--font-family-sans: 'Archivo', system-ui, sans-serif;
+	--font-family-serif: 'Times New Roman', serif;
 }
 
+/* Global styles */
 html {
+	scroll-behavior: smooth;
 	font-family: 'Archivo', system-ui, sans-serif;
 }
 
