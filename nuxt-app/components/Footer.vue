@@ -11,29 +11,28 @@
           <p class="text-primary40">
             A modern web application demo built with the latest technologies.
           </p>
-        </div>
-        <div>
+        </div>        <div>
           <h4 class="font-semibold mb-4">Product</h4>
           <ul class="space-y-2 text-primary40">
-            <li><a href="#" class="hover:text-white transition-colors">Features</a></li>
-            <li><a href="#" class="hover:text-white transition-colors">Pricing</a></li>
-            <li><a href="#" class="hover:text-white transition-colors">Documentation</a></li>
+            <li><button type="button" class="hover:text-white transition-colors">Features</button></li>
+            <li><button type="button" class="hover:text-white transition-colors">Pricing</button></li>
+            <li><button type="button" class="hover:text-white transition-colors">Documentation</button></li>
           </ul>
         </div>
         <div>
           <h4 class="font-semibold mb-4">Company</h4>
           <ul class="space-y-2 text-primary40">
-            <li><a href="#" class="hover:text-white transition-colors">About</a></li>
-            <li><a href="#" class="hover:text-white transition-colors">Blog</a></li>
-            <li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
+            <li><NuxtLink to="/about" class="hover:text-white transition-colors">About</NuxtLink></li>
+            <li><NuxtLink to="/blog" class="hover:text-white transition-colors">Blog</NuxtLink></li>
+            <li><button type="button" class="hover:text-white transition-colors">Careers</button></li>
           </ul>
         </div>
         <div>
           <h4 class="font-semibold mb-4">Connect</h4>
           <ul class="space-y-2 text-primary40">
-            <li><a href="#" class="hover:text-white transition-colors">Twitter</a></li>
-            <li><a href="#" class="hover:text-white transition-colors">GitHub</a></li>
-            <li><a href="#" class="hover:text-white transition-colors">Discord</a></li>
+            <li><a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Twitter</a></li>
+            <li><a href="https://github.com" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">GitHub</a></li>
+            <li><a href="https://discord.com" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Discord</a></li>
           </ul>
         </div>
       </div>
