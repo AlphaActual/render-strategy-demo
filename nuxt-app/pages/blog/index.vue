@@ -14,10 +14,10 @@ interface User {
 }
 
 // Fetch posts and users data
-const { data: posts } = await useLazyFetch<Post[]>(
+const { data: posts } = await useFetch<Post[]>(
   "https://jsonplaceholder.typicode.com/posts"
 );
-const { data: users } = await useLazyFetch<User[]>(
+const { data: users } = await useFetch<User[]>(
   "https://jsonplaceholder.typicode.com/users"
 );
 </script>
@@ -41,7 +41,8 @@ const { data: users } = await useLazyFetch<User[]>(
         ></div>
       </div>
       <!-- Posts Grid -->
-      <div v-else class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">        <article
+      <div v-else class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <article
           v-for="post in posts"
           :key="post.id"
           class="group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 hover:border-blue-200 transform hover:-translate-y-2 flex flex-col"
@@ -66,7 +67,8 @@ const { data: users } = await useLazyFetch<User[]>(
                 Article
               </span>
             </div>
-          </div>          <!-- Post Content -->
+          </div>
+          <!-- Post Content -->
           <div class="p-6 flex flex-col flex-1">
             <!-- Author Info -->
             <div class="flex items-center mb-4">
