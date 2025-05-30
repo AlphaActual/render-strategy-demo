@@ -1,26 +1,23 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Global styles */
+html {
+	scroll-behavior: smooth;
+	font-family: 'Archivo', system-ui, sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer components {
+	.error-wrap {
+		@apply flex min-h-dvh flex-col;
+	}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+	.error-wrap__main {
+		@apply flex flex-grow items-center justify-center text-center;
+	}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+	.input {
+		@apply w-full rounded border border-gray100;
+	}
 }
