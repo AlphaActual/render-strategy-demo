@@ -1,12 +1,23 @@
 import tailwindcss from "@tailwindcss/vite";
 
 const cmsDomain = ["https://picsum.photos/"];
-const APP_NAME = "Nuxt App";
+const APP_NAME = "Nuxt App SSR";
+const BASE_APP_URL = "https://render-strategy-demo-nuxt-app-ssr.vercel.app"
 export default defineNuxtConfig({
   app: {
     pageTransition: { name: "page", mode: "out-in" },
     head: {
       title: APP_NAME,
+
+      meta: [
+				{ name: 'application-name', content: APP_NAME },
+				{ name: 'twitter:card', content: 'summary_large_image' },
+				{ property: 'og:type', content: 'website' },
+				{ property: 'og:site_name', content: APP_NAME },
+				{ property: 'og:title', content: APP_NAME },
+				{ property: 'og:image', content: BASE_APP_URL + '/img/og-image.jpg' },
+        { name: 'description', content: 'A Nuxt.js application demonstrating SSR' },
+			],
 
       link: [
         { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
