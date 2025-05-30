@@ -14,8 +14,6 @@
 	
 	const isErrorPage = $derived($page.url.pathname.startsWith('/error') || $page.status >= 400);
 	
-	// Use static og-image URL for consistent social media sharing
-	const absoluteOgImage = $derived(`${BASE_APP_URL}${base}/og-image.jpg`);
 </script>
 
 <svelte:head>
@@ -28,18 +26,11 @@
 	<meta property="og:site_name" content={APP_NAME} />
 	<meta property="og:title" content={APP_NAME} />
 	<meta property="og:description" content={APP_DESCRIPTION} />
-	<meta property="og:image" content={absoluteOgImage} />
-	<meta property="og:image:type" content="image/jpeg" />
-	<meta property="og:image:width" content="1200" />
-	<meta property="og:image:height" content="630" />
-	<meta property="og:image:alt" content="SvelteKit App Preview" />
-	
+	<meta property="og:image" content="/og-image.jpg" />
+
 	<!-- Twitter Card meta tags -->
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content={APP_NAME} />
-	<meta name="twitter:description" content={APP_DESCRIPTION} />
-	<meta name="twitter:image" content={absoluteOgImage} />
-	<meta name="twitter:image:alt" content="SvelteKit App Preview" />
+	
 </svelte:head>
 
 <div class="min-h-screen bg-gray-50">
