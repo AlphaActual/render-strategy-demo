@@ -3,6 +3,9 @@ import Link from 'next/link';
 import Image from '@/components/Image';
 import { notFound } from 'next/navigation';
 
+// Force dynamic rendering for pure SSR
+export const dynamic = 'force-dynamic';
+
 // Post interface
 interface Post {
   id: number;
@@ -44,7 +47,7 @@ interface BlogPostPageProps {
 const fetchPost = async (postId: string): Promise<Post | null> => {
   try {
     const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`, {
-      cache: 'no-store' // Force fresh data on every request
+      cache: 'no-store' // Force dynamic rendering on every request
     });
     
     if (!response.ok) {
@@ -62,7 +65,7 @@ const fetchPost = async (postId: string): Promise<Post | null> => {
 const fetchUser = async (userId: number): Promise<User | null> => {
   try {
     const response = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}`, {
-      cache: 'no-store' // Force fresh data on every request
+      cache: 'no-store' // Force dynamic rendering on every request
     });
     
     if (!response.ok) {
@@ -80,7 +83,7 @@ const fetchUser = async (userId: number): Promise<User | null> => {
 const fetchComments = async (postId: string): Promise<Comment[]> => {
   try {
     const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}/comments`, {
-      cache: 'no-store' // Force fresh data on every request
+      cache: 'no-store' // Force dynamic rendering on every request
     });
     
     if (!response.ok) {

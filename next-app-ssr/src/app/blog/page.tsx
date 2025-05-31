@@ -43,11 +43,14 @@ interface User {
   username: string;
 }
 
+// Force dynamic rendering for pure SSR
+export const dynamic = 'force-dynamic';
+
 // Function to fetch posts data
 const fetchPosts = async (): Promise<Post[]> => {
   try {
     const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
-      cache: 'no-store', // Force fresh data on every request
+      cache: 'no-store' // Force dynamic rendering on every request
     });
 
     if (!response.ok) {
@@ -65,7 +68,7 @@ const fetchPosts = async (): Promise<Post[]> => {
 const fetchUsers = async (): Promise<User[]> => {
   try {
     const response = await fetch('https://jsonplaceholder.typicode.com/users', {
-      cache: 'no-store' // Force fresh data on every request
+      cache: 'no-store' // Force dynamic rendering on every request
     });
     
     if (!response.ok) {
