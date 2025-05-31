@@ -24,11 +24,18 @@
 </script>
 
 <svelte:head>
-	<title>{post?.title || 'Blog Post'}</title>
+	<title>{post?.title ? `${post.title} - SvelteKit App SSR` : 'Blog Post - SvelteKit App SSR'}</title>
 	<meta
 		name="description"
 		content={post?.body?.substring(0, 160) || 'Read this amazing blog post'}
 	/>
+	<meta property="og:title" content={post?.title ? `${post.title} - SvelteKit App SSR` : 'Blog Post - SvelteKit App SSR'} />
+	<meta property="og:description" content={post?.body?.substring(0, 160) || 'Read this amazing blog post'} />
+	<meta property="og:type" content="article" />
+	<meta property="og:image" content="/og-image.jpg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content={post?.title ? `${post.title} - SvelteKit App SSR` : 'Blog Post - SvelteKit App SSR'} />
+	<meta name="twitter:description" content={post?.body?.substring(0, 160) || 'Read this amazing blog post'} />
 </svelte:head>
 
 <div class="py-8">

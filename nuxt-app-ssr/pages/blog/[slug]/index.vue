@@ -51,14 +51,25 @@ const { data: postUser, error: userError } = await useFetch<User>(`https://jsonp
 })
 
 // Fetch comments for the post
-const { data: comments, error: commentsError } = await useFetch<Comment[]>(`https://jsonplaceholder.typicode.com/posts/${postId}/comments`, {
+const { data: comments } = await useFetch<Comment[]>(`https://jsonplaceholder.typicode.com/comments?postId=${postId}`, {
   key: `comments-${postId}`,
-  server: true,
-  default: () => []
+  server: true
+})
+
+// SEO
+useSeoMeta({
+  title: `${post.value?.title || 'Blog Post'} - Nuxt App SSR`,
+  description: post.value?.body?.substring(0, 160) || 'Read this amazing blog post',
+  ogTitle: `${post.value?.title || 'Blog Post'} - Nuxt App SSR`,
+  ogDescription: post.value?.body?.substring(0, 160) || 'Read this amazing blog post',
+  ogType: 'article',
+  twitterCard: 'summary_large_image',
+  twitterTitle: `${post.value?.title || 'Blog Post'} - Nuxt App SSR`,
+  twitterDescription: post.value?.body?.substring(0, 160) || 'Read this amazing blog post'
 })
 
 // Handle errors
-if (userError.value || commentsError.value) {
+if (userError.value) {
   throw createError({
     statusCode: 500,
     statusMessage: 'Failed to load post data'

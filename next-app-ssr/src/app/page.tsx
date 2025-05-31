@@ -1,4 +1,27 @@
 import Image from '../components/Image'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: "Home - Next.js SSR Demo",
+  description: "Experience modern web development with Next.js, TypeScript, and Tailwind CSS. This demo showcases best practices and beautiful design patterns.",
+  openGraph: {
+    title: "Next.js SSR Demo - Modern Web Development",
+    description: "Experience modern web development with Next.js, TypeScript, and Tailwind CSS. This demo showcases best practices and beautiful design patterns.",
+    url: "/",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Next.js SSR Demo",
+      },
+    ],
+  },
+  twitter: {
+    title: "Next.js SSR Demo - Modern Web Development",
+    description: "Experience modern web development with Next.js, TypeScript, and Tailwind CSS. This demo showcases best practices and beautiful design patterns.",
+  },
+}
 
 export default function Home() {
   const features = [

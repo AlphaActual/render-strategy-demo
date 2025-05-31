@@ -25,6 +25,18 @@ const { data: users } = await useFetch<User[]>(
     server: true
   }
 );
+
+// SEO
+useSeoMeta({
+  title: 'Blog Posts - Nuxt App SSR',
+  description: 'Discover amazing articles and stories from our community. Browse through our collection of blog posts covering various topics.',
+  ogTitle: 'Blog Posts - Nuxt App SSR',
+  ogDescription: 'Discover amazing articles and stories from our community. Browse through our collection of blog posts covering various topics.',
+  ogType: 'website',
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'Blog Posts - Nuxt App SSR',
+  twitterDescription: 'Discover amazing articles and stories from our community. Browse through our collection of blog posts covering various topics.'
+})
 </script>
 
 <template>

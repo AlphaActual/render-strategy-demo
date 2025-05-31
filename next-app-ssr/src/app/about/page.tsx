@@ -1,5 +1,28 @@
 import Link from 'next/link';
 import Image from '@/components/Image';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: "About Us - Next.js SSR Demo",
+  description: "Learn about our team, mission, and the technology behind our modern web development demo.",
+  openGraph: {
+    title: "About Us - Next.js SSR Demo",
+    description: "Learn about our team, mission, and the technology behind our modern web development demo.",
+    url: "/about",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "About Us - Next.js SSR Demo",
+      },
+    ],
+  },
+  twitter: {
+    title: "About Us - Next.js SSR Demo",
+    description: "Learn about our team, mission, and the technology behind our modern web development demo.",
+  },
+}
 
 // Team member interface
 interface TeamMember {

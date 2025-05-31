@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from '@/components/Image';
 import { notFound } from 'next/navigation';
@@ -91,6 +92,61 @@ const fetchComments = async (postId: string): Promise<Comment[]> => {
     console.error('Error fetching comments:', error);
     return [];
   }
+};
+
+// Generate dynamic metadata for each blog post
+export const generateMetadata = async ({ params }: BlogPostPageProps): Promise<Metadata> => {
+  const { slug } = await params;
+  const postId = parseInt(slug);
+  
+  // Validate post ID
+  if (isNaN(postId) || postId < 1) {
+    return {
+      title: 'Post Not Found - Next.js App SSR',
+      description: 'The blog post you are looking for could not be found.',
+    };
+  }
+
+  const post = await fetchPost(slug);
+  
+  if (!post) {
+    return {
+      title: 'Post Not Found - Next.js App SSR',
+      description: 'The blog post you are looking for could not be found.',
+    };
+  }
+
+  const user = await fetchUser(post.userId);
+  const description = post.body.substring(0, 160).replace(/\n/g, ' ') + '...';
+  const title = `${post.title} - Next.js App SSR`;
+
+  return {
+    title,
+    description,
+    keywords: ['blog', 'article', 'technology', 'tutorial', 'development'],
+    authors: user ? [{ name: user.name }] : undefined,
+    openGraph: {
+      title,
+      description,
+      type: 'article',
+      publishedTime: new Date(2024, 0, (postId % 28) + 1).toISOString(),
+      authors: user ? [user.name] : undefined,
+      images: [
+        {
+          url: `/og-image.jpg`,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [`/og-image.jpg`],
+    },
+  };
 };
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
