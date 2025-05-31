@@ -35,9 +35,9 @@ interface Comment {
 
 // Props interface
 interface BlogPostPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 // Function to fetch post data
