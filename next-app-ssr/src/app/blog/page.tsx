@@ -1,15 +1,16 @@
-import type { Metadata } from 'next';
-import Link from 'next/link';
-import Image from '@/components/Image';
+import type { Metadata } from "next";
+import Link from "next/link";
+import Image from "@/components/Image";
 
 export const metadata: Metadata = {
-  title: 'Blog Posts - Next.js App SSR',
+  title: "Blog Posts - Next.js App SSR",
   description:
-    'Discover amazing articles and stories from our community. Browse through our collection of blog posts covering various topics.',  openGraph: {
-    title: 'Blog Posts - Next.js App SSR',
+    "Discover amazing articles and stories from our community. Browse through our collection of blog posts covering various topics.",
+  openGraph: {
+    title: "Blog Posts - Next.js App SSR",
     description:
-      'Discover amazing articles and stories from our community. Browse through our collection of blog posts covering various topics.',
-    type: 'website',
+      "Discover amazing articles and stories from our community. Browse through our collection of blog posts covering various topics.",
+    type: "website",
     images: [
       {
         url: "/og-image.jpg",
@@ -18,11 +19,12 @@ export const metadata: Metadata = {
         alt: "Blog Posts - Next.js App SSR",
       },
     ],
-  },  twitter: {
-    card: 'summary_large_image',
-    title: 'Blog Posts - Next.js App SSR',
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Blog Posts - Next.js App SSR",
     description:
-      'Discover amazing articles and stories from our community. Browse through our collection of blog posts covering various topics.',
+      "Discover amazing articles and stories from our community. Browse through our collection of blog posts covering various topics.",
     images: ["/og-image.jpg"],
   },
 };
@@ -44,41 +46,41 @@ interface User {
 }
 
 // Force dynamic rendering for pure SSR
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 // Function to fetch posts data
 const fetchPosts = async (): Promise<Post[]> => {
   try {
-    const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
-      cache: 'no-store' // Force dynamic rendering on every request
+    const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
+      cache: "no-store", // Force dynamic rendering on every request
     });
 
     if (!response.ok) {
-      throw new Error('Failed to fetch posts');
+      throw new Error("Failed to fetch posts");
     }
 
     return response.json();
   } catch (error) {
-    console.error('Error fetching posts:', error);
-    throw new Error('Failed to load blog posts');
+    console.error("Error fetching posts:", error);
+    throw new Error("Failed to load blog posts");
   }
 };
 
 // Function to fetch users data
 const fetchUsers = async (): Promise<User[]> => {
   try {
-    const response = await fetch('https://jsonplaceholder.typicode.com/users', {
-      cache: 'no-store' // Force dynamic rendering on every request
+    const response = await fetch("https://jsonplaceholder.typicode.com/users", {
+      cache: "no-store", // Force dynamic rendering on every request
     });
-    
+
     if (!response.ok) {
-      throw new Error('Failed to fetch users');
+      throw new Error("Failed to fetch users");
     }
-    
+
     return response.json();
   } catch (error) {
-    console.error('Error fetching users:', error);
-    throw new Error('Failed to load user data');
+    console.error("Error fetching users:", error);
+    throw new Error("Failed to load user data");
   }
 };
 
@@ -89,21 +91,21 @@ export default async function BlogPage() {
 
   // Helper function to get user by ID
   const getUserById = (userId: number): User | undefined => {
-    return users.find(user => user.id === userId);
+    return users.find((user) => user.id === userId);
   };
 
   // Helper function to format date
   const formatDate = (postId: number): string => {
     const date = new Date(2024, 0, (postId % 28) + 1);
-    return date.toLocaleDateString('en-US', { 
-      month: 'short', 
-      day: 'numeric' 
+    return date.toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
     });
   };
 
   // Helper function to calculate reading time
   const calculateReadingTime = (body: string): number => {
-    return Math.ceil(body.split(' ').length / 200);
+    return Math.ceil(body.split(" ").length / 200);
   };
 
   return (
@@ -158,19 +160,20 @@ export default async function BlogPage() {
                         <Image
                           src="https://picsum.photos/40/40"
                           seed={`user-${post.userId}`}
-                          alt={author?.name || 'User avatar'}
+                          alt={author?.name || "User avatar"}
                           width={40}
                           height={40}
                           className="h-10 w-10 rounded-full object-cover ring-2 ring-blue-100"
                         />
-                      </div>
-                      <div className="ml-3 flex-1">
+                      </div>{" "}                      <div className="ml-3 flex-1">
                         <p className="text-sm font-semibold text-gray-900">
-                          {author?.name || 'Unknown Author'}
+                          {author?.name || "Unknown Author"}
                         </p>
-                        <div className="flex items-center text-xs text-gray-500 space-x-2">
-                          <span>@{author?.username || 'unknown'}</span>
-                          <span>•</span>
+                        <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center text-xs text-gray-500 gap-1 sm:gap-2">
+                          <span>
+                            @{author?.username || "unknown"}
+                          </span>
+                          <span className="hidden sm:inline">•</span>
                           <span>{postDate}</span>
                         </div>
                       </div>
@@ -235,7 +238,9 @@ export default async function BlogPage() {
                 />
               </svg>
             </div>
-            <h3 className="text-lg font-medium text-gray-900 mb-2">No posts found</h3>
+            <h3 className="text-lg font-medium text-gray-900 mb-2">
+              No posts found
+            </h3>
             <p className="text-gray-600">
               There are no blog posts available at the moment.
             </p>

@@ -1,2 +1,0 @@
-* popravak komentara na blog details page-u na mobilnoj verziji overflow
-* add og image to next and sveltekit

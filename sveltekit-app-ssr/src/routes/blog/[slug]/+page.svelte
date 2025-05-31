@@ -106,16 +106,15 @@
 								class="ring-3 h-14 w-14 rounded-full object-cover ring-blue-100"
 								fit="cover"
 							/>
-						</div>
-						<div class="ml-4 flex-1">
-							<div class="flex items-center justify-between">
+						</div>						<div class="ml-4 flex-1">
+							<div class="flex flex-col gap-2">
 								<div>
 									<p class="text-lg font-semibold text-gray-900">{author.name}</p>
-									<div class="flex items-center space-x-4 text-sm text-gray-500">
+									<div class="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-1 sm:gap-2 text-sm text-gray-500">
 										<span>@{author.username}</span>
-										<span>•</span>
+										<span class="hidden sm:inline text-gray-300">•</span>
 										<span>{formattedDate}</span>
-										<span>•</span>
+										<span class="hidden sm:inline text-gray-300">•</span>
 										<span>{Math.ceil(post.body.split(' ').length / 200)} min read</span>
 									</div>
 								</div>
@@ -246,16 +245,16 @@
 												class="h-12 w-12 rounded-full object-cover ring-2 ring-gray-100"
 												fit="cover"
 											/>
-										</div>
-										<div class="flex-1">
-											<div class="mb-3 flex items-center space-x-2">
+										</div>										<div class="flex-1">
+											<div class="flex flex-col gap-1 mb-3">
 												<h4 class="font-semibold text-gray-900">{comment.name}</h4>
-												<span class="text-gray-300">•</span>
-												<span class="text-sm text-gray-500">{comment.email}</span>
-												<span class="text-gray-300">•</span>
-												<span class="text-sm text-gray-400"
-													>{Math.floor(Math.random() * 24) + 1}h ago</span
-												>
+												<div class="flex flex-col sm:flex-row sm:flex-wrap sm:items-center text-sm text-gray-500 gap-1 sm:gap-2">
+													<span>{comment.email}</span>
+													<span class="hidden sm:inline text-gray-300">•</span>
+													<span class="text-gray-400"
+														>{Math.floor(Math.random() * 24) + 1}h ago</span
+													>
+												</div>
 											</div>
 											<p class="leading-relaxed text-gray-700">{comment.body}</p>
 

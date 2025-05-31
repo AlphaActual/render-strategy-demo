@@ -16,27 +16,30 @@ interface User {
 const { data: posts } = await useFetch<Post[]>(
   "https://jsonplaceholder.typicode.com/posts",
   {
-    server: true
+    server: true,
   }
 );
 const { data: users } = await useFetch<User[]>(
   "https://jsonplaceholder.typicode.com/users",
   {
-    server: true
+    server: true,
   }
 );
 
 // SEO
 useSeoMeta({
-  title: 'Blog Posts - Nuxt App SSR',
-  description: 'Discover amazing articles and stories from our community. Browse through our collection of blog posts covering various topics.',
-  ogTitle: 'Blog Posts - Nuxt App SSR',
-  ogDescription: 'Discover amazing articles and stories from our community. Browse through our collection of blog posts covering various topics.',
-  ogType: 'website',
-  twitterCard: 'summary_large_image',
-  twitterTitle: 'Blog Posts - Nuxt App SSR',
-  twitterDescription: 'Discover amazing articles and stories from our community. Browse through our collection of blog posts covering various topics.'
-})
+  title: "Blog Posts - Nuxt App SSR",
+  description:
+    "Discover amazing articles and stories from our community. Browse through our collection of blog posts covering various topics.",
+  ogTitle: "Blog Posts - Nuxt App SSR",
+  ogDescription:
+    "Discover amazing articles and stories from our community. Browse through our collection of blog posts covering various topics.",
+  ogType: "website",
+  twitterCard: "summary_large_image",
+  twitterTitle: "Blog Posts - Nuxt App SSR",
+  twitterDescription:
+    "Discover amazing articles and stories from our community. Browse through our collection of blog posts covering various topics.",
+});
 </script>
 
 <template>
@@ -100,22 +103,19 @@ useSeoMeta({
                   class="h-10 w-10 rounded-full object-cover ring-2 ring-blue-100"
                   fit="cover"
                 />
-              </div>
-              <div class="ml-3 flex-1">
+              </div>              <div class="ml-3 flex-1">
                 <p class="text-sm font-semibold text-gray-900">
                   {{
                     users?.find((u) => u.id === post.userId)?.name ||
                     "Unknown Author"
                   }}
                 </p>
-                <div class="flex items-center text-xs text-gray-500 space-x-2">
-                  <span
-                    >@{{
+                <div class="flex flex-col sm:flex-row sm:flex-wrap sm:items-center text-xs text-gray-500 gap-1 sm:gap-2">
+                  <span>@{{
                       users?.find((u) => u.id === post.userId)?.username ||
                       "unknown"
-                    }}</span
-                  >
-                  <span>•</span>
+                    }}</span>
+                  <span class="hidden sm:inline">•</span>
                   <span>{{
                     new Date(2024, 0, (post.id % 28) + 1).toLocaleDateString(
                       "en-US",
