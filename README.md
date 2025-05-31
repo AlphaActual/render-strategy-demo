@@ -2,11 +2,21 @@
 
 This is a monorepo demonstrating different rendering strategies with modern web frameworks.
 
-## Projects
+## Structure
 
-- **next-app-ssr**: Next.js application with Server-Side Rendering
-- **nuxt-app-ssr**: Nuxt.js application with Server-Side Rendering  
-- **sveltekit-app-ssr**: SvelteKit application with Server-Side Rendering
+The monorepo is organized by rendering strategy for easy comparison and analysis:
+
+### SSR (Server-Side Rendering)
+
+- **SSR/next-app-ssr**: Next.js application with Server-Side Rendering
+- **SSR/nuxt-app-ssr**: Nuxt.js application with Server-Side Rendering  
+- **SSR/sveltekit-app-ssr**: SvelteKit application with Server-Side Rendering
+
+### Future Additions
+
+- **CSR/**: Client-Side Rendering applications
+- **ISR/**: Incremental Static Regeneration applications
+- **SSG/**: Static Site Generation applications
 
 ## Workspace Setup
 
@@ -23,15 +33,21 @@ This monorepo is configured as an npm workspace to enable Vercel's "skipping una
 ### Available Scripts
 
 ```bash
-# Development
+# Development - Individual apps
 npm run dev:next     # Start Next.js dev server
 npm run dev:nuxt     # Start Nuxt.js dev server  
 npm run dev:svelte   # Start SvelteKit dev server
 
-# Build
+# Development - All SSR apps
+npm run dev:ssr      # Start all SSR apps
+
+# Build - Individual apps
 npm run build:next   # Build Next.js app
 npm run build:nuxt   # Build Nuxt.js app
 npm run build:svelte # Build SvelteKit app
+
+# Build - All SSR apps
+npm run build:ssr    # Build all SSR apps
 
 # Install dependencies for all workspaces
 npm install

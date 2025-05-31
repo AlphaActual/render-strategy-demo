@@ -4,17 +4,19 @@
   "private": true,
   "packageManager": "npm@10.0.0",
   "workspaces": [
-    "next-app-ssr",
-    "nuxt-app-ssr",
-    "sveltekit-app-ssr"
+    "SSR/next-app-ssr",
+    "SSR/nuxt-app-ssr",
+    "SSR/sveltekit-app-ssr"
   ],
   "scripts": {
-    "dev:next": "npm run dev --workspace=next-app-ssr",
-    "dev:nuxt": "npm run dev --workspace=nuxt-app-ssr",
-    "dev:svelte": "npm run dev --workspace=sveltekit-app-ssr",
-    "build:next": "npm run build --workspace=next-app-ssr",
-    "build:nuxt": "npm run build --workspace=nuxt-app-ssr",
-    "build:svelte": "npm run build --workspace=sveltekit-app-ssr",
+    "dev:next": "npm run dev --workspace=SSR/next-app-ssr",
+    "dev:nuxt": "npm run dev --workspace=SSR/nuxt-app-ssr",
+    "dev:svelte": "npm run dev --workspace=SSR/sveltekit-app-ssr",
+    "dev:ssr": "npm run dev --workspaces --if-present --workspace=SSR/*",
+    "build:next": "npm run build --workspace=SSR/next-app-ssr",
+    "build:nuxt": "npm run build --workspace=SSR/nuxt-app-ssr",
+    "build:svelte": "npm run build --workspace=SSR/sveltekit-app-ssr",
+    "build:ssr": "npm run build --workspaces --if-present --workspace=SSR/*",
     "install:all": "npm install"
   },
   "engines": {
