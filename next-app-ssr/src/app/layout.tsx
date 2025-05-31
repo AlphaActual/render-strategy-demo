@@ -4,7 +4,9 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
-const archivo = Archivo();
+const archivo = Archivo({
+  subsets: ['latin'],
+});
 
 export const metadata: Metadata = {
   title: "Next.js SSR Demo",
