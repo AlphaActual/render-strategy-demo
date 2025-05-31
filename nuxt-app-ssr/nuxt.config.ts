@@ -9,7 +9,7 @@ export default defineNuxtConfig({
   
   // Nitro configuration for pure SSR
   nitro: {
-    preset: 'node-server'
+    preset: 'vercel'
   },
   
   // Route rules to ensure pure SSR for all routes
