@@ -13,12 +13,17 @@ interface User {
   username: string;
 }
 
-// Fetch posts and users data
 const { data: posts } = await useFetch<Post[]>(
-  "https://jsonplaceholder.typicode.com/posts"
+  "https://jsonplaceholder.typicode.com/posts",
+  {
+    server: true
+  }
 );
 const { data: users } = await useFetch<User[]>(
-  "https://jsonplaceholder.typicode.com/users"
+  "https://jsonplaceholder.typicode.com/users",
+  {
+    server: true
+  }
 );
 </script>
 

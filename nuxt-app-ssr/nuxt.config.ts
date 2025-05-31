@@ -4,6 +4,20 @@ const cmsDomain = ["https://picsum.photos/"];
 const APP_NAME = "Nuxt App SSR";
 const BASE_APP_URL = "https://render-strategy-demo-nuxt-app-ssr.vercel.app"
 export default defineNuxtConfig({
+  // Enable pure SSR mode - disable SPA mode and hybrid rendering
+  ssr: true,
+  
+  // Nitro configuration for pure SSR
+  nitro: {
+    preset: 'node-server'
+  },
+  
+  // Route rules to ensure pure SSR for all routes
+  routeRules: {
+    // Disable prerendering and ensure SSR for all routes
+    '/**': { ssr: true, prerender: false }
+  },
+  
   app: {
     pageTransition: { name: "page", mode: "out-in" },
     head: {

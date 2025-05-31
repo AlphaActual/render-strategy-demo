@@ -22,16 +22,20 @@ export interface BlogPageData {
 
 export const load: PageLoad = async ({ fetch }): Promise<BlogPageData> => {
 	try {
-		const [postsResponse, usersResponse] = await Promise.all([
-			fetch('https://jsonplaceholder.typicode.com/posts'),
-			fetch('https://jsonplaceholder.typicode.com/users')
-		]);
-
-		if (!postsResponse.ok || !usersResponse.ok) {
-			throw error(500, 'Failed to fetch data from the API');
+		const postsResponse = await fetch('https://jsonplaceholder.typicode.com/posts');
+		
+		if (!postsResponse.ok) {
+			throw error(500, 'Failed to fetch posts from the API');
 		}
-
+		
 		const posts: Post[] = await postsResponse.json();
+		
+		const usersResponse = await fetch('https://jsonplaceholder.typicode.com/users');
+		
+		if (!usersResponse.ok) {
+			throw error(500, 'Failed to fetch users from the API');
+		}
+		
 		const users: User[] = await usersResponse.json();
 
 		return {

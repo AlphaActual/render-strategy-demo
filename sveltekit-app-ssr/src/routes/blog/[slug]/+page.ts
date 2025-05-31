@@ -24,11 +24,7 @@ export const load: PageLoad = async ({ params, fetch }): Promise<BlogPostPageDat
 	}
 
 	try {
-		const [postResponse, usersResponse, commentsResponse] = await Promise.all([
-			fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`),
-			fetch('https://jsonplaceholder.typicode.com/users'),
-			fetch(`https://jsonplaceholder.typicode.com/posts/${postId}/comments`)
-		]);
+		const postResponse = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`);
 
 		if (!postResponse.ok) {
 			if (postResponse.status === 404) {
@@ -37,13 +33,19 @@ export const load: PageLoad = async ({ params, fetch }): Promise<BlogPostPageDat
 			throw error(500, 'Failed to fetch post');
 		}
 
+		const post: Post = await postResponse.json();
+
+		const usersResponse = await fetch('https://jsonplaceholder.typicode.com/users');
+
 		if (!usersResponse.ok) {
 			throw error(500, 'Failed to fetch users');
 		}
 
-		const post: Post = await postResponse.json();
 		const users: User[] = await usersResponse.json();
+
+		const commentsResponse = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}/comments`);
 		const comments: Comment[] = commentsResponse.ok ? await commentsResponse.json() : [];
+		
 		const author = users.find(user => user.id === post.userId) || null;
 
 		return {
