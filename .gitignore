@@ -1,6 +1,7 @@
 # Dependencies
 node_modules/
-package-lock.json
+# Allow root lockfile for monorepo detection
+*/package-lock.json
 yarn.lock
 pnpm-lock.yaml
 bun.lockb

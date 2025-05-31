@@ -1,0 +1,23 @@
+{
+  "name": "render-strategy-demo",
+  "version": "1.0.0",
+  "private": true,
+  "packageManager": "npm@10.0.0",
+  "workspaces": [
+    "next-app-ssr",
+    "nuxt-app-ssr",
+    "sveltekit-app-ssr"
+  ],
+  "scripts": {
+    "dev:next": "npm run dev --workspace=next-app-ssr",
+    "dev:nuxt": "npm run dev --workspace=nuxt-app-ssr",
+    "dev:svelte": "npm run dev --workspace=sveltekit-app-ssr",
+    "build:next": "npm run build --workspace=next-app-ssr",
+    "build:nuxt": "npm run build --workspace=nuxt-app-ssr",
+    "build:svelte": "npm run build --workspace=sveltekit-app-ssr",
+    "install:all": "npm install"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
