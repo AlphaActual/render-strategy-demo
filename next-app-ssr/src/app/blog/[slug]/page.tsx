@@ -43,7 +43,7 @@ interface BlogPostPageProps {
 const fetchPost = async (postId: string): Promise<Post | null> => {
   try {
     const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`, {
-      next: { revalidate: 3600 } // Revalidate every hour
+      cache: 'no-store' // Force fresh data on every request
     });
     
     if (!response.ok) {
@@ -61,7 +61,7 @@ const fetchPost = async (postId: string): Promise<Post | null> => {
 const fetchUser = async (userId: number): Promise<User | null> => {
   try {
     const response = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}`, {
-      next: { revalidate: 3600 } // Revalidate every hour
+      cache: 'no-store' // Force fresh data on every request
     });
     
     if (!response.ok) {
@@ -79,7 +79,7 @@ const fetchUser = async (userId: number): Promise<User | null> => {
 const fetchComments = async (postId: string): Promise<Comment[]> => {
   try {
     const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}/comments`, {
-      next: { revalidate: 3600 } // Revalidate every hour
+      cache: 'no-store' // Force fresh data on every request
     });
     
     if (!response.ok) {
@@ -94,14 +94,13 @@ const fetchComments = async (postId: string): Promise<Comment[]> => {
 };
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const { slug } = params;
+  const { slug } = await params;
   const postId = parseInt(slug);
 
   // Validate post ID
   if (isNaN(postId) || postId < 1) {
     notFound();
   }
-  // Fetch data server-side
   const post = await fetchPost(slug);
   
   // If post doesn't exist, trigger 404
@@ -109,14 +108,14 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     notFound();
   }
 
-  const [user, comments] = await Promise.all([
-    fetchUser(post.userId),
-    fetchComments(slug)
-  ]);
+  const user = await fetchUser(post.userId);
+  
   // If user data failed to load, trigger error
   if (!user) {
     throw new Error('Failed to load post data');
   }
+
+  const comments = await fetchComments(slug);
 
   // Helper functions
   const formatDate = (postId: number): string => {

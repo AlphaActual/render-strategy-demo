@@ -21,7 +21,7 @@ interface User {
 const fetchPosts = async (): Promise<Post[]> => {
   try {
     const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
-      next: { revalidate: 3600 } // Revalidate every hour
+      cache: 'no-store' // Force fresh data on every request
     });
     
     if (!response.ok) {
@@ -39,7 +39,7 @@ const fetchPosts = async (): Promise<Post[]> => {
 const fetchUsers = async (): Promise<User[]> => {
   try {
     const response = await fetch('https://jsonplaceholder.typicode.com/users', {
-      next: { revalidate: 3600 } // Revalidate every hour
+      cache: 'no-store' // Force fresh data on every request
     });
     
     if (!response.ok) {
