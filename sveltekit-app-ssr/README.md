@@ -91,4 +91,4 @@ For detailed migration information, see [MIGRATION_SUMMARY.md](./MIGRATION_SUMMA
 
 ## License
 
-This project is for demonstration purposes.
+This project is for demonstration purposes only.
