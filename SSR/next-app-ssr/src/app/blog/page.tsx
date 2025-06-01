@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "@/components/Image";
 
+// Force dynamic rendering to ensure true SSR
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {
   title: "Blog Posts - Next.js App SSR",
   description:
@@ -45,8 +48,6 @@ interface User {
   username: string;
 }
 
-// Force dynamic rendering for pure SSR
-export const dynamic = "force-dynamic";
 
 // Function to fetch posts data
 const fetchPosts = async (): Promise<Post[]> => {

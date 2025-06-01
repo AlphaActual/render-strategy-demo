@@ -2,6 +2,9 @@ import Link from 'next/link';
 import Image from '@/components/Image';
 import type { Metadata } from 'next';
 
+// Force dynamic rendering to ensure true SSR
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {
   title: "About Us - Next.js SSR Demo",
   description: "Learn about our team, mission, and the technology behind our modern web development demo.",

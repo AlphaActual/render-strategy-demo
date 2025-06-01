@@ -1,6 +1,9 @@
 import Image from '../components/Image'
 import type { Metadata } from 'next'
 
+// Force dynamic rendering to ensure true SSR
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {
   title: "Home - Next.js SSR Demo",
   description: "Experience modern web development with Next.js, TypeScript, and Tailwind CSS. This demo showcases best practices and beautiful design patterns.",
