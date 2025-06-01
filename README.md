@@ -12,11 +12,21 @@ The monorepo is organized by rendering strategy for easy comparison and analysis
 - **SSR/nuxt-app-ssr**: Nuxt.js application with Server-Side Rendering  
 - **SSR/sveltekit-app-ssr**: SvelteKit application with Server-Side Rendering
 
+### ISR (Incremental Static Regeneration) ✅
+
+- **ISR/next-app-isr**: Next.js application with Incremental Static Regeneration
+- **ISR/nuxt-app-isr**: Nuxt.js application with Incremental Static Regeneration  
+- **ISR/sveltekit-app-isr**: SvelteKit application with Incremental Static Regeneration
+
+### SSG (Static Site Generation) ✅
+
+- **SSG/next-app-ssg**: Next.js application with Static Site Generation
+- **SSG/nuxt-app-ssg**: Nuxt.js application with Static Site Generation  
+- **SSG/sveltekit-app-ssg**: SvelteKit application with Static Site Generation
+
 ### Future Additions
 
 - **CSR/**: Client-Side Rendering applications
-- **ISR/**: Incremental Static Regeneration applications
-- **SSG/**: Static Site Generation applications
 
 ## Workspace Setup
 

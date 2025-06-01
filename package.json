@@ -9,7 +9,10 @@
     "SSR/sveltekit-app-ssr",
     "ISR/next-app-isr",
     "ISR/nuxt-app-isr",
-    "ISR/sveltekit-app-isr"
+    "ISR/sveltekit-app-isr",
+    "SSG/next-app-ssg",
+    "SSG/nuxt-app-ssg",
+    "SSG/sveltekit-app-ssg"
   ],
   "scripts": {
     "dev:next": "npm run dev --workspace=SSR/next-app-ssr",
@@ -18,16 +21,24 @@
     "dev:next-isr": "npm run dev --workspace=ISR/next-app-isr",
     "dev:nuxt-isr": "npm run dev --workspace=ISR/nuxt-app-isr",
     "dev:svelte-isr": "npm run dev --workspace=ISR/sveltekit-app-isr",
+    "dev:next-ssg": "npm run dev --workspace=SSG/next-app-ssg",
+    "dev:nuxt-ssg": "npm run dev --workspace=SSG/nuxt-app-ssg",
+    "dev:svelte-ssg": "npm run dev --workspace=SSG/sveltekit-app-ssg",
     "dev:ssr": "npm run dev --workspaces --if-present --workspace=SSR/*",
     "dev:isr": "npm run dev --workspaces --if-present --workspace=ISR/*",
+    "dev:ssg": "npm run dev --workspaces --if-present --workspace=SSG/*",
     "build:next": "npm run build --workspace=SSR/next-app-ssr",
     "build:nuxt": "npm run build --workspace=SSR/nuxt-app-ssr",
     "build:svelte": "npm run build --workspace=SSR/sveltekit-app-ssr",
     "build:next-isr": "npm run build --workspace=ISR/next-app-isr",
     "build:nuxt-isr": "npm run build --workspace=ISR/nuxt-app-isr",
     "build:svelte-isr": "npm run build --workspace=ISR/sveltekit-app-isr",
+    "build:next-ssg": "npm run build --workspace=SSG/next-app-ssg",
+    "build:nuxt-ssg": "npm run generate --workspace=SSG/nuxt-app-ssg",
+    "build:svelte-ssg": "npm run build --workspace=SSG/sveltekit-app-ssg",
     "build:ssr": "npm run build --workspaces --if-present --workspace=SSR/*",
     "build:isr": "npm run build --workspaces --if-present --workspace=ISR/*",
+    "build:ssg": "npm run build --workspaces --if-present --workspace=SSG/*",
     "install:all": "npm install"
   },
   "engines": {
