@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global styles */
+html {
+	scroll-behavior: smooth;
+	font-family: 'Archivo', system-ui, sans-serif;
+}
+
+@layer components {
+	.error-wrap {
+		@apply flex min-h-dvh flex-col;
+	}
+
+	.error-wrap__main {
+		@apply flex flex-grow items-center justify-center text-center;
+	}
+
+	.input {
+		@apply w-full rounded border border-gray100;
+	}
+}

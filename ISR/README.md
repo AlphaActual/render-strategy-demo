@@ -1,24 +1,30 @@
-# Incremental Static Regeneration (ISR) Applications
+# Server-Side Rendering (SSR) Applications
 
-This directory will contain applications that demonstrate Incremental Static Regeneration across different frameworks.
+This directory contains applications that demonstrate Server-Side Rendering across different frameworks.
 
-## Future Applications
+## Applications
 
-- **next-app-isr**: Next.js ISR application
-- **nuxt-app-isr**: Nuxt.js ISR application
+- **next-app-ssr**: Next.js SSR application
+- **nuxt-app-ssr**: Nuxt.js SSR application  
+- **sveltekit-app-ssr**: SvelteKit SSR application
 
-## About ISR
+## About SSR
 
-Incremental Static Regeneration combines the benefits of static generation with the ability to update content without rebuilding the entire site. This provides:
+Server-Side Rendering pre-renders pages on the server before sending them to the client. This provides:
 
-- Static performance benefits
-- Dynamic content capabilities
-- Automatic cache invalidation
-- Reduced build times for large sites
+- Better SEO (search engines can crawl the content)
+- Faster initial page load for users
+- Better performance on slower devices
+- Social media preview support
 
-## Use Cases
+## Running Applications
 
-- E-commerce product pages
-- Blog posts with comments
-- News articles
-- Content that updates periodically
+```bash
+# Start individual applications
+npm run dev:next     # Next.js SSR
+npm run dev:nuxt     # Nuxt.js SSR  
+npm run dev:svelte   # SvelteKit SSR
+
+# Start all SSR applications
+npm run dev:ssr
+```
