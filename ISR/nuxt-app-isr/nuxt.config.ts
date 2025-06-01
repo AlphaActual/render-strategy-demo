@@ -3,14 +3,9 @@ import tailwindcss from "@tailwindcss/vite";
 const cmsDomain = ["https://picsum.photos/"];
 const APP_NAME = "Nuxt App ISR";
 const BASE_APP_URL = "https://render-strategy-demo-nuxt-app-isr.vercel.app"
-export default defineNuxtConfig({
-  // Enable ISR (Incremental Static Regeneration)
+export default defineNuxtConfig({  // Enable ISR (Incremental Static Regeneration)
   nitro: {
-    preset: 'vercel',
-    prerender: {
-      // Configure ISR routes
-      routes: ['/sitemap.xml']
-    }
+    preset: 'vercel'
   },
   
   // Route rules for ISR configuration
@@ -18,7 +13,8 @@ export default defineNuxtConfig({
     // Homepage pre-rendered at build time
     '/': { isr: 60 }, // Regenerate every 60 seconds
     // Blog pages use ISR
-    '/blog': { isr: 300 }, // Regenerate every 5 minutes    '/blog/**': { isr: 600 }, // Regenerate every 10 minutes
+    '/blog': { isr: 300 }, // Regenerate every 5 minutes
+    '/blog/**': { isr: 600 }, // Regenerate every 10 minutes
     // About page uses ISR
     '/about': { isr: 3600 }, // Regenerate every hour
     // API routes
