@@ -5,17 +5,36 @@ const APP_NAME = "Nuxt App SSG";
 const BASE_APP_URL = "https://render-strategy-demo-nuxt-app-ssg.vercel.app"
 export default defineNuxtConfig({
   // Enable SSG mode - prerendering for all routes
-  ssr: true,
-  
-  // Nitro configuration for SSG
+  ssr: true,  // Nitro configuration for SSG
   nitro: {
-    preset: 'static'
+    preset: 'static',
+    prerender: {
+      crawlLinks: false,
+      routes: [
+        '/',
+        '/about', 
+        '/blog',
+        // Prerender first 10 blog posts like the SvelteKit version
+        '/blog/1',
+        '/blog/2', 
+        '/blog/3',
+        '/blog/4',
+        '/blog/5',
+        '/blog/6',
+        '/blog/7',
+        '/blog/8',
+        '/blog/9',
+        '/blog/10'
+      ]
+    }
   },
   
-  // Route rules to ensure prerendering for all routes (SSG)
+  // Route rules for SSG
   routeRules: {
-    // Enable prerendering for all routes
-    '/**': { prerender: true }
+    // Prerender static pages
+    '/': { prerender: true },
+    '/about': { prerender: true },
+    '/blog': { prerender: true }
   },
   
   app: {
@@ -72,11 +91,10 @@ export default defineNuxtConfig({
     },
 
     defaultCacheMaxAge: 7200,
-  },
-
-  image: {
+  },  image: {
+    // Disable image optimization during SSG to prevent ENOENT errors
+    provider: 'none',
     staticFilename: "[publicPath]/img/[name]-[hash][ext]",
-    format: ["avif", "webp"],
     domains: [
       ...cmsDomain,
       // add CMS CDN domain here

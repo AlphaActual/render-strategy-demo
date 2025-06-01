@@ -30,6 +30,15 @@ interface Comment {
 const route = useRoute();
 const postId = route.params.slug as string;
 
+// Validate postId is a number and within reasonable range for SSG
+const postIdNum = parseInt(postId);
+if (isNaN(postIdNum) || postIdNum < 1 || postIdNum > 100) {
+  throw createError({
+    statusCode: 404,
+    statusMessage: "Post not found",
+  });
+}
+
 // Fetch post data
 const {
   data: post,
