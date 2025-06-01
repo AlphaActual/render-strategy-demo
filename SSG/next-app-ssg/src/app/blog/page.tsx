@@ -18,12 +18,11 @@ export const metadata: Metadata = {
         alt: "Blog Posts - Next.js App SSG",
       },
     ],
-  },
-  twitter: {
+  },  twitter: {
     card: "summary_large_image",
-    title: "Blog Posts - Next.js App SSR",
+    title: "Blog Posts - Next.js App SSG",
     description:
-      "Discover amazing articles and stories from our community. Browse through our collection of blog posts covering various topics.",
+      "Discover amazing articles and stories from our community. Browse through our collection of blog posts covering Static Site Generation.",
     images: ["/og-image.jpg"],
   },
 };
@@ -44,14 +43,11 @@ interface User {
   username: string;
 }
 
-// Force dynamic rendering for pure SSR
-export const dynamic = "force-dynamic";
-
 // Function to fetch posts data
 const fetchPosts = async (): Promise<Post[]> => {
   try {
     const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
-      cache: "no-store", // Force dynamic rendering on every request
+      cache: "force-cache", // Cache data for SSG build
     });
 
     if (!response.ok) {
@@ -69,7 +65,7 @@ const fetchPosts = async (): Promise<Post[]> => {
 const fetchUsers = async (): Promise<User[]> => {
   try {
     const response = await fetch("https://jsonplaceholder.typicode.com/users", {
-      cache: "no-store", // Force dynamic rendering on every request
+      cache: "force-cache", // Cache data for SSG build
     });
 
     if (!response.ok) {
