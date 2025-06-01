@@ -10,6 +10,9 @@ const config = {
 	kit: {
 		// Static adapter for SSG (Static Site Generation)
 		adapter: adapter({
+			// Output to public directory for Vercel
+			pages: 'public',
+			assets: 'public',
 			// Generate a fallback for single-page app mode
 			fallback: undefined,
 			// Precompress files
