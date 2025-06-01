@@ -3,8 +3,8 @@ import Link from "next/link";
 import Image from "@/components/Image";
 import { notFound } from "next/navigation";
 
-// Force dynamic rendering for pure SSR
-export const dynamic = "force-dynamic";
+// Enable ISR for individual blog posts
+export const revalidate = 600; // Revalidate every 10 minutes
 
 // Post interface
 interface Post {
@@ -36,6 +36,16 @@ interface Comment {
   body: string;
 }
 
+// Generate static params for ISR - pre-generate first 10 posts
+export async function generateStaticParams() {
+  // Generate static params for the first 10 posts
+  const posts = Array.from({ length: 10 }, (_, i) => ({
+    slug: (i + 1).toString(),
+  }));
+
+  return posts;
+}
+
 // Props interface
 interface BlogPostPageProps {
   params: Promise<{
@@ -49,7 +59,7 @@ const fetchPost = async (postId: string): Promise<Post | null> => {
     const response = await fetch(
       `https://jsonplaceholder.typicode.com/posts/${postId}`,
       {
-        cache: "no-store", // Force dynamic rendering on every request
+        next: { revalidate: 600 }, // Revalidate every 10 minutes for ISR
       }
     );
 
@@ -70,7 +80,7 @@ const fetchUser = async (userId: number): Promise<User | null> => {
     const response = await fetch(
       `https://jsonplaceholder.typicode.com/users/${userId}`,
       {
-        cache: "no-store", // Force dynamic rendering on every request
+        next: { revalidate: 3600 }, // Revalidate every hour for ISR
       }
     );
 
@@ -91,7 +101,7 @@ const fetchComments = async (postId: string): Promise<Comment[]> => {
     const response = await fetch(
       `https://jsonplaceholder.typicode.com/posts/${postId}/comments`,
       {
-        cache: "no-store", // Force dynamic rendering on every request
+        next: { revalidate: 300 }, // Revalidate every 5 minutes for ISR
       }
     );
 

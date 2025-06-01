@@ -1,21 +1,28 @@
 import tailwindcss from "@tailwindcss/vite";
 
 const cmsDomain = ["https://picsum.photos/"];
-const APP_NAME = "Nuxt App SSR";
-const BASE_APP_URL = "https://render-strategy-demo-nuxt-app-ssr.vercel.app"
+const APP_NAME = "Nuxt App ISR";
+const BASE_APP_URL = "https://render-strategy-demo-nuxt-app-isr.vercel.app"
 export default defineNuxtConfig({
-  // Enable pure SSR mode - disable SPA mode and hybrid rendering
-  ssr: true,
-  
-  // Nitro configuration for pure SSR
+  // Enable ISR (Incremental Static Regeneration)
   nitro: {
-    preset: 'vercel'
+    preset: 'vercel',
+    prerender: {
+      // Configure ISR routes
+      routes: ['/sitemap.xml']
+    }
   },
   
-  // Route rules to ensure pure SSR for all routes
+  // Route rules for ISR configuration
   routeRules: {
-    // Disable prerendering and ensure SSR for all routes
-    '/**': { ssr: true, prerender: false }
+    // Homepage pre-rendered at build time
+    '/': { isr: 60 }, // Regenerate every 60 seconds
+    // Blog pages use ISR
+    '/blog': { isr: 300 }, // Regenerate every 5 minutes    '/blog/**': { isr: 600 }, // Regenerate every 10 minutes
+    // About page uses ISR
+    '/about': { isr: 3600 }, // Regenerate every hour
+    // API routes
+    '/api/**': { cors: true },
   },
   
   app: {
@@ -30,7 +37,7 @@ export default defineNuxtConfig({
 				{ property: 'og:site_name', content: APP_NAME },
 				{ property: 'og:title', content: APP_NAME },
 				{ property: 'og:image', content: BASE_APP_URL + '/img/og-image.jpg' },
-        { name: 'description', content: 'A Nuxt.js application demonstrating SSR' },
+        { name: 'description', content: 'A Nuxt.js application demonstrating ISR (Incremental Static Regeneration)' },
 			],
 
       link: [

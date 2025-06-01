@@ -40,6 +40,8 @@ const {
   {
     key: `post-${postId}`,
     server: true,
+    // Enable caching for ISR
+    default: () => null,
   }
 );
 
@@ -57,6 +59,8 @@ const { data: postUser, error: userError } = await useFetch<User>(
   {
     key: `user-${post.value.userId}`,
     server: true,
+    // Enable caching for ISR
+    default: () => null,
   }
 );
 
@@ -66,15 +70,17 @@ const { data: comments } = await useFetch<Comment[]>(
   {
     key: `comments-${postId}`,
     server: true,
+    // Enable caching for ISR
+    default: () => [],
   }
 );
 
 // SEO
 useSeoMeta({
-  title: `${post.value?.title || "Blog Post"} - Nuxt App SSR`,
+  title: `${post.value?.title || "Blog Post"} - Nuxt App ISR`,
   description:
     post.value?.body?.substring(0, 160) || "Read this amazing blog post",
-  ogTitle: `${post.value?.title || "Blog Post"} - Nuxt App SSR`,
+  ogTitle: `${post.value?.title || "Blog Post"} - Nuxt App ISR`,
   ogDescription:
     post.value?.body?.substring(0, 160) || "Read this amazing blog post",
   ogType: "article",

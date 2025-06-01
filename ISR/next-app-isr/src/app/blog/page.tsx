@@ -2,12 +2,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "@/components/Image";
 
+// Enable ISR for blog listing page
+export const revalidate = 300; // Revalidate every 5 minutes
+
 export const metadata: Metadata = {
-  title: "Blog Posts - Next.js App SSR",
+  title: "Blog Posts - Next.js App ISR",
   description:
     "Discover amazing articles and stories from our community. Browse through our collection of blog posts covering various topics.",
   openGraph: {
-    title: "Blog Posts - Next.js App SSR",
+    title: "Blog Posts - Next.js App ISR",
     description:
       "Discover amazing articles and stories from our community. Browse through our collection of blog posts covering various topics.",
     type: "website",
@@ -19,10 +22,9 @@ export const metadata: Metadata = {
         alt: "Blog Posts - Next.js App SSR",
       },
     ],
-  },
-  twitter: {
+  },  twitter: {
     card: "summary_large_image",
-    title: "Blog Posts - Next.js App SSR",
+    title: "Blog Posts - Next.js App ISR",
     description:
       "Discover amazing articles and stories from our community. Browse through our collection of blog posts covering various topics.",
     images: ["/og-image.jpg"],
@@ -45,14 +47,11 @@ interface User {
   username: string;
 }
 
-// Force dynamic rendering for pure SSR
-export const dynamic = "force-dynamic";
-
 // Function to fetch posts data
 const fetchPosts = async (): Promise<Post[]> => {
   try {
     const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
-      cache: "no-store", // Force dynamic rendering on every request
+      next: { revalidate: 300 }, // Revalidate every 5 minutes for ISR
     });
 
     if (!response.ok) {
@@ -67,10 +66,9 @@ const fetchPosts = async (): Promise<Post[]> => {
 };
 
 // Function to fetch users data
-const fetchUsers = async (): Promise<User[]> => {
-  try {
+const fetchUsers = async (): Promise<User[]> => {  try {
     const response = await fetch("https://jsonplaceholder.typicode.com/users", {
-      cache: "no-store", // Force dynamic rendering on every request
+      next: { revalidate: 3600 }, // Revalidate every hour for ISR
     });
 
     if (!response.ok) {

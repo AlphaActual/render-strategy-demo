@@ -1,6 +1,6 @@
-# SvelteKit Blog Application
+# SvelteKit ISR Blog Application
 
-A modern blog application built with SvelteKit, migrated from the Nuxt 3 version. This application demonstrates server-side rendering, dynamic routing, and modern web development practices.
+A modern blog application built with SvelteKit and configured for **Incremental Static Regeneration (ISR)** on Vercel. This application demonstrates server-side rendering with intelligent caching, dynamic routing, and modern web development practices.
 
 ## Features
 
@@ -10,11 +10,29 @@ A modern blog application built with SvelteKit, migrated from the Nuxt 3 version
 - 📱 **Responsive Design**: Mobile-first approach with Tailwind CSS
 - 🎨 **Modern UI**: Smooth animations and hover effects
 - 🔧 **TypeScript**: Full type safety with Svelte 5 runes
-- ⚡ **Performance**: Static prerendering and optimized loading
+- ⚡ **ISR Performance**: Incremental static regeneration with intelligent caching
+- 🚀 **Vercel Optimized**: Built specifically for Vercel deployment
+
+## ISR Configuration
+
+This application uses **Incremental Static Regeneration** to combine the benefits of static generation with dynamic content:
+
+### Cache Strategy
+- **Homepage**: 60-second cache expiration
+- **Blog Listing**: 300-second cache with query parameter support  
+- **Blog Posts**: 600-second cache for individual posts
+
+### Benefits
+- Fast loading times through static generation
+- Fresh content through automatic revalidation
+- Reduced API calls with intelligent caching
+- Better SEO with server-side rendering
 
 ## Technology Stack
 
 - **Framework**: SvelteKit with Svelte 5
+- **Deployment**: Vercel with ISR support
+- **Adapter**: `@sveltejs/adapter-vercel`
 - **Styling**: Tailwind CSS v3
 - **Language**: TypeScript
 - **API**: JSONPlaceholder for demo content
@@ -88,6 +106,49 @@ Key changes made during migration:
 - Vue state management → Svelte reactive statements
 
 For detailed migration information, see [MIGRATION_SUMMARY.md](./MIGRATION_SUMMARY.md).
+
+## Deployment
+
+### Vercel Deployment (Recommended)
+
+1. **Connect to Vercel**:
+   ```bash
+   npm i -g vercel
+   vercel login
+   vercel
+   ```
+
+2. **Environment Variables**:
+   - Set `BYPASS_TOKEN` in Vercel dashboard for cache bypassing
+   - Example: `https://your-app.vercel.app/blog?__vercel_bypass=your-token`
+
+3. **ISR Configuration**:
+   - Homepage: Revalidates every 60 seconds
+   - Blog listing: Revalidates every 300 seconds
+   - Blog posts: Revalidates every 600 seconds
+
+### Local Development with ISR
+
+For local testing of ISR functionality:
+
+```bash
+# Build the application
+npm run build
+
+# Preview with Vercel adapter
+npm run preview
+```
+
+**Note**: Full ISR functionality requires Vercel deployment. Local development uses standard SvelteKit SSR.
+
+## Environment Setup
+
+Copy `.env.example` to `.env.local` and configure:
+
+```bash
+# Cache bypass token for ISR
+BYPASS_TOKEN=your-secure-token-here
+```
 
 ## License
 

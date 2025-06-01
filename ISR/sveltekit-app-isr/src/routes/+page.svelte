@@ -76,14 +76,14 @@
 </script>
 
 <svelte:head>
-	<title>Home - SvelteKit App SSR</title>
-	<meta name="description" content="Experience modern web development with SvelteKit, TypeScript, and Tailwind CSS. This demo showcases best practices and beautiful design patterns." />
-	<meta property="og:title" content="SvelteKit App SSR - Modern Web Development" />
-	<meta property="og:description" content="Experience modern web development with SvelteKit, TypeScript, and Tailwind CSS. This demo showcases best practices and beautiful design patterns." />
+	<title>Home - SvelteKit App ISR</title>
+	<meta name="description" content="Experience modern web development with SvelteKit, TypeScript, and Tailwind CSS. This demo showcases Incremental Static Regeneration." />
+	<meta property="og:title" content="SvelteKit App ISR - Modern Web Development" />
+	<meta property="og:description" content="Experience modern web development with SvelteKit, TypeScript, and Tailwind CSS. This demo showcases Incremental Static Regeneration." />
 	<meta property="og:url" content="/" />
 	<meta property="og:image" content="/og-image.jpg" />
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content="SvelteKit App SSR - Modern Web Development" />
+	<meta name="twitter:title" content="SvelteKit App ISR - Modern Web Development" />
 	<meta name="twitter:description" content="Experience modern web development with SvelteKit, TypeScript, and Tailwind CSS. This demo showcases best practices and beautiful design patterns." />
 </svelte:head>
 

@@ -2,24 +2,26 @@ import Link from 'next/link';
 import Image from '@/components/Image';
 import type { Metadata } from 'next';
 
+// Enable ISR for this page
+export const revalidate = 3600; // Revalidate every hour
+
 export const metadata: Metadata = {
-  title: "About Us - Next.js SSR Demo",
+  title: "About Us - Next.js ISR Demo",
   description: "Learn about our team, mission, and the technology behind our modern web development demo.",
   openGraph: {
-    title: "About Us - Next.js SSR Demo",
+    title: "About Us - Next.js ISR Demo",
     description: "Learn about our team, mission, and the technology behind our modern web development demo.",
     url: "/about",
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
-        height: 630,
-        alt: "About Us - Next.js SSR Demo",
+        height: 630,        alt: "About Us - Next.js ISR Demo",
       },
     ],
   },
   twitter: {
-    title: "About Us - Next.js SSR Demo",
+    title: "About Us - Next.js ISR Demo",
     description: "Learn about our team, mission, and the technology behind our modern web development demo.",
   },
 }

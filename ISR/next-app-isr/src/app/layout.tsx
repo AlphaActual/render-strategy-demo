@@ -9,10 +9,10 @@ const archivo = Archivo({
 });
 
 export const metadata: Metadata = {
-  title: "Next.js SSR Demo",
-  description: "A modern web application demo built with Next.js and the latest technologies.",
-  applicationName: "Next.js App SSR",
-  keywords: ["Next.js", "React", "TypeScript", "Tailwind CSS", "SSR", "Demo"],
+  title: "Next.js ISR Demo",
+  description: "A modern web application demo built with Next.js and Incremental Static Regeneration.",
+  applicationName: "Next.js App ISR",
+  keywords: ["Next.js", "React", "TypeScript", "Tailwind CSS", "ISR", "Demo"],
   authors: [{ name: "Demo Team" }],
   creator: "Demo Team",
   publisher: "Demo Team",
@@ -23,9 +23,9 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://render-strategy-demo-next-app.vercel.app",
-    siteName: "Next.js App SSR",
-    title: "Next.js SSR Demo",
-    description: "A modern web application demo built with Next.js and the latest technologies.",
+    siteName: "Next.js App ISR",
+    title: "Next.js ISR Demo",
+    description: "A modern web application demo built with Next.js and Incremental Static Regeneration.",
     images: [
       {
         url: "/og-image.jpg",

@@ -1,9 +1,12 @@
 import Image from '../components/Image'
 import type { Metadata } from 'next'
 
+// Enable ISR for this page
+export const revalidate = 60; // Revalidate every 60 seconds
+
 export const metadata: Metadata = {
-  title: "Home - Next.js SSR Demo",
-  description: "Experience modern web development with Next.js, TypeScript, and Tailwind CSS. This demo showcases best practices and beautiful design patterns.",
+  title: "Home - Next.js ISR Demo",
+  description: "Experience modern web development with Next.js, TypeScript, and Tailwind CSS. This demo showcases Incremental Static Regeneration.",
   openGraph: {
     title: "Next.js SSR Demo - Modern Web Development",
     description: "Experience modern web development with Next.js, TypeScript, and Tailwind CSS. This demo showcases best practices and beautiful design patterns.",

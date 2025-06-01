@@ -17,21 +17,27 @@ const { data: posts } = await useFetch<Post[]>(
   "https://jsonplaceholder.typicode.com/posts",
   {
     server: true,
+    // Enable caching for ISR
+    key: 'blog-posts',
+    default: () => [],
   }
 );
 const { data: users } = await useFetch<User[]>(
   "https://jsonplaceholder.typicode.com/users",
   {
     server: true,
+    // Enable caching for ISR  
+    key: 'blog-users',
+    default: () => [],
   }
 );
 
 // SEO
 useSeoMeta({
-  title: "Blog Posts - Nuxt App SSR",
+  title: "Blog Posts - Nuxt App ISR",
   description:
     "Discover amazing articles and stories from our community. Browse through our collection of blog posts covering various topics.",
-  ogTitle: "Blog Posts - Nuxt App SSR",
+  ogTitle: "Blog Posts - Nuxt App ISR",
   ogDescription:
     "Discover amazing articles and stories from our community. Browse through our collection of blog posts covering various topics.",
   ogType: "website",

@@ -1,15 +1,15 @@
 <script setup lang="ts">
 // SEO
 useSeoMeta({
-  title: 'Home - Nuxt App SSR',
-  description: 'Experience modern web development with Nuxt.js, TypeScript, and Tailwind CSS. This demo showcases best practices and beautiful design patterns.',
-  ogTitle: 'Nuxt App SSR - Modern Web Development',
-  ogDescription: 'Experience modern web development with Nuxt.js, TypeScript, and Tailwind CSS. This demo showcases best practices and beautiful design patterns.',
+  title: 'Home - Nuxt App ISR',
+  description: 'Experience modern web development with Nuxt.js, TypeScript, and Tailwind CSS. This demo showcases Incremental Static Regeneration.',
+  ogTitle: 'Nuxt App ISR - Modern Web Development',
+  ogDescription: 'Experience modern web development with Nuxt.js, TypeScript, and Tailwind CSS. This demo showcases Incremental Static Regeneration.',
   ogUrl: '/',
   ogImage: '/img/og-image.jpg',
   twitterCard: 'summary_large_image',
-  twitterTitle: 'Nuxt App SSR - Modern Web Development',
-  twitterDescription: 'Experience modern web development with Nuxt.js, TypeScript, and Tailwind CSS. This demo showcases best practices and beautiful design patterns.'
+  twitterTitle: 'Nuxt App ISR - Modern Web Development',
+  twitterDescription: 'Experience modern web development with Nuxt.js, TypeScript, and Tailwind CSS. This demo showcases Incremental Static Regeneration.'
 })
 
 const features = [
