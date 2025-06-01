@@ -9,10 +9,7 @@ const config = {
 
 	kit: {
 		// Use Vercel adapter for ISR support
-		adapter: adapter({
-			// Default configuration for ISR
-			runtime: 'nodejs18.x'
-		})
+		adapter: adapter()
 	}
 };
 
