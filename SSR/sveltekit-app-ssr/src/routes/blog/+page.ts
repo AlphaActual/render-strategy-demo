@@ -1,6 +1,11 @@
 import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
+// Force SSR for this page - no prerendering
+// This ensures true server-side rendering on each request
+export const prerender = false;
+export const ssr = true;
+
 export interface Post {
 	id: number;
 	title: string;

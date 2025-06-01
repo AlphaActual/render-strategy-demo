@@ -1,4 +1,4 @@
-import adapter from '@sveltejs/adapter-node'; // Use Node adapter for SSR
+import adapter from '@sveltejs/adapter-vercel'; // Use Vercel adapter for Vercel deployment
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
 /** @type {import('@sveltejs/kit').Config} */
@@ -8,13 +8,8 @@ const config = {
 	preprocess: vitePreprocess(),
 
 	kit: {
-		// Use Node adapter for proper SSR deployment
-		adapter: adapter(),
-		
-		// Ensure SSR is enabled globally
-		ssr: {
-			noExternal: []
-		}
+		// Use Vercel adapter for proper SSR deployment on Vercel
+		adapter: adapter()
 	}
 };
 
