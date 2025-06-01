@@ -1,0 +1,73 @@
+{
+  "folders": [
+    {
+      "name": "Root",
+      "path": ".",
+    },
+    {
+      "name": "Next.js SSR",
+      "path": "./SSR/next-app-ssr",
+    },
+    {
+      "name": "Next.js ISR",
+      "path": "./ISR/next-app-isr",
+    },
+    {
+      "name": "SvelteKit SSR",
+      "path": "./SSR/sveltekit-app-ssr",
+    },
+    {
+      "name": "SvelteKit ISR",
+      "path": "./ISR/sveltekit-app-isr",
+    },
+    {
+      "name": "Nuxt SSR",
+      "path": "./SSR/nuxt-app-ssr",
+    },
+    {
+      "name": "Nuxt ISR",
+      "path": "./ISR/nuxt-app-isr",
+    },
+  ],
+  "settings": {
+    "typescript.preferences.includePackageJsonAutoImports": "on",
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "typescript.suggest.autoImports": true,
+
+    // Svelte settings
+    "svelte.enable-ts-plugin": true,
+    "svelte.plugin.svelte.compilerWarnings": {
+      "css-unused-selector": "ignore",
+    },
+
+    // File associations
+    "files.associations": {
+      "*.svelte": "svelte",
+    },
+
+    // Exclude problematic patterns
+    "files.exclude": {
+      "**/.svelte-kit": true,
+      "**/node_modules/.svelte2tsx-language-server-files": true,
+    },
+
+    "search.exclude": {
+      "**/.svelte-kit": true,
+      "**/node_modules/.svelte2tsx-language-server-files": true,
+    },
+
+    "files.watcherExclude": {
+      "**/.svelte-kit/**": true,
+      "**/node_modules/.svelte2tsx-language-server-files/**": true,
+    },
+  },
+  "extensions": {
+    "recommendations": [
+      "svelte.svelte-vscode",
+      "bradlc.vscode-tailwindcss",
+      "ms-vscode.vscode-typescript-next",
+      "vue.volar",
+      "nuxt.mdc",
+    ],
+  },
+}

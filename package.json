@@ -6,17 +6,28 @@
   "workspaces": [
     "SSR/next-app-ssr",
     "SSR/nuxt-app-ssr",
-    "SSR/sveltekit-app-ssr"
+    "SSR/sveltekit-app-ssr",
+    "ISR/next-app-isr",
+    "ISR/nuxt-app-isr",
+    "ISR/sveltekit-app-isr"
   ],
   "scripts": {
     "dev:next": "npm run dev --workspace=SSR/next-app-ssr",
     "dev:nuxt": "npm run dev --workspace=SSR/nuxt-app-ssr",
     "dev:svelte": "npm run dev --workspace=SSR/sveltekit-app-ssr",
+    "dev:next-isr": "npm run dev --workspace=ISR/next-app-isr",
+    "dev:nuxt-isr": "npm run dev --workspace=ISR/nuxt-app-isr",
+    "dev:svelte-isr": "npm run dev --workspace=ISR/sveltekit-app-isr",
     "dev:ssr": "npm run dev --workspaces --if-present --workspace=SSR/*",
+    "dev:isr": "npm run dev --workspaces --if-present --workspace=ISR/*",
     "build:next": "npm run build --workspace=SSR/next-app-ssr",
     "build:nuxt": "npm run build --workspace=SSR/nuxt-app-ssr",
     "build:svelte": "npm run build --workspace=SSR/sveltekit-app-ssr",
+    "build:next-isr": "npm run build --workspace=ISR/next-app-isr",
+    "build:nuxt-isr": "npm run build --workspace=ISR/nuxt-app-isr",
+    "build:svelte-isr": "npm run build --workspace=ISR/sveltekit-app-isr",
     "build:ssr": "npm run build --workspaces --if-present --workspace=SSR/*",
+    "build:isr": "npm run build --workspaces --if-present --workspace=ISR/*",
     "install:all": "npm install"
   },
   "engines": {

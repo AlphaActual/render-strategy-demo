@@ -218,7 +218,7 @@
 													d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
 												/>
 											</svg>
-											{author.email}
+											<span class="break-all">{author.email}</span>
 										</div>
 									</div>
 								</div>
@@ -246,11 +246,11 @@
 												class="h-12 w-12 rounded-full object-cover ring-2 ring-gray-100"
 												fit="cover"
 											/>
-										</div>										<div class="flex-1">
+										</div>
+										<div class="flex-1">
 											<div class="flex flex-col gap-1 mb-3">
-												<h4 class="font-semibold text-gray-900">{comment.name}</h4>
-												<div class="flex flex-col sm:flex-row sm:flex-wrap sm:items-center text-sm text-gray-500 gap-1 sm:gap-2">
-													<span>{comment.email}</span>
+												<h4 class="font-semibold text-gray-900">{comment.name}</h4>												<div class="flex flex-col sm:flex-row sm:flex-wrap sm:items-center text-sm text-gray-500 gap-1 sm:gap-2">
+													<span class="break-all">{comment.email}</span>
 													<span class="hidden sm:inline text-gray-300">•</span>
 													<span class="text-gray-400"
 														>{Math.floor(Math.random() * 24) + 1}h ago</span

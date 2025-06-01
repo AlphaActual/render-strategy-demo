@@ -75,7 +75,7 @@ const Header = () => {
               className="text-2xl font-bold text-primary100 hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 hover:bg-clip-text hover:text-transparent transition-all duration-300"
               onClick={closeMobileMenu}
             >
-              Next.js SSR mode
+              Next.js ISR mode
             </Link>
           </div>
           {/* Desktop Navigation */}{" "}

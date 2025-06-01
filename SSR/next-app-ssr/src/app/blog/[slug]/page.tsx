@@ -383,8 +383,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                             strokeWidth="2"
                             d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                           />
-                        </svg>
-                        {user.email}
+                          </svg>
+                        <span className="break-all">{user.email}</span>
                       </div>
                       <div className="flex items-center">
                         <svg
@@ -462,7 +462,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                             {comment.name}
                           </h4>
                           <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center text-sm text-gray-500 gap-1 sm:gap-2">
-                            <span>{comment.email}</span>
+                            <span className="break-all">{comment.email}</span>
                             <span className="hidden sm:inline text-gray-300">
                               •
                             </span>
