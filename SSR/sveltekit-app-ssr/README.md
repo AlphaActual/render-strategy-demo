@@ -2,6 +2,12 @@
 
 A modern blog application built with SvelteKit, migrated from the Nuxt 3 version. This application demonstrates server-side rendering, dynamic routing, and modern web development practices.
 
+## Live Demo
+
+🚀 **Live Demo**: <https://render-strategy-demo-sveltekit-app.vercel.app/>
+
+Experience Server-Side Rendering (SSR) with SvelteKit featuring dynamic content generation and optimal SEO performance.
+
 ## Features
 
 - 🏠 **Homepage**: Hero section, features, testimonials, and company information

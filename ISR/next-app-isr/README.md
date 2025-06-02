@@ -1,5 +1,11 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Live Demo
+
+🔁 **Live Demo**: <https://render-strategy-demo-next-app-isr.vercel.app/>
+
+This application demonstrates Incremental Static Regeneration (ISR) with Next.js, combining the benefits of static generation with dynamic content updates.
+
 ## Getting Started
 
 First, run the development server:

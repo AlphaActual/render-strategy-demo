@@ -2,6 +2,12 @@
 
 This directory contains applications that demonstrate Server-Side Rendering across different frameworks.
 
+## Live Demos
+
+- **Next.js SSR**: <https://render-strategy-demo-next-app-ssr.vercel.app/>
+- **Nuxt.js SSR**: <https://render-strategy-demo-nuxt-app-ssr.vercel.app/>
+- **SvelteKit SSR**: <https://render-strategy-demo-sveltekit-app.vercel.app/>
+
 ## Applications
 
 - **next-app-ssr**: Next.js SSR application

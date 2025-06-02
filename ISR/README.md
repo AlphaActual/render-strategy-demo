@@ -2,6 +2,12 @@
 
 This directory contains applications that demonstrate Incremental Static Regeneration across different frameworks.
 
+## Live Demos
+
+- **Next.js ISR**: <https://render-strategy-demo-next-app-isr.vercel.app/>
+- **Nuxt.js ISR**: <https://render-strategy-demo-nuxt-app-isr.vercel.app/>
+- **SvelteKit ISR**: <https://render-strategy-demo-sveltekit-app-rho.vercel.app/>
+
 ## Applications
 
 - **next-app-isr**: Next.js ISR application

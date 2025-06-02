@@ -2,6 +2,12 @@
 
 This directory contains applications that demonstrate Static Site Generation across different frameworks. All applications have been converted from their SSR counterparts to use SSG rendering mode.
 
+## Live Demos
+
+- **Next.js SSG**: <https://render-strategy-demo-next-app-ssg.vercel.app/>
+- **Nuxt.js SSG**: <https://render-strategy-demo-nuxt-app-ssg.vercel.app/>
+- **SvelteKit SSG**: <https://render-strategy-demo-sveltekit-app-nine.vercel.app/>
+
 ## Applications
 
 ### ✅ Completed

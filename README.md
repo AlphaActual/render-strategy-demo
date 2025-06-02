@@ -2,6 +2,34 @@
 
 This is a monorepo demonstrating different rendering strategies with modern web frameworks.
 
+## Live Demos
+
+Experience the different rendering strategies with these live deployments:
+
+### 🔄 CSR (Client-Side Rendering)
+
+- **Next.js CSR**: <https://render-strategy-demo-csr-next-app-c.vercel.app/>
+- **Nuxt.js CSR**: <https://render-strategy-demo-csr-nuxt-app-c.vercel.app/>
+- **SvelteKit CSR**: <https://render-strategy-demo-csr-sveltekit.vercel.app/>
+
+### 🚀 SSR (Server-Side Rendering)
+
+- **Next.js SSR**: <https://render-strategy-demo-next-app-ssr.vercel.app/>
+- **Nuxt.js SSR**: <https://render-strategy-demo-nuxt-app-ssr.vercel.app/>
+- **SvelteKit SSR**: <https://render-strategy-demo-sveltekit-app.vercel.app/>
+
+### ⚡ SSG (Static Site Generation)
+
+- **Next.js SSG**: <https://render-strategy-demo-next-app-ssg.vercel.app/>
+- **Nuxt.js SSG**: <https://render-strategy-demo-nuxt-app-ssg.vercel.app/>
+- **SvelteKit SSG**: <https://render-strategy-demo-sveltekit-app-nine.vercel.app/>
+
+### 🔁 ISR (Incremental Static Regeneration)
+
+- **Next.js ISR**: <https://render-strategy-demo-next-app-isr.vercel.app/>
+- **Nuxt.js ISR**: <https://render-strategy-demo-nuxt-app-isr.vercel.app/>
+- **SvelteKit ISR**: <https://render-strategy-demo-sveltekit-app-rho.vercel.app/>
+
 ## Structure
 
 The monorepo is organized by rendering strategy for easy comparison and analysis:

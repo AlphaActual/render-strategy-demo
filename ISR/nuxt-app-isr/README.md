@@ -1,4 +1,12 @@
-# Nuxt Minimal Starter
+# Nuxt ISR Blog Application
+
+A modern blog application built with Nuxt 3 demonstrating Incremental Static Regeneration (ISR) capabilities.
+
+## Live Demo
+
+🔁 **Live Demo**: <https://render-strategy-demo-nuxt-app-isr.vercel.app/>
+
+Experience Incremental Static Regeneration (ISR) with Nuxt 3, combining the benefits of static generation with dynamic content updates.
 
 Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 

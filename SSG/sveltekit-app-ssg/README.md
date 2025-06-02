@@ -1,6 +1,12 @@
 # SvelteKit Blog Application
 
-A modern blog application built with SvelteKit, migrated from the Nuxt 3 version. This application demonstrates server-side rendering, dynamic routing, and modern web development practices.
+A modern blog application built with SvelteKit, migrated from the Nuxt 3 version. This application demonstrates static site generation, dynamic routing, and modern web development practices.
+
+## Live Demo
+
+⚡ **Live Demo**: <https://render-strategy-demo-sveltekit-app-nine.vercel.app/>
+
+Experience Static Site Generation (SSG) with SvelteKit featuring pre-generated static pages for optimal performance.
 
 ## Features
 

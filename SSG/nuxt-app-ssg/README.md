@@ -1,4 +1,12 @@
-# Nuxt Minimal Starter
+# Nuxt SSG Blog Application
+
+A modern blog application built with Nuxt 3 demonstrating Static Site Generation (SSG) capabilities.
+
+## Live Demo
+
+⚡ **Live Demo**: <https://render-strategy-demo-nuxt-app-ssg.vercel.app/>
+
+Experience Static Site Generation (SSG) with Nuxt 3, providing optimal performance through pre-generated static pages.
 
 Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 

@@ -2,6 +2,12 @@
 
 A modern blog application built with SvelteKit and configured for **Incremental Static Regeneration (ISR)** on Vercel. This application demonstrates server-side rendering with intelligent caching, dynamic routing, and modern web development practices.
 
+## Live Demo
+
+🔁 **Live Demo**: <https://render-strategy-demo-sveltekit-app-rho.vercel.app/>
+
+Experience Incremental Static Regeneration (ISR) with SvelteKit, combining the benefits of static generation with dynamic content updates.
+
 ## Features
 
 - 🏠 **Homepage**: Hero section, features, testimonials, and company information
