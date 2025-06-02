@@ -331,11 +331,10 @@ const Header = () => {
                     />
                   </svg>
                 </button>
-              </div>
-              {/* Footer */}
+              </div>              {/* Footer */}
               <div className="p-6 border-t border-gray-200/50">
                 <p className="text-center text-sm text-gray-500">
-                  © 2025 Next.js SSR Demo. All rights reserved.
+                  © 2025 Next.js ISR Demo. All rights reserved.
                 </p>
               </div>
             </div>

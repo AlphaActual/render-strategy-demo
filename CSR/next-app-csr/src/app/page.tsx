@@ -1,32 +1,25 @@
-import Image from '../components/Image'
-import type { Metadata } from 'next'
+"use client";
 
-// Force dynamic rendering to ensure true SSR
-export const dynamic = 'force-dynamic'
-
-export const metadata: Metadata = {
-  title: "Home - Next.js SSR Demo",
-  description: "Experience modern web development with Next.js, TypeScript, and Tailwind CSS. This demo showcases best practices and beautiful design patterns.",
-  openGraph: {
-    title: "Next.js SSR Demo - Modern Web Development",
-    description: "Experience modern web development with Next.js, TypeScript, and Tailwind CSS. This demo showcases best practices and beautiful design patterns.",
-    url: "/",
-    images: [
-      {
-        url: "/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Next.js SSR Demo",
-      },
-    ],
-  },
-  twitter: {
-    title: "Next.js SSR Demo - Modern Web Development",
-    description: "Experience modern web development with Next.js, TypeScript, and Tailwind CSS. This demo showcases best practices and beautiful design patterns.",
-  },
-}
+import { useEffect } from 'react';
+import Image from '../components/Image';
 
 export default function Home() {
+  // Client-side metadata handling
+  useEffect(() => {
+    document.title = "Home - Next.js CSR Demo";
+    
+    // Set meta description
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Experience modern web development with Next.js, TypeScript, and Tailwind CSS. This demo showcases client-side rendering.');
+    } else {
+      const meta = document.createElement('meta');
+      meta.name = 'description';
+      meta.content = 'Experience modern web development with Next.js, TypeScript, and Tailwind CSS. This demo showcases client-side rendering.';
+      document.head.appendChild(meta);
+    }
+  }, []);
+
   const features = [
     {
       title: 'Modern Design',

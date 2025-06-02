@@ -13,16 +13,16 @@ export const metadata: Metadata = {
     title: "Blog Posts - Next.js App ISR",
     description:
       "Discover amazing articles and stories from our community. Browse through our collection of blog posts covering various topics.",
-    type: "website",
+  type: "website",
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Blog Posts - Next.js App SSR",
+        alt: "Blog Posts - Next.js App ISR",
       },
     ],
-  },  twitter: {
+  },twitter: {
     card: "summary_large_image",
     title: "Blog Posts - Next.js App ISR",
     description:

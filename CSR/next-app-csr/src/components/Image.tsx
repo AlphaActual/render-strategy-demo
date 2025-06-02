@@ -14,7 +14,7 @@ interface ImageProps {
 
 const Image = ({ 
   src, 
-  alt = "Next.js SSR Demo", 
+  alt = "Next.js CSR Demo", 
   className = "", 
   seed = "demoapp",
   width = 800,

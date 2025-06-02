@@ -1,21 +1,19 @@
 import tailwindcss from "@tailwindcss/vite";
 
 const cmsDomain = ["https://picsum.photos/"];
-const APP_NAME = "Nuxt App SSR";
-const BASE_APP_URL = "https://render-strategy-demo-nuxt-app-ssr.vercel.app"
-export default defineNuxtConfig({
-  // Enable pure SSR mode - disable SPA mode and hybrid rendering
-  ssr: true,
-  
-  // Nitro configuration for pure SSR
+const APP_NAME = "Nuxt App CSR";
+const BASE_APP_URL = "https://render-strategy-demo-nuxt-app-csr.vercel.app"
+export default defineNuxtConfig({  // Enable pure CSR mode - disable SSR and enable SPA mode
+  ssr: false,
+    // Nitro configuration for CSR
   nitro: {
     preset: 'vercel'
   },
   
-  // Route rules to ensure pure SSR for all routes
+  // Route rules to ensure CSR for all routes
   routeRules: {
-    // Disable prerendering and ensure SSR for all routes
-    '/**': { ssr: true, prerender: false }
+    // Disable SSR and prerendering for all routes
+    '/**': { ssr: false, prerender: false }
   },
   
   app: {
@@ -30,7 +28,7 @@ export default defineNuxtConfig({
 				{ property: 'og:site_name', content: APP_NAME },
 				{ property: 'og:title', content: APP_NAME },
 				{ property: 'og:image', content: BASE_APP_URL + '/img/og-image.jpg' },
-        { name: 'description', content: 'A Nuxt.js application demonstrating SSR' },
+        { name: 'description', content: 'A Nuxt.js application demonstrating CSR' },
 			],
 
       link: [

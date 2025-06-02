@@ -77,9 +77,8 @@
 				<a
 					href="/"
 					class="text-primary100 text-2xl font-bold transition-all duration-300 hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 hover:bg-clip-text hover:text-transparent"
-					onclick={closeMobileMenu}
-				>
-					SvelteKit SSR mode
+					onclick={closeMobileMenu}				>
+					SvelteKit CSR mode
 				</a>
 			</div>			<!-- Desktop Navigation -->
 			<div class="hidden md:block">
@@ -332,12 +331,10 @@
 								/>
 							</svg>
 						</button>
-					</div>
-
-					<!-- Footer -->
+					</div>				<!-- Footer -->
 					<div class="border-t border-gray-200/50 p-6">
 						<p class="text-center text-sm text-gray-500">
-							© 2025 SvelteKit SSR Demo. All rights reserved.
+							© 2025 SvelteKit CSR Demo. All rights reserved.
 						</p>
 					</div>
 				</div>

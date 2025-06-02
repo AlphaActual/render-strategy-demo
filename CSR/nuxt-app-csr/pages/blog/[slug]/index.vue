@@ -71,15 +71,15 @@ const { data: comments } = await useFetch<Comment[]>(
 
 // SEO
 useSeoMeta({
-  title: `${post.value?.title || "Blog Post"} - Nuxt App SSR`,
+  title: `${post.value?.title || "Blog Post"} - Nuxt App CSR`,
   description:
     post.value?.body?.substring(0, 160) || "Read this amazing blog post",
-  ogTitle: `${post.value?.title || "Blog Post"} - Nuxt App SSR`,
+  ogTitle: `${post.value?.title || "Blog Post"} - Nuxt App CSR`,
   ogDescription:
     post.value?.body?.substring(0, 160) || "Read this amazing blog post",
   ogType: "article",
   twitterCard: "summary_large_image",
-  twitterTitle: `${post.value?.title || "Blog Post"} - Nuxt App SSR`,
+  twitterTitle: `${post.value?.title || "Blog Post"} - Nuxt App CSR`,
   twitterDescription:
     post.value?.body?.substring(0, 160) || "Read this amazing blog post",
 });

@@ -99,17 +99,17 @@
 </script>
 
 <svelte:head>
-	<title>About Us - SvelteKit App SSR</title>
+	<title>About Us - SvelteKit App ISR</title>
 	<meta
 		name="description"
 		content="Learn about our team, mission, and the technology behind our modern web development demo."
 	/>
-	<meta property="og:title" content="About Us - SvelteKit App SSR" />
+	<meta property="og:title" content="About Us - SvelteKit App ISR" />
 	<meta property="og:description" content="Learn about our team, mission, and the technology behind our modern web development demo." />
 	<meta property="og:url" content="/about" />
 	<meta property="og:image" content="/og-image.jpg" />
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content="About Us - SvelteKit App SSR" />
+	<meta name="twitter:title" content="About Us - SvelteKit App ISR" />
 	<meta name="twitter:description" content="Learn about our team, mission, and the technology behind our modern web development demo." />
 </svelte:head>
 

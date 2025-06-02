@@ -14,14 +14,13 @@
 </script>
 
 <svelte:head>
-  <title>Blog Posts - SvelteKit App SSR</title>
+  <title>Blog Posts - SvelteKit App CSR</title>
   <meta name="description" content="Discover amazing articles and stories from our community. Browse through our collection of blog posts covering various topics." />
-  <meta property="og:title" content="Blog Posts - SvelteKit App SSR" />
-  <meta property="og:description" content="Discover amazing articles and stories from our community. Browse through our collection of blog posts covering various topics." />
-  <meta property="og:url" content="/blog" />
+  <meta property="og:title" content="Blog Posts - SvelteKit App CSR" />
+  <meta property="og:description" content="Discover amazing articles and stories from our community. Browse through our collection of blog posts covering various topics." />  <meta property="og:url" content="/blog" />
   <meta property="og:image" content="/og-image.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Blog Posts - SvelteKit App SSR" />
+  <meta name="twitter:title" content="Blog Posts - SvelteKit App CSR" />
   <meta name="twitter:description" content="Discover amazing articles and stories from our community. Browse through our collection of blog posts covering various topics." />
 </svelte:head>
 

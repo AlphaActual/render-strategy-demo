@@ -82,7 +82,7 @@ const navigationItems = [
             class="text-2xl font-bold text-primary100 hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 hover:bg-clip-text hover:text-transparent transition-all duration-300"
             @click="closeMobileMenu"
           >
-            Nuxt 3 SSR mode
+            Nuxt 3 CSR mode
           </NuxtLink>
         </div>
 
@@ -355,7 +355,7 @@ const navigationItems = [
             <!-- Footer -->
             <div class="p-6 border-t border-gray-200/50">
               <p class="text-center text-sm text-gray-500">
-                © 2025 Nuxt 3 SSR Demo. All rights reserved.
+                © 2025 Nuxt 3 CSR Demo. All rights reserved.
               </p>
             </div>
           </div>

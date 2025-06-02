@@ -122,11 +122,10 @@ export const generateMetadata = async ({
 }: BlogPostPageProps): Promise<Metadata> => {
   const { slug } = await params;
   const postId = parseInt(slug);
-
   // Validate post ID
   if (isNaN(postId) || postId < 1) {
     return {
-      title: "Post Not Found - Next.js App SSR",
+      title: "Post Not Found - Next.js App ISR",
       description: "The blog post you are looking for could not be found.",
     };
   }
@@ -135,14 +134,14 @@ export const generateMetadata = async ({
 
   if (!post) {
     return {
-      title: "Post Not Found - Next.js App SSR",
+      title: "Post Not Found - Next.js App ISR",
       description: "The blog post you are looking for could not be found.",
     };
   }
 
   const user = await fetchUser(post.userId);
   const description = post.body.substring(0, 160).replace(/\n/g, " ") + "...";
-  const title = `${post.title} - Next.js App SSR`;
+  const title = `${post.title} - Next.js App ISR`;
 
   return {
     title,

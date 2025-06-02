@@ -350,12 +350,10 @@ const navigationItems = [
                   />
                 </svg>
               </button>
-            </div>
-
-            <!-- Footer -->
+            </div>            <!-- Footer -->
             <div class="p-6 border-t border-gray-200/50">
               <p class="text-center text-sm text-gray-500">
-                © 2025 Nuxt 3 SSR Demo. All rights reserved.
+                © 2025 Nuxt 3 ISR Demo. All rights reserved.
               </p>
             </div>
           </div>

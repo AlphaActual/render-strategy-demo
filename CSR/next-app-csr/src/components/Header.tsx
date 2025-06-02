@@ -67,15 +67,14 @@ const Header = () => {
   return (
     <header className="bg-white/95 backdrop-blur-md border-b border-primary10 sticky top-0 z-50 shadow-sm">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          {/* Logo */}
+        <div className="flex justify-between items-center h-16">          {/* Logo */}
           <div className="flex items-center">
             <Link
               href="/"
               className="text-2xl font-bold text-primary100 hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 hover:bg-clip-text hover:text-transparent transition-all duration-300"
               onClick={closeMobileMenu}
             >
-              Next.js SSR mode
+              Next.js CSR mode
             </Link>
           </div>
           {/* Desktop Navigation */}{" "}
@@ -331,11 +330,10 @@ const Header = () => {
                     />
                   </svg>
                 </button>
-              </div>
-              {/* Footer */}
+              </div>              {/* Footer */}
               <div className="p-6 border-t border-gray-200/50">
                 <p className="text-center text-sm text-gray-500">
-                  © 2025 Next.js SSR Demo. All rights reserved.
+                  © 2025 Next.js CSR Demo. All rights reserved.
                 </p>
               </div>
             </div>

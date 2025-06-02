@@ -1,36 +1,8 @@
-import type { Metadata } from "next";
+"use client";
+
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "@/components/Image";
-
-// Force dynamic rendering to ensure true SSR
-export const dynamic = 'force-dynamic'
-
-export const metadata: Metadata = {
-  title: "Blog Posts - Next.js App SSR",
-  description:
-    "Discover amazing articles and stories from our community. Browse through our collection of blog posts covering various topics.",
-  openGraph: {
-    title: "Blog Posts - Next.js App SSR",
-    description:
-      "Discover amazing articles and stories from our community. Browse through our collection of blog posts covering various topics.",
-    type: "website",
-    images: [
-      {
-        url: "/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Blog Posts - Next.js App SSR",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Blog Posts - Next.js App SSR",
-    description:
-      "Discover amazing articles and stories from our community. Browse through our collection of blog posts covering various topics.",
-    images: ["/og-image.jpg"],
-  },
-};
 
 // Post interface
 interface Post {
@@ -48,48 +20,44 @@ interface User {
   username: string;
 }
 
+export default function BlogPage() {
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [users, setUsers] = useState<User[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-// Function to fetch posts data
-const fetchPosts = async (): Promise<Post[]> => {
-  try {
-    const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
-      cache: "no-store", // Force dynamic rendering on every request
-    });
+  // Fetch data client-side using useEffect
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        setError(null);
 
-    if (!response.ok) {
-      throw new Error("Failed to fetch posts");
-    }
+        // Fetch posts and users in parallel
+        const [postsResponse, usersResponse] = await Promise.all([
+          fetch("https://jsonplaceholder.typicode.com/posts"),
+          fetch("https://jsonplaceholder.typicode.com/users")
+        ]);
 
-    return response.json();
-  } catch (error) {
-    console.error("Error fetching posts:", error);
-    throw new Error("Failed to load blog posts");
-  }
-};
+        if (!postsResponse.ok || !usersResponse.ok) {
+          throw new Error("Failed to fetch blog data");
+        }
 
-// Function to fetch users data
-const fetchUsers = async (): Promise<User[]> => {
-  try {
-    const response = await fetch("https://jsonplaceholder.typicode.com/users", {
-      cache: "no-store", // Force dynamic rendering on every request
-    });
+        const postsData = await postsResponse.json();
+        const usersData = await usersResponse.json();
 
-    if (!response.ok) {
-      throw new Error("Failed to fetch users");
-    }
+        setPosts(postsData);
+        setUsers(usersData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setError(error instanceof Error ? error.message : "Failed to load blog posts");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    return response.json();
-  } catch (error) {
-    console.error("Error fetching users:", error);
-    throw new Error("Failed to load user data");
-  }
-};
-
-export default async function BlogPage() {
-  // Fetch data server-side
-  const posts = await fetchPosts();
-  const users = await fetchUsers();
-
+    fetchData();
+  }, []);
   // Helper function to get user by ID
   const getUserById = (userId: number): User | undefined => {
     return users.find((user) => user.id === userId);
@@ -108,6 +76,82 @@ export default async function BlogPage() {
   const calculateReadingTime = (body: string): number => {
     return Math.ceil(body.split(" ").length / 200);
   };
+
+  // Loading state
+  if (loading) {
+    return (
+      <div className="py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">Blog Posts</h1>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Loading amazing articles and stories from our community...
+            </p>
+          </div>
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {[...Array(6)].map((_, i) => (
+              <div key={i} className="bg-white rounded-xl shadow-lg p-6 animate-pulse">
+                <div className="bg-gray-200 h-48 rounded-lg mb-4"></div>
+                <div className="flex items-center mb-4">
+                  <div className="w-10 h-10 bg-gray-200 rounded-full mr-3"></div>
+                  <div className="flex-1 space-y-2">
+                    <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+                    <div className="h-3 bg-gray-200 rounded w-1/2"></div>
+                  </div>
+                </div>
+                <div className="space-y-3">
+                  <div className="h-5 bg-gray-200 rounded"></div>
+                  <div className="h-4 bg-gray-200 rounded w-5/6"></div>
+                  <div className="h-4 bg-gray-200 rounded w-4/6"></div>
+                </div>
+                <div className="mt-6 h-10 bg-gray-200 rounded"></div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Error state
+  if (error) {
+    return (
+      <div className="py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">Blog Posts</h1>
+          </div>
+          <div className="text-center py-12">
+            <div className="text-red-400 mb-4">
+              <svg
+                className="mx-auto h-12 w-12"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"
+                />
+              </svg>
+            </div>
+            <h3 className="text-lg font-medium text-gray-900 mb-2">
+              Error Loading Posts
+            </h3>
+            <p className="text-gray-600 mb-4">{error}</p>
+            <button 
+              onClick={() => window.location.reload()}
+              className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200"
+            >
+              Try Again
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="py-8">

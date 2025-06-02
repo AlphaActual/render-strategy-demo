@@ -96,14 +96,14 @@ const values = [
 
 // SEO
 useSeoMeta({
-  title: 'About Us - Nuxt App SSR',
+  title: 'About Us - Nuxt App CSR',
   description: 'Learn about our team, mission, and the technology behind our modern web development demo.',
-  ogTitle: 'About Us - Nuxt App SSR',
+  ogTitle: 'About Us - Nuxt App CSR',
   ogDescription: 'Learn about our team, mission, and the technology behind our modern web development demo.',
   ogUrl: '/about',
   ogImage: '/img/og-image.jpg',
   twitterCard: 'summary_large_image',
-  twitterTitle: 'About Us - Nuxt App SSR',
+  twitterTitle: 'About Us - Nuxt App CSR',
   twitterDescription: 'Learn about our team, mission, and the technology behind our modern web development demo.'
 })
 </script>

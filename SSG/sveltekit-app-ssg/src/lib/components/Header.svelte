@@ -331,12 +331,10 @@
 								/>
 							</svg>
 						</button>
-					</div>
-
-					<!-- Footer -->
+					</div>					<!-- Footer -->
 					<div class="border-t border-gray-200/50 p-6">
 						<p class="text-center text-sm text-gray-500">
-							© 2025 SvelteKit SSR Demo. All rights reserved.
+							© 2025 SvelteKit SSG Demo. All rights reserved.
 						</p>
 					</div>
 				</div>

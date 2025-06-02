@@ -3,14 +3,16 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
   
-  // Experimental features for better SSR control
-  experimental: {
-    // Ensure server-side rendering is always used
-    serverComponentsExternalPackages: [],
-  },
+  // Export as a static SPA for pure client-side rendering
+  output: 'export',
   
-  // Disable static optimization to ensure true SSR
-  output: undefined, // Ensure we're not using static export
+  // Disable server-side features for CSR
+  trailingSlash: true,
+  
+  // Ensure images work with static export
+  images: {
+    unoptimized: true
+  }
 };
 
 export default nextConfig;

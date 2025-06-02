@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: "Home - Next.js ISR Demo",
   description: "Experience modern web development with Next.js, TypeScript, and Tailwind CSS. This demo showcases Incremental Static Regeneration.",
   openGraph: {
-    title: "Next.js SSR Demo - Modern Web Development",
+    title: "Next.js ISR Demo - Modern Web Development",
     description: "Experience modern web development with Next.js, TypeScript, and Tailwind CSS. This demo showcases best practices and beautiful design patterns.",
     url: "/",
     images: [
@@ -16,12 +16,12 @@ export const metadata: Metadata = {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Next.js SSR Demo",
+        alt: "Next.js ISR Demo",
       },
     ],
   },
   twitter: {
-    title: "Next.js SSR Demo - Modern Web Development",
+    title: "Next.js ISR Demo - Modern Web Development",
     description: "Experience modern web development with Next.js, TypeScript, and Tailwind CSS. This demo showcases best practices and beautiful design patterns.",
   },
 }

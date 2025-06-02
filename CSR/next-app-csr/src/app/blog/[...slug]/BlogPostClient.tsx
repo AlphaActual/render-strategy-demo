@@ -1,16 +1,9 @@
-import type { Metadata } from "next";
+"use client";
+
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "@/components/Image";
-import { notFound } from "next/navigation";
-
-// Generate static params for SSG
-export async function generateStaticParams() {
-  // Generate static pages for the first 10 blog posts
-  const posts = Array.from({ length: 10 }, (_, i) => i + 1);
-  return posts.map((id) => ({
-    slug: id.toString(),
-  }));
-}
+import { useParams, notFound } from "next/navigation";
 
 // Post interface
 interface Post {
@@ -42,155 +35,121 @@ interface Comment {
   body: string;
 }
 
-// Props interface
-interface BlogPostPageProps {
-  params: Promise<{
-    slug: string;
-  }>;
-}
+export default function BlogPostClient() {
+  const params = useParams();
+  // Handle catch-all route [...slug] - slug is an array, take the first element
+  const slugArray = params.slug as string[] | string;
+  const slug = Array.isArray(slugArray) ? slugArray[0] : slugArray;
+  const postId = parseInt(slug || '');
 
-// Function to fetch post data
-const fetchPost = async (postId: string): Promise<Post | null> => {
-  try {
-    const response = await fetch(
-      `https://jsonplaceholder.typicode.com/posts/${postId}`,
-      {
-        cache: "force-cache", // Cache data for SSG build
-      }
-    );
-
-    if (!response.ok) {
-      return null;
-    }
-
-    return response.json();
-  } catch (error) {
-    console.error("Error fetching post:", error);
-    return null;
-  }
-};
-
-// Function to fetch user data
-const fetchUser = async (userId: number): Promise<User | null> => {
-  try {
-    const response = await fetch(
-      `https://jsonplaceholder.typicode.com/users/${userId}`,
-      {
-        cache: "force-cache", // Cache data for SSG build
-      }
-    );
-
-    if (!response.ok) {
-      return null;
-    }
-
-    return response.json();
-  } catch (error) {
-    console.error("Error fetching user:", error);
-    return null;
-  }
-};
-
-// Function to fetch comments
-const fetchComments = async (postId: string): Promise<Comment[]> => {
-  try {
-    const response = await fetch(
-      `https://jsonplaceholder.typicode.com/posts/${postId}/comments`,
-      {
-        cache: "force-cache", // Cache data for SSG build
-      }
-    );
-
-    if (!response.ok) {
-      return [];
-    }
-
-    return response.json();
-  } catch (error) {
-    console.error("Error fetching comments:", error);
-    return [];
-  }
-};
-
-// Generate dynamic metadata for each blog post
-export const generateMetadata = async ({
-  params,
-}: BlogPostPageProps): Promise<Metadata> => {
-  const { slug } = await params;
-  const postId = parseInt(slug);
-  // Validate post ID
-  if (isNaN(postId) || postId < 1) {
-    return {
-      title: "Post Not Found - Next.js App SSG",
-      description: "The blog post you are looking for could not be found.",
-    };
-  }
-
-  const post = await fetchPost(slug);
-
-  if (!post) {
-    return {
-      title: "Post Not Found - Next.js App SSG",
-      description: "The blog post you are looking for could not be found.",
-    };
-  }
-
-  const user = await fetchUser(post.userId);
-  const description = post.body.substring(0, 160).replace(/\n/g, " ") + "...";
-  const title = `${post.title} - Next.js App SSG`;
-
-  return {
-    title,
-    description,
-    keywords: ["blog", "article", "technology", "tutorial", "development"],
-    authors: user ? [{ name: user.name }] : undefined,
-    openGraph: {
-      title,
-      description,
-      type: "article",
-      publishedTime: new Date(2024, 0, (postId % 28) + 1).toISOString(),
-      authors: user ? [user.name] : undefined,
-      images: [
-        {
-          url: `/og-image.jpg`,
-          width: 1200,
-          height: 630,
-          alt: post.title,
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      images: [`/og-image.jpg`],
-    },
-  };
-};
-
-export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const { slug } = await params;
-  const postId = parseInt(slug);
+  const [post, setPost] = useState<Post | null>(null);
+  const [user, setUser] = useState<User | null>(null);
+  const [comments, setComments] = useState<Comment[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   // Validate post ID
-  if (isNaN(postId) || postId < 1) {
-    notFound();
+  useEffect(() => {
+    if (isNaN(postId) || postId < 1) {
+      notFound();
+      return;
+    }
+
+    // Client-side data fetching
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        // Fetch post data
+        const postResponse = await fetch(
+          `https://jsonplaceholder.typicode.com/posts/${postId}`
+        );
+        
+        if (!postResponse.ok) {
+          throw new Error("Post not found");
+        }
+        
+        const postData = await postResponse.json();
+        setPost(postData);
+
+        // Fetch user data
+        const userResponse = await fetch(
+          `https://jsonplaceholder.typicode.com/users/${postData.userId}`
+        );
+        
+        if (!userResponse.ok) {
+          throw new Error("User data not found");
+        }
+        
+        const userData = await userResponse.json();
+        setUser(userData);
+
+        // Fetch comments
+        const commentsResponse = await fetch(
+          `https://jsonplaceholder.typicode.com/posts/${postId}/comments`
+        );
+        
+        if (commentsResponse.ok) {
+          const commentsData = await commentsResponse.json();
+          setComments(commentsData);
+        }
+
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setError(error instanceof Error ? error.message : "Failed to load post data");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [postId]);
+
+  // Loading state
+  if (loading) {
+    return (
+      <div className="py-8">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="animate-pulse">
+            <div className="h-8 bg-gray-300 rounded w-1/4 mb-8"></div>
+            <div className="bg-white rounded-xl shadow-xl overflow-hidden">
+              <div className="h-64 sm:h-80 lg:h-96 bg-gray-300"></div>
+              <div className="p-6 space-y-4">
+                <div className="h-4 bg-gray-300 rounded w-3/4"></div>
+                <div className="h-4 bg-gray-300 rounded w-1/2"></div>
+                <div className="h-4 bg-gray-300 rounded w-5/6"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   }
-  const post = await fetchPost(slug);
 
-  // If post doesn't exist, trigger 404
-  if (!post) {
-    notFound();
+  // Error state
+  if (error || !post || !user) {
+    return (
+      <div className="py-8">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center py-12">
+            <h1 className="text-2xl font-bold text-gray-900 mb-4">
+              {error || "Post not found"}
+            </h1>
+            <p className="text-gray-600 mb-8">
+              The blog post you are looking for could not be loaded.
+            </p>
+            <Link
+              href="/blog"
+              className="inline-flex items-center px-4 py-2 text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 rounded-lg transition-all duration-300 font-medium"
+            >
+              ← Back to Blog
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
   }
-
-  const user = await fetchUser(post.userId);
-
-  // If user data failed to load, trigger error
-  if (!user) {
-    throw new Error("Failed to load post data");
-  }
-
-  const comments = await fetchComments(slug);
 
   // Helper functions
   const formatDate = (postId: number): string => {
@@ -279,7 +238,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   height={60}
                   className="h-14 w-14 rounded-full object-cover ring-3 ring-blue-100"
                 />
-              </div>{" "}
+              </div>
               <div className="ml-4 flex-1">
                 <div className="flex flex-col gap-2">
                   <div>
@@ -388,7 +347,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                             strokeWidth="2"
                             d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                           />
-                          </svg>
+                        </svg>
                         <span className="break-all">{user.email}</span>
                       </div>
                       <div className="flex items-center">
@@ -460,7 +419,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                           height={50}
                           className="h-12 w-12 rounded-full object-cover ring-2 ring-gray-100"
                         />
-                      </div>{" "}
+                      </div>
                       <div className="flex-1">
                         <div className="flex flex-col gap-1 mb-3">
                           <h4 className="font-semibold text-gray-900">

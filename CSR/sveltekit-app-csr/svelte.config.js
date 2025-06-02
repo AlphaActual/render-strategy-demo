@@ -1,4 +1,4 @@
-import adapter from '@sveltejs/adapter-vercel'; // Use Vercel adapter for Vercel deployment
+import adapter from '@sveltejs/adapter-static'; // Use static adapter for CSR
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
 /** @type {import('@sveltejs/kit').Config} */
@@ -8,8 +8,11 @@ const config = {
 	preprocess: vitePreprocess(),
 
 	kit: {
-		// Use Vercel adapter for proper SSR deployment on Vercel
-		adapter: adapter()
+		// Use static adapter for pure CSR deployment
+		adapter: adapter({
+			// Pages will be generated as a single page application
+			fallback: 'index.html'
+		})
 	}
 };
 
