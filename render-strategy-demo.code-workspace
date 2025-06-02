@@ -13,6 +13,10 @@
       "path": "./ISR/next-app-isr",
     },
     {
+      "name": "Next.js SSG",
+      "path": "./SSG/next-app-ssg",
+    },
+    {
       "name": "SvelteKit SSR",
       "path": "./SSR/sveltekit-app-ssr",
     },
@@ -21,12 +25,20 @@
       "path": "./ISR/sveltekit-app-isr",
     },
     {
+      "name": "SvelteKit SSG",
+      "path": "./SSG/sveltekit-app-ssg",
+    },
+    {
       "name": "Nuxt SSR",
       "path": "./SSR/nuxt-app-ssr",
     },
     {
       "name": "Nuxt ISR",
       "path": "./ISR/nuxt-app-isr",
+    },
+    {
+      "name": "Nuxt SSG",
+      "path": "./SSG/nuxt-app-ssg",
     },
   ],
   "settings": {

@@ -24,10 +24,6 @@ The monorepo is organized by rendering strategy for easy comparison and analysis
 - **SSG/nuxt-app-ssg**: Nuxt.js application with Static Site Generation  
 - **SSG/sveltekit-app-ssg**: SvelteKit application with Static Site Generation
 
-### Future Additions
-
-- **CSR/**: Client-Side Rendering applications
-
 ## Workspace Setup
 
 This monorepo is configured as an npm workspace to enable Vercel's "skipping unaffected projects" feature, which automatically skips builds for unchanged projects in a monorepo.
@@ -44,20 +40,36 @@ This monorepo is configured as an npm workspace to enable Vercel's "skipping una
 
 ```bash
 # Development - Individual apps
-npm run dev:next     # Start Next.js dev server
-npm run dev:nuxt     # Start Nuxt.js dev server  
-npm run dev:svelte   # Start SvelteKit dev server
+npm run dev:next        # Start Next.js SSR dev server
+npm run dev:nuxt        # Start Nuxt.js SSR dev server  
+npm run dev:svelte      # Start SvelteKit SSR dev server
+npm run dev:next-isr    # Start Next.js ISR dev server
+npm run dev:nuxt-isr    # Start Nuxt.js ISR dev server
+npm run dev:svelte-isr  # Start SvelteKit ISR dev server
+npm run dev:next-ssg    # Start Next.js SSG dev server
+npm run dev:nuxt-ssg    # Start Nuxt.js SSG dev server
+npm run dev:svelte-ssg  # Start SvelteKit SSG dev server
 
-# Development - All SSR apps
-npm run dev:ssr      # Start all SSR apps
+# Development - All apps by strategy
+npm run dev:ssr         # Start all SSR apps
+npm run dev:isr         # Start all ISR apps
+npm run dev:ssg         # Start all SSG apps
 
 # Build - Individual apps
-npm run build:next   # Build Next.js app
-npm run build:nuxt   # Build Nuxt.js app
-npm run build:svelte # Build SvelteKit app
+npm run build:next      # Build Next.js SSR app
+npm run build:nuxt      # Build Nuxt.js SSR app
+npm run build:svelte    # Build SvelteKit SSR app
+npm run build:next-isr  # Build Next.js ISR app
+npm run build:nuxt-isr  # Build Nuxt.js ISR app
+npm run build:svelte-isr # Build SvelteKit ISR app
+npm run build:next-ssg  # Build Next.js SSG app
+npm run build:nuxt-ssg  # Build Nuxt.js SSG app
+npm run build:svelte-ssg # Build SvelteKit SSG app
 
-# Build - All SSR apps
-npm run build:ssr    # Build all SSR apps
+# Build - All apps by strategy
+npm run build:ssr       # Build all SSR apps
+npm run build:isr       # Build all ISR apps
+npm run build:ssg       # Build all SSG apps
 
 # Install dependencies for all workspaces
 npm install
