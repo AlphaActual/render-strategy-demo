@@ -1,26 +1,30 @@
-# Client-Side Rendering (CSR) Applications
+# Server-Side Rendering (SSR) Applications
 
-This directory will contain applications that demonstrate Client-Side Rendering across different frameworks.
+This directory contains applications that demonstrate Server-Side Rendering across different frameworks.
 
-## Future Applications
+## Applications
 
-- **react-app-csr**: React CSR application
-- **vue-app-csr**: Vue.js CSR application
-- **svelte-app-csr**: Svelte CSR application
-- **angular-app-csr**: Angular CSR application
+- **next-app-ssr**: Next.js SSR application
+- **nuxt-app-ssr**: Nuxt.js SSR application  
+- **sveltekit-app-ssr**: SvelteKit SSR application
 
-## About CSR
+## About SSR
 
-Client-Side Rendering renders the application entirely in the browser using JavaScript. This provides:
+Server-Side Rendering pre-renders pages on the server before sending them to the client. This provides:
 
-- Highly interactive user experiences
-- Reduced server load
-- Better caching strategies
-- Simplified deployment
+- Better SEO (search engines can crawl the content)
+- Faster initial page load for users
+- Better performance on slower devices
+- Social media preview support
 
-## Trade-offs
+## Running Applications
 
-- Slower initial page load
-- SEO challenges
-- Requires JavaScript to be enabled
-- Larger initial bundle sizes
+```bash
+# Start individual applications
+npm run dev:next     # Next.js SSR
+npm run dev:nuxt     # Nuxt.js SSR  
+npm run dev:svelte   # SvelteKit SSR
+
+# Start all SSR applications
+npm run dev:ssr
+```
