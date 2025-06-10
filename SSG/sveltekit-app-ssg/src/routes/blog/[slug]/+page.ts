@@ -6,10 +6,10 @@ import type { Post, User } from '../+page.js';
 export const prerender = true;
 
 // Define which blog post entries to prerender (first 10 posts)
-export async function entries() {
+export const entries = async () => {
 	const posts = Array.from({ length: 10 }, (_, i) => i + 1);
 	return posts.map(id => ({ slug: id.toString() }));
-}
+};
 
 export interface Comment {
 	id: number;

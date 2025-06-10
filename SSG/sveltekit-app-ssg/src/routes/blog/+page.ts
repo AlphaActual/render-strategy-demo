@@ -30,8 +30,10 @@ export const load: PageLoad = async ({ fetch }): Promise<BlogPageData> => {
 		if (!postsResponse.ok) {
 			throw error(500, 'Failed to fetch posts from the API');
 		}
+				const posts: Post[] = await postsResponse.json();
 		
-		const posts: Post[] = await postsResponse.json();
+		// For SSG, only show first 10 posts to match prerendered entries
+		const limitedPosts = posts.slice(0, 10);
 		
 		const usersResponse = await fetch('https://jsonplaceholder.typicode.com/users');
 		
@@ -42,7 +44,7 @@ export const load: PageLoad = async ({ fetch }): Promise<BlogPageData> => {
 		const users: User[] = await usersResponse.json();
 
 		return {
-			posts,
+			posts: limitedPosts,
 			users
 		};
 	} catch (err) {
