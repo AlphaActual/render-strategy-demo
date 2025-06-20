@@ -5,9 +5,9 @@ import type { Post, User } from '../+page.js';
 // Enable prerendering for specific entries
 export const prerender = true;
 
-// Define which blog post entries to prerender (first 10 posts)
+// Define which blog post entries to prerender (all 100 posts)
 export const entries = async () => {
-	const posts = Array.from({ length: 10 }, (_, i) => i + 1);
+	const posts = Array.from({ length: 100 }, (_, i) => i + 1);
 	return posts.map(id => ({ slug: id.toString() }));
 };
 

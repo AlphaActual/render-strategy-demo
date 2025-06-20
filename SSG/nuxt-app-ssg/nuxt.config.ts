@@ -7,24 +7,14 @@ export default defineNuxtConfig({
   // Enable SSG mode - prerendering for all routes
   ssr: true,  // Nitro configuration for SSG
   nitro: {
-    preset: 'static',
-    prerender: {
+    preset: 'static',    prerender: {
       crawlLinks: false,
       routes: [
         '/',
         '/about', 
         '/blog',
-        // Prerender first 10 blog posts like the SvelteKit version
-        '/blog/1',
-        '/blog/2', 
-        '/blog/3',
-        '/blog/4',
-        '/blog/5',
-        '/blog/6',
-        '/blog/7',
-        '/blog/8',
-        '/blog/9',
-        '/blog/10'
+        // Prerender all 100 blog posts
+        ...Array.from({ length: 100 }, (_, i) => `/blog/${i + 1}`)
       ]
     }
   },

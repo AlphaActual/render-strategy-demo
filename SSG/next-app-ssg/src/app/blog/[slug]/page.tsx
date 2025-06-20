@@ -5,8 +5,8 @@ import { notFound } from "next/navigation";
 
 // Generate static params for SSG
 export async function generateStaticParams() {
-  // Generate static pages for the first 10 blog posts
-  const posts = Array.from({ length: 10 }, (_, i) => i + 1);
+  // Generate static pages for all 100 blog posts
+  const posts = Array.from({ length: 100 }, (_, i) => i + 1);
   return posts.map((id) => ({
     slug: id.toString(),
   }));

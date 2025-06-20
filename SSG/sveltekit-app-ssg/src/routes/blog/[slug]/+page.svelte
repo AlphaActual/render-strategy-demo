@@ -324,8 +324,7 @@
 				<div
 					class="rounded-2xl border border-blue-100 bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 p-8"
 				>
-					<h3 class="mb-6 text-center text-lg font-semibold text-gray-900">Continue Reading</h3>
-					<div class="flex flex-col justify-between gap-4 sm:flex-row">
+					<h3 class="mb-6 text-center text-lg font-semibold text-gray-900">Continue Reading</h3>					<div class="flex flex-col justify-between gap-4 sm:flex-row">
 						{#if post.id > 1}
 							<a
 								href="/blog/{post.id - 1}"
@@ -386,8 +385,7 @@
 									<div class="text-sm font-medium">You're at the beginning!</div>
 								</div>
 							</div>
-						{/if}
-						{#if post.id < 100}
+						{/if}						{#if post.id < 100}
 							<a
 								href="/blog/{post.id + 1}"
 								class="group relative flex-1 transform overflow-hidden rounded-xl border border-gray-200 bg-white p-6 shadow-md transition-all duration-300 hover:-translate-y-1 hover:border-blue-300 hover:shadow-xl"
@@ -444,7 +442,7 @@
 											/>
 										</svg>
 									</div>
-									<div class="text-sm font-medium">You've reached the end!</div>
+									<div class="text-sm font-medium">You've reached the end of all posts!</div>
 								</div>
 							</div>
 						{/if}
