@@ -1,15 +1,19 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import Image from '$lib/components/Image.svelte';
 	import type { BlogPostPageData, Comment } from './+page.js';
 	import type { Post, User } from '../+page.js';
 	interface Props {
 		data: BlogPostPageData;
 	}
-
 	let { data }: Props = $props();
-	const post: Post | null = data.post;
-	const author: User | null = data.author;
-	const comments: Comment[] = data.comments || [];
+	
+	// Make data reactive to route changes
+	let currentSlug = $derived($page.params.slug);
+	let post = $derived(data.post);
+	let author = $derived(data.author);
+	let comments = $derived(data.comments || []);
+	
 	// Format date (since JSONPlaceholder doesn't provide dates, we'll use a mock date)
 	const formatDate = (date: Date): string => {
 		return new Intl.DateTimeFormat('en-US', {
@@ -24,18 +28,32 @@
 </script>
 
 <svelte:head>
-	<title>{post?.title ? `${post.title} - SvelteKit App SSG` : 'Blog Post - SvelteKit App SSG'}</title>
+	<title
+		>{post?.title ? `${post.title} - SvelteKit App SSG` : 'Blog Post - SvelteKit App SSG'}</title
+	>
 	<meta
 		name="description"
 		content={post?.body?.substring(0, 160) || 'Read this amazing blog post'}
 	/>
-	<meta property="og:title" content={post?.title ? `${post.title} - SvelteKit App SSG` : 'Blog Post - SvelteKit App SSG'} />
-	<meta property="og:description" content={post?.body?.substring(0, 160) || 'Read this amazing blog post'} />
+	<meta
+		property="og:title"
+		content={post?.title ? `${post.title} - SvelteKit App SSG` : 'Blog Post - SvelteKit App SSG'}
+	/>
+	<meta
+		property="og:description"
+		content={post?.body?.substring(0, 160) || 'Read this amazing blog post'}
+	/>
 	<meta property="og:type" content="article" />
 	<meta property="og:image" content="/og-image.jpg" />
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content={post?.title ? `${post.title} - SvelteKit App SSG` : 'Blog Post - SvelteKit App SSG'} />
-	<meta name="twitter:description" content={post?.body?.substring(0, 160) || 'Read this amazing blog post'} />
+	<meta
+		name="twitter:title"
+		content={post?.title ? `${post.title} - SvelteKit App SSG` : 'Blog Post - SvelteKit App SSG'}
+	/>
+	<meta
+		name="twitter:description"
+		content={post?.body?.substring(0, 160) || 'Read this amazing blog post'}
+	/>
 </svelte:head>
 
 <div class="py-8">
@@ -62,7 +80,7 @@
 				Back to Blog
 			</a>
 		</div>
-		
+
 		{#if post && author}
 			<!-- Article -->
 			<article class="overflow-hidden rounded-xl bg-white shadow-xl">
@@ -80,7 +98,7 @@
 					></div>
 
 					<!-- Hero Content Overlay -->
-					<div class="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
+					<div class="absolute right-0 bottom-0 left-0 p-6 sm:p-8">
 						<div class="mb-4">
 							<span
 								class="inline-flex items-center rounded-full bg-blue-100 px-3 py-1 text-sm font-medium text-blue-800 backdrop-blur-sm"
@@ -88,7 +106,7 @@
 								Article
 							</span>
 						</div>
-						<h1 class="mb-4 text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">
+						<h1 class="mb-4 text-3xl leading-tight font-bold text-white sm:text-4xl lg:text-5xl">
 							{post.title}
 						</h1>
 					</div>
@@ -103,18 +121,21 @@
 								src="https://picsum.photos/60/60"
 								seed="user-{author.id}"
 								alt="{author.name} avatar"
-								class="ring-3 h-14 w-14 rounded-full object-cover ring-blue-100"
+								class="h-14 w-14 rounded-full object-cover ring-3 ring-blue-100"
 								fit="cover"
 							/>
-						</div>						<div class="ml-4 flex-1">
+						</div>
+						<div class="ml-4 flex-1">
 							<div class="flex flex-col gap-2">
 								<div>
 									<p class="text-lg font-semibold text-gray-900">{author.name}</p>
-									<div class="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-1 sm:gap-2 text-sm text-gray-500">
+									<div
+										class="flex flex-col gap-1 text-sm text-gray-500 sm:flex-row sm:flex-wrap sm:items-center sm:gap-2"
+									>
 										<span>@{author.username}</span>
-										<span class="hidden sm:inline text-gray-300">•</span>
+										<span class="hidden text-gray-300 sm:inline">•</span>
 										<span>{formattedDate}</span>
-										<span class="hidden sm:inline text-gray-300">•</span>
+										<span class="hidden text-gray-300 sm:inline">•</span>
 										<span>{Math.ceil(post.body.split(' ').length / 200)} min read</span>
 									</div>
 								</div>
@@ -157,7 +178,7 @@
 
 					<!-- Article Content -->
 					<div class="max-w-none">
-						<div class="whitespace-pre-line text-lg leading-relaxed text-gray-700">
+						<div class="text-lg leading-relaxed whitespace-pre-line text-gray-700">
 							{post.body}
 						</div>
 					</div>
@@ -195,27 +216,28 @@
 										src="https://picsum.photos/80/80"
 										seed="user-{author.id}"
 										alt="{author.name} profile picture"
-										class="ring-3 h-16 w-16 rounded-full object-cover shadow-lg ring-white"
+										class="h-16 w-16 rounded-full object-cover shadow-lg ring-3 ring-white"
 										fit="cover"
 									/>
 								</div>
 								<div class="flex-1">
 									<h4 class="text-lg font-semibold text-gray-900">{author.name}</h4>
-									<p class="mb-2 font-medium text-blue-600">@{author.username}</p>										<div class="space-y-2 text-sm text-gray-600">
-											<div class="flex items-center">
-												<svg
-													class="mr-2 h-4 w-4 text-gray-400"
-													fill="none"
-													stroke="currentColor"
-													viewBox="0 0 24 24"
-												>
-													<path
-														stroke-linecap="round"
-														stroke-linejoin="round"
-														stroke-width="2"
-														d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-													/>
-												</svg>
+									<p class="mb-2 font-medium text-blue-600">@{author.username}</p>
+									<div class="space-y-2 text-sm text-gray-600">
+										<div class="flex items-center">
+											<svg
+												class="mr-2 h-4 w-4 text-gray-400"
+												fill="none"
+												stroke="currentColor"
+												viewBox="0 0 24 24"
+											>
+												<path
+													stroke-linecap="round"
+													stroke-linejoin="round"
+													stroke-width="2"
+													d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+												/>
+											</svg>
 											<span class="break-all">{author.email}</span>
 										</div>
 									</div>
@@ -223,7 +245,8 @@
 							</div>
 						</div>
 					</div>
-				</div>				<!-- Comments Section -->
+				</div>
+				<!-- Comments Section -->
 				<div class="border-t bg-gradient-to-b from-gray-50 to-white px-6 py-8 sm:px-8">
 					<h3 class="mb-6 text-2xl font-bold text-gray-900">
 						Comments ({comments?.length || 0})
@@ -246,10 +269,13 @@
 											/>
 										</div>
 										<div class="flex-1">
-											<div class="flex flex-col gap-1 mb-3">
-												<h4 class="font-semibold text-gray-900">{comment.name}</h4>												<div class="flex flex-col sm:flex-row sm:flex-wrap sm:items-center text-sm text-gray-500 gap-1 sm:gap-2">
+											<div class="mb-3 flex flex-col gap-1">
+												<h4 class="font-semibold text-gray-900">{comment.name}</h4>
+												<div
+													class="flex flex-col gap-1 text-sm text-gray-500 sm:flex-row sm:flex-wrap sm:items-center sm:gap-2"
+												>
 													<span class="break-all">{comment.email}</span>
-													<span class="hidden sm:inline text-gray-300">•</span>
+													<span class="hidden text-gray-300 sm:inline">•</span>
 													<span class="text-gray-400"
 														>{Math.floor(Math.random() * 24) + 1}h ago</span
 													>
@@ -317,18 +343,18 @@
 						</div>
 					{/if}
 				</div>
-			</article>
-
-			<!-- Related Posts / Navigation -->
+			</article>			<!-- Related Posts / Navigation -->
 			<div class="mt-12">
 				<div
 					class="rounded-2xl border border-blue-100 bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 p-8"
 				>
-					<h3 class="mb-6 text-center text-lg font-semibold text-gray-900">Continue Reading</h3>					<div class="flex flex-col justify-between gap-4 sm:flex-row">
-						{#if post.id > 1}
+					<h3 class="mb-6 text-center text-lg font-semibold text-gray-900">Continue Reading</h3>
+					<div class="flex flex-col justify-between gap-4 sm:flex-row">						{#if post && post.id > 1}
 							<a
 								href="/blog/{post.id - 1}"
 								class="group relative flex-1 transform overflow-hidden rounded-xl border border-gray-200 bg-white p-6 shadow-md transition-all duration-300 hover:-translate-y-1 hover:border-blue-300 hover:shadow-xl"
+								data-sveltekit-preload-data="hover"
+								data-sveltekit-reload
 							>
 								<div
 									class="absolute inset-0 bg-gradient-to-r from-blue-600/5 to-purple-600/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
@@ -385,10 +411,12 @@
 									<div class="text-sm font-medium">You're at the beginning!</div>
 								</div>
 							</div>
-						{/if}						{#if post.id < 100}
+						{/if}						{#if post && post.id < 100}
 							<a
 								href="/blog/{post.id + 1}"
 								class="group relative flex-1 transform overflow-hidden rounded-xl border border-gray-200 bg-white p-6 shadow-md transition-all duration-300 hover:-translate-y-1 hover:border-blue-300 hover:shadow-xl"
+								data-sveltekit-preload-data="hover"
+								data-sveltekit-reload
 							>
 								<div
 									class="absolute inset-0 bg-gradient-to-r from-purple-600/5 to-blue-600/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100"

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import Image from '$lib/components/Image.svelte';
 	import type { BlogPostPageData, Comment } from './+page.js';
 	import type { Post, User } from '../+page.js';
@@ -7,9 +8,13 @@
 	}
 
 	let { data }: Props = $props();
-	const post: Post | null = data.post;
-	const author: User | null = data.author;
-	const comments: Comment[] = data.comments || [];
+	
+	// Make data reactive to route changes
+	let currentSlug = $derived($page.params.slug);
+	let post = $derived(data.post);
+	let author = $derived(data.author);
+	let comments = $derived(data.comments || []);
+	
 	// Format date (since JSONPlaceholder doesn't provide dates, we'll use a mock date)
 	const formatDate = (date: Date): string => {
 		return new Intl.DateTimeFormat('en-US', {
@@ -324,12 +329,13 @@
 				<div
 					class="rounded-2xl border border-blue-100 bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 p-8"
 				>
-					<h3 class="mb-6 text-center text-lg font-semibold text-gray-900">Continue Reading</h3>
-					<div class="flex flex-col justify-between gap-4 sm:flex-row">
-						{#if post.id > 1}
+					<h3 class="mb-6 text-center text-lg font-semibold text-gray-900">Continue Reading</h3>					<div class="flex flex-col justify-between gap-4 sm:flex-row">
+						{#if post && post.id > 1}
 							<a
 								href="/blog/{post.id - 1}"
 								class="group relative flex-1 transform overflow-hidden rounded-xl border border-gray-200 bg-white p-6 shadow-md transition-all duration-300 hover:-translate-y-1 hover:border-blue-300 hover:shadow-xl"
+								data-sveltekit-preload-data="hover"
+								data-sveltekit-reload
 							>
 								<div
 									class="absolute inset-0 bg-gradient-to-r from-blue-600/5 to-purple-600/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
@@ -386,11 +392,12 @@
 									<div class="text-sm font-medium">You're at the beginning!</div>
 								</div>
 							</div>
-						{/if}
-						{#if post.id < 100}
+						{/if}						{#if post && post.id < 100}
 							<a
 								href="/blog/{post.id + 1}"
 								class="group relative flex-1 transform overflow-hidden rounded-xl border border-gray-200 bg-white p-6 shadow-md transition-all duration-300 hover:-translate-y-1 hover:border-blue-300 hover:shadow-xl"
+								data-sveltekit-preload-data="hover"
+								data-sveltekit-reload
 							>
 								<div
 									class="absolute inset-0 bg-gradient-to-r from-purple-600/5 to-blue-600/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
